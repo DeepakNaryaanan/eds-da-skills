@@ -1,4 +1,4 @@
 .banner .banner-inner {
-  display: flex;
+  display: block;
   flex-direction: column;
-}
+} 
