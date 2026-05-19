@@ -1,0 +1,174 @@
+/*
+ * Copyright 2020 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+/* ─── Cascade layer order ─────────────────────────────────────────────────── */
+@layer reset, base, layout, blocks, utilities, overrides;
+
+/* ─── Config imports ──────────────────────────────────────────────────────── */
+@import url('config/normalize.css') layer(reset);
+@import url('config/colors.css') layer(base);
+@import url('config/themes.css') layer(base);
+@import url('config/typography.css') layer(base);
+@import url('config/grid.css') layer(layout);
+@import url('config/forms.css') layer(base);
+@import url('config/globals.css') layer(base);
+@import url('config/utilities.css') layer(utilities);
+@import url('config/buttons.css') layer(utilities);
+@import url('config/overrides.css') layer(overrides);
+
+/* ─── Design tokens ───────────────────────────────────────────────────────── */
+:root {
+  /* breakpoints — JS reference only; use literal px values in @media rules */
+  --breakpoint-sm: 632px;
+  --breakpoint-md: 760px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1272px;
+  --breakpoint-xxl: 1432px;
+
+  /* ── Colors ── */
+
+  /*
+   * Legacy bridge tokens — these point to the semantic layer defined in
+   * config/themes.css, which in turn references the palette in config/colors.css.
+   * All legacy consumers (globals.css, blocks, etc.) continue to work unchanged.
+   * For new code prefer the semantic tokens (--color-primary, --color-danger, …).
+   */
+  --background-color: var(--color-page-bg);
+  --surface-color:    var(--color-surface);
+  --light-color:      var(--color-surface);
+  --dark-color:       var(--color-neutral-700);
+  --text-color:       var(--color-text);
+  --muted-color:      var(--color-text-muted);
+  --border-color:     var(--color-border);
+  --link-color:       var(--color-primary);
+  --link-hover-color: var(--color-primary-hover);
+  --accent-color:     var(--color-primary);
+  --accent-hover-color: var(--color-primary-hover);
+
+  /* ── Fonts ── */
+  --body-font-family: noto-sans, noto-sans-fallback, sans-serif;
+  --heading-font-family: noto-serif, noto-serif-fallback, serif;
+  --mono-font-family: google-sans-code, google-sans-code-fallback, ui-monospace, monospace;
+
+  /* ── Fluid type scale ──────────────────────────────────────────────────────
+   * clamp(min-size, preferred, max-size)
+   * min-size applied at 632 px (sm), max-size at 1432 px (xxl).
+   * Preferred = intercept + slope·vw, ensuring exact values at both endpoints.
+   * ────────────────────────────────────────────────────────────────────────── */
+
+  /* display */
+  --font-size-display1: clamp(2rem, 1.0125rem + 2.5vw, 3.25rem);
+  --font-size-display2: clamp(1.875rem, 0.9863rem + 2.25vw, 3rem);
+  --font-size-display3: clamp(1.75rem, 0.96rem + 2vw, 2.75rem);
+  --font-size-display4: clamp(1.625rem, 0.9338rem + 1.75vw, 2.5rem);
+  --font-size-display5: clamp(1.5rem, 0.9075rem + 1.5vw, 2.25rem);
+  --font-size-display6: clamp(1.375rem, 0.8813rem + 1.25vw, 2rem);
+
+  /* headings */
+  --font-size-h1: clamp(1.75rem, 0.7625rem + 2.5vw, 3rem);
+  --font-size-h2: clamp(1.625rem, 0.9338rem + 1.75vw, 2.5rem);
+  --font-size-h3: clamp(1.5rem, 0.9075rem + 1.5vw, 2.25rem);
+  --font-size-h4: clamp(1.375rem, 0.8813rem + 1.25vw, 2rem);
+  --font-size-h5: clamp(1.25rem, 0.855rem + 1vw, 1.75rem);
+  --font-size-h6: clamp(1.125rem, 0.8288rem + 0.75vw, 1.5rem);
+
+  /* body / prose */
+  --font-size-intro: clamp(1.25rem, 0.855rem + 1vw, 1.75rem);
+  --font-size-p: clamp(1rem, 0.8025rem + 0.5vw, 1.25rem);
+  --font-size-small: clamp(0.875rem, 0.7763rem + 0.25vw, 1rem);
+
+  /* ── Spacing (base-4 scale) ── */
+  --spacing-1: 0.25rem;    /*  4 px */
+  --spacing-2: 0.5rem;     /*  8 px */
+  --spacing-3: 1rem;       /* 16 px */
+  --spacing-4: 1.5rem;     /* 24 px */
+  --spacing-5: 3rem;       /* 48 px */
+
+  /* ── Border radius ── */
+  --border-radius-s: 0.25rem;
+  --border-radius-m: 0.5rem;
+  --border-radius-l: 1rem;
+  --border-radius-pill: 50rem;
+  --border-radius-circle: 50%;
+
+  /* ── Shadows ── */
+  --shadow-s: 0 1px 3px oklch(0% 0 0deg / 12%), 0 1px 2px oklch(0% 0 0deg / 8%);
+  --shadow-m: 0 4px 6px oklch(0% 0 0deg / 10%), 0 2px 4px oklch(0% 0 0deg / 8%);
+  --shadow-l: 0 10px 15px oklch(0% 0 0deg / 10%), 0 4px 6px oklch(0% 0 0deg / 8%);
+
+  /* ── Transitions ── */
+  --transition-speed: 200ms;
+  --transition-ease: ease;
+  --transition-base: var(--transition-speed) var(--transition-ease);
+
+  /* ── Z-index scale ── */
+  --z-below:    -1;
+  --z-base:      0;
+  --z-raised:   10;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-fixed:    300;
+  --z-overlay:  400;
+  --z-modal:    500;
+  --z-popover:  600;
+  --z-toast:    700;
+
+  /* ── Container max-widths (px → rem at 16 px base) ── */
+  --container-max-width-sm:  37.5rem;   /*  600 px */
+  --container-max-width-md:  45rem;     /*  720 px */
+  --container-max-width-lg:  60rem;     /*  960 px */
+  --container-max-width-xl:  71.25rem;  /* 1140 px */
+  --container-max-width-xxl: 87.5rem;   /* 1400 px */
+
+  /* ── Grid ── */
+  --grid-gutter-width: 3rem;   /* 48 px */
+  --grid-row-columns: 6;
+  --grid-columns: 12;
+
+  /* ── Widths ── */
+  --width-25:   25%;
+  --width-50:   50%;
+  --width-75:   75%;
+  --width-100: 100%;
+  --width-auto: auto;
+
+  /* ── Site max-width ── */
+  --max-width: 120rem;   /* 1920 px */
+
+  /* ── Nav ── */
+  --nav-height: 64px;
+}
+
+/* ─── Fallback fonts (kept here — needed before first paint) ─────────────── */
+
+/*
+ * size-adjust compensates for metric differences between the fallback and the
+ * web font so text reflow (CLS) is minimised when the custom font swaps in.
+ * Tune these values by comparing layouts with/without the web font loaded.
+ */
+@font-face {
+  font-family: noto-sans-fallback;
+  size-adjust: 99.3%;
+  src: local('Arial');
+}
+
+@font-face {
+  font-family: noto-serif-fallback;
+  size-adjust: 100%;
+  src: local('Georgia');
+}
+
+@font-face {
+  font-family: google-sans-code-fallback;
+  size-adjust: 100%;
+  src: local('Courier New');
+}
