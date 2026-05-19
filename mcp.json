@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "helix-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "github:cloudadoption/helix-mcp"
+      ],
+      "env": {
+        "HELIX_ADMIN_API_TOKEN": "${HELIX_ADMIN_API_TOKEN}",
+        "RUM_DOMAIN_KEY": "${RUM_DOMAIN_KEY}"
+      }
+    }
+  }
+}
