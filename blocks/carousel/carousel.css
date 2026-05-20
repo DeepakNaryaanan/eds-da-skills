@@ -1,0 +1,4 @@
+.carousel .carousel-inner {
+  display: flex;
+  flex-direction: column;
+}
