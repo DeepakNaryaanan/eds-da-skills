@@ -1,0 +1,4 @@
+.teaser .teaser-inner {
+  display: flex;
+  flex-direction: column;
+}
