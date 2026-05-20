@@ -1,10 +1,16 @@
-import { defineConfig } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testMatch: 'blocks/**/*.spec.js',
   use: {
     baseURL: 'http://localhost:3000',
   },
+  projects: [
+    {
+      name: 'chrome',
+      use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    },
+  ],
   webServer: {
     command: 'npx -y @adobe/aem-cli up --no-open --forward-browser-logs --html-folder tests',
     url: 'http://localhost:3000',
