@@ -1,3 +1,21 @@
 .image-teaser .image-teaser-content {
   display: block;
 }
+
+@media (width >= 992px) {
+  .image-teaser .image-teaser-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    align-items: center;
+  }
+
+  .image-teaser .image-teaser-content > picture {
+    grid-column: 1;
+    grid-row: 1 / -1;
+  }
+
+  .image-teaser .image-teaser-content > :not(picture) {
+    grid-column: 2;
+  }
+}
