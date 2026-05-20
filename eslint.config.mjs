@@ -15,7 +15,18 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ['helix-importer-ui/**', '**/*.min.js', '**/*.test.js', '**/*.spec.js', 'scripts/**', '.claude', '.github', 'static'],
+    ignores: [
+      'helix-importer-ui/**',
+      '**/*.min.js',
+      '**/*.test.js',
+      '**/*.spec.js',
+      'scripts/**',
+      '.claude',
+      '.github',
+      'static',
+      'test/tmp/**',
+      'drafts/tmp/**',
+    ],
   },
   ...compat.extends('airbnb-base'),
   {

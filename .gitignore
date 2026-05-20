@@ -1,0 +1,6 @@
+node_modules
+test/tmp/
+drafts/tmp/
+test-results/
+__temp.html
+tests/fragments/*-fragment-outerhtml.html

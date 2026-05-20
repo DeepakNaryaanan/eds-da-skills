@@ -6,7 +6,7 @@ export default defineConfig({
     baseURL: 'http://localhost:3000',
   },
   webServer: {
-    command: 'npx -y @adobe/aem-cli up --no-open --forward-browser-logs',
+    command: 'npx -y @adobe/aem-cli up --no-open --forward-browser-logs --html-folder tests',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
   },
