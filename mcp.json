@@ -10,6 +10,9 @@
         "HELIX_ADMIN_API_TOKEN": "${HELIX_ADMIN_API_TOKEN}",
         "RUM_DOMAIN_KEY": "${RUM_DOMAIN_KEY}"
       }
+    },
+    "da-prod-mcp": {
+      "url": "https://mcp.adobeaemcloud.com/adobe/mcp/da"
     }
   }
 }
