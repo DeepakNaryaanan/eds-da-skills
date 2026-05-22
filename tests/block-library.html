@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Block Library — Patient Resources</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script nonce="aem" src="/scripts/aem.js" type="module"></script>
+    <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css"/>
+    <style>
+      .library-entry {
+        margin: 2rem 0;
+        padding: 2rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius-m);
+      }
+      .library-entry-label {
+        font-size: var(--font-size-small);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-text-muted);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--color-border);
+      }
+      h1 { margin: 2rem 0 0.5rem; font-size: var(--font-size-h2); }
+      h2.lib-section { margin: 3rem 0 1rem; font-size: var(--font-size-h3); color: var(--color-text-muted); }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="section">
+        <h1>Block Library</h1>
+        <p>Canonical examples for copy-paste into the CMS. Each entry below represents one authored block table.</p>
+
+        <h2 class="lib-section">patient-resources — Default</h2>
+
+        <!-- ── CANONICAL EXAMPLE: patient-resources (default) ──────────────── -->
+        <div class="library-entry">
+          <div class="library-entry-label">patient-resources</div>
+          <div class="patient-resources" data-block-name="patient-resources">
+            <!-- Row 1: header (two cells) -->
+            <div>
+              <div>
+                <p>INFORMATION &amp; GUIDES</p>
+                <h2>Patient Resources</h2>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect width='600' height='400' fill='%23cbd5e1'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='24' fill='%23475569'%3EHealthcare Worker Image%3C/text%3E%3C/svg%3E"
+                    alt="A healthcare worker speaking with an older patient"
+                  />
+                </picture>
+              </div>
+              <div>
+                <p>We offer tools to help patients learn more about prescription drug coverage and accessing their treatments.</p>
+              </div>
+            </div>
+            <!-- Row 2: resource item -->
+            <div>
+              <div>
+                <h3>Understanding Medicare in 2025</h3>
+                <p>Patients enrolled in Medicare or looking for a plan can use this easy-to-follow guide to learn more about Medicare plans and prescription drug coverage.</p>
+                <a href="/guides/medicare-2025">Click here for Medicare in 2025 guide</a>
+              </div>
+            </div>
+            <!-- Row 3: resource item -->
+            <div>
+              <div>
+                <h3>Understanding Prior Authorization</h3>
+                <p>Patients can use this guide to learn more about how to navigate your authorization as part of their prescription drug coverage.</p>
+                <a href="/guides/prior-authorization">Click here for Prior Authorization guide</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="lib-section">patient-resources (dark) — Dark Variant</h2>
+
+        <!-- ── CANONICAL EXAMPLE: patient-resources (dark) ─────────────────── -->
+        <div class="library-entry">
+          <div class="library-entry-label">patient-resources (dark)</div>
+          <div class="patient-resources dark" data-block-name="patient-resources">
+            <div>
+              <div>
+                <p>COVERAGE RESOURCES</p>
+                <h2>Coverage Support</h2>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect width='600' height='400' fill='%23334155'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='24' fill='%23cbd5e1'%3ECoverage Image%3C/text%3E%3C/svg%3E"
+                    alt="A patient reviewing coverage documents"
+                  />
+                </picture>
+              </div>
+              <div>
+                <p>Find out what coverage options are available to you and how to maximize your benefits.</p>
+              </div>
+            </div>
+            <div>
+              <div>
+                <h3>Formulary Information</h3>
+                <p>Check which medications are covered under your plan and what tier they belong to.</p>
+                <a href="/guides/formulary">Review formulary details</a>
+              </div>
+            </div>
+            <div>
+              <div>
+                <h3>Cost-Sharing Explained</h3>
+                <p>Understand copays, deductibles, and out-of-pocket maximums for your prescription coverage.</p>
+                <a href="/guides/cost-sharing">View cost-sharing guide</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </body>
+</html>

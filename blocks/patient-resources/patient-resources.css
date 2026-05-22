@@ -1,0 +1,178 @@
+/**
+ * patient-resources block styles.
+ *
+ * Mobile-first. Single-column stacking order:
+ *   1. .patient-resources-header  (eyebrow + section heading)
+ *   2. .patient-resources-intro   (intro paragraph)
+ *   3. .patient-resources-image   (supporting image)
+ *   4. .patient-resources-items   (resource list)
+ *
+ * At the lg breakpoint (992 px) the layout switches to a two-column CSS Grid:
+ *   Left:  header + image
+ *   Right: intro  + items
+ *
+ * All colors use semantic tokens from styles/config/themes.css.
+ */
+
+/* ── Block shell ──────────────────────────────────────────────────────────── */
+
+.patient-resources {
+  container-type: inline-size;
+}
+
+/* ── Layout — mobile: single column, stacked in document order ───────────── */
+
+.patient-resources .patient-resources-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+/* ── Layout — desktop: two-column CSS Grid ───────────────────────────────── */
+
+@media (width >= 992px) {
+  .patient-resources .patient-resources-layout {
+    display: grid;
+    grid-template-columns: 45% 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "header intro"
+      "image  items";
+    column-gap: var(--spacing-5);
+    row-gap: var(--spacing-4);
+  }
+
+  .patient-resources .patient-resources-header { grid-area: header; }
+  .patient-resources .patient-resources-intro  { grid-area: intro; }
+  .patient-resources .patient-resources-image  { grid-area: image; }
+  .patient-resources .patient-resources-items  { grid-area: items; }
+}
+
+/* ── Eyebrow label ────────────────────────────────────────────────────────── */
+
+.patient-resources .patient-resources-eyebrow {
+  display: block;
+  margin-bottom: var(--spacing-2);
+  font-family: var(--body-font-family);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+/* ── Section heading ──────────────────────────────────────────────────────── */
+
+.patient-resources .patient-resources-header h2,
+.patient-resources .patient-resources-header h3 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* ── Supporting image ─────────────────────────────────────────────────────── */
+
+.patient-resources .patient-resources-image picture,
+.patient-resources .patient-resources-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-m);
+  object-fit: cover;
+}
+
+/* ── Intro paragraph ──────────────────────────────────────────────────────── */
+
+.patient-resources .patient-resources-intro p {
+  margin: 0;
+  font-size: var(--font-size-p);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* ── Resource items list ──────────────────────────────────────────────────── */
+
+.patient-resources .patient-resources-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.patient-resources .patient-resources-item {
+  padding: var(--spacing-4) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.patient-resources .patient-resources-item:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.patient-resources .patient-resources-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+/* Resource item heading */
+.patient-resources .patient-resources-item h3,
+.patient-resources .patient-resources-item h4 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--font-size-h4);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* Resource item description */
+.patient-resources .patient-resources-item-desc {
+  margin: 0;
+  font-size: var(--font-size-p);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* ── CTA link ─────────────────────────────────────────────────────────────── */
+
+.patient-resources .patient-resources-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: color var(--transition-base);
+}
+
+.patient-resources .patient-resources-cta:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.patient-resources .patient-resources-cta:active {
+  color: var(--color-primary-active);
+}
+
+.patient-resources .patient-resources-cta:focus-visible {
+  outline: 3px solid var(--color-primary-focus);
+  outline-offset: 2px;
+  border-radius: var(--border-radius-s);
+}
+
+.patient-resources .patient-resources-chevron {
+  font-style: normal;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+/* ── Dark variant ─────────────────────────────────────────────────────────── */
+
+.patient-resources.dark {
+  padding: var(--spacing-5);
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-m);
+}
