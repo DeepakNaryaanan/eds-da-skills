@@ -3,25 +3,23 @@ import { test, expect } from '@playwright/test';
 test.describe('footer block', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/tests/footer-test.html');
-    // Wait for the footer wrapper div to be injected before each assertion.
-    await page.waitForSelector('footer > div');
+    await page.waitForSelector('footer .footer-inner');
   });
 
-  test('renders a wrapper div inside the footer element', async ({ page }) => {
-    await expect(page.locator('footer > div')).toBeVisible();
+  test('renders the footer inner wrapper', async ({ page }) => {
+    await expect(page.locator('footer .footer-inner')).toBeVisible();
   });
 
-  test('footer content from fragment is visible', async ({ page }) => {
-    await expect(page.locator('footer')).toContainText('Example Site');
+  test('renders multi-column link groups', async ({ page }) => {
+    const cols = page.locator('footer .footer-columns');
+    await expect(cols).toBeVisible();
+    expect(await cols.locator('h3, h4').count()).toBeGreaterThanOrEqual(2);
+    expect(await cols.locator('ul li a').count()).toBeGreaterThanOrEqual(4);
   });
 
-  test('footer element is present in the DOM', async ({ page }) => {
-    await expect(page.locator('footer')).toBeVisible();
-  });
-
-  test('footer does not retain original empty state after decoration', async ({ page }) => {
-    // After decoration the footer must have at least one child element.
-    const childCount = await page.locator('footer').evaluate((el) => el.children.length);
-    expect(childCount).toBeGreaterThan(0);
+  test('renders a legal bar after the horizontal rule', async ({ page }) => {
+    const legal = page.locator('footer .footer-legal');
+    await expect(legal).toBeVisible();
+    await expect(legal).toContainText(/©|copyright|all rights reserved/i);
   });
 });

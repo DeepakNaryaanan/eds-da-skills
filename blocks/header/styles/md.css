@@ -1,6 +1,49 @@
-/* @media (width >= 760px) — tablet: increase header height to 84 px */
+/* Desktop layout (≥ 760px): nav inline, hamburger hidden. */
+
 @media (width >= 760px) {
-  :root {
-    --nav-height: 84px;
+  header {
+    --header-height: 80px;
+  }
+
+  .header .header-bar {
+    padding: 0 2rem;
+  }
+
+  .header .header-logo img,
+  .header .header-logo picture {
+    max-height: 48px;
+  }
+
+  .header .header-nav-toggle {
+    display: none;
+  }
+
+  .header .header-nav {
+    position: static;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    box-shadow: none;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .header .header-nav[hidden] {
+    display: flex;
+  }
+
+  .header .header-nav .navigation-list {
+    flex-direction: row;
+    gap: 1.75rem;
+  }
+
+  .header .header-nav .navigation-item {
+    border: 0;
+  }
+
+  .header .header-nav .navigation-item a {
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
   }
 }

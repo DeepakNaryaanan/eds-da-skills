@@ -1,1 +1,17 @@
-/* @media (width >= 760px) — no footer-specific overrides at this breakpoint */
+@media (width >= 760px) {
+  .footer .footer-inner {
+    padding: 3rem 2rem 2rem;
+  }
+
+  .footer .footer-columns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .footer .footer-legal {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}

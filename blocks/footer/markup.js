@@ -1,10 +1,15 @@
-// The footer block builds its DOM programmatically from a footer fragment.
-// This file documents the final rendered structure for reference.
-
-export const FOOTER_MARKUP = /* html */`
-<div>
-  {content}
+/**
+ * Root footer shell.
+ *
+ * Tokens:
+ *   {columns} – authored fragment content before the <hr> (link groups)
+ *   {legal}   – authored fragment content after the <hr> (legal / copyright)
+ */
+export const MARKUP = /* html */`
+<div class="footer-inner">
+  <div class="footer-columns">{columns}</div>
+  <div class="footer-legal">{legal}</div>
 </div>
 `;
 
-export default FOOTER_MARKUP;
+export default MARKUP;
