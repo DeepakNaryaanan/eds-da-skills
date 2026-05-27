@@ -1,0 +1,169 @@
+/*
+ * nav-cards block styles
+ *
+ * Matches Abbott Nutrition's destination-card section:
+ *   - No card chrome (no background, border, or shadow on tiles)
+ *   - Line-art icon centred above
+ *   - Regular-weight dark heading, dark body copy
+ *   - Solid sky-blue uppercase CTA button
+ *   - Generous gutter between cards
+ *
+ * Grid: 1 col mobile → 2 cols at 632px → 3 cols at 760px+. The auto-fit
+ * fallback supports 4 or 5 cards on wider viewports without forcing a
+ * specific column count.
+ */
+
+/* ── Grid container ───────────────────────────────────────────────────────── */
+.nav-cards .nav-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-5);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (width >= 632px) {
+  .nav-cards .nav-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-5);
+  }
+}
+
+@media (width >= 760px) {
+  .nav-cards .nav-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+}
+
+@media (width >= 1272px) {
+  .nav-cards .nav-cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 4rem;
+  }
+}
+
+/* ── Card item ────────────────────────────────────────────────────────────── */
+.nav-cards .nav-cards-item {
+  display: flex;
+}
+
+/* ── Card link wrapper — transparent, centred column ──────────────────────── */
+.nav-cards .nav-cards-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--spacing-3);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  text-decoration: none;
+  color: var(--color-text);
+  width: 100%;
+  border-radius: var(--border-radius-s);
+  transition: opacity 0.2s ease;
+}
+
+.nav-cards .nav-cards-link:hover {
+  opacity: 0.9;
+  color: var(--color-text);
+}
+
+.nav-cards .nav-cards-link:focus-visible {
+  outline: 3px solid var(--color-primary-focus);
+  outline-offset: 4px;
+}
+
+/* ── Icon ─────────────────────────────────────────────────────────────────── */
+.nav-cards .nav-cards-icon {
+  width: 96px;
+  height: 96px;
+  margin-bottom: var(--spacing-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav-cards .nav-cards-icon img,
+.nav-cards .nav-cards-icon picture {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+.nav-cards .nav-cards-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  width: 100%;
+}
+
+/* Heading — regular-weight dark text, larger than the previous tile size */
+.nav-cards .nav-cards-body h2,
+.nav-cards .nav-cards-body h3 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-3);
+  line-height: 1.2;
+}
+
+@media (width >= 992px) {
+  .nav-cards .nav-cards-body h2,
+  .nav-cards .nav-cards-body h3 {
+    font-size: 2rem;
+  }
+}
+
+/* ── Description ──────────────────────────────────────────────────────────── */
+.nav-cards .nav-cards-desc {
+  font-size: 1rem;
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-4);
+  line-height: 1.5;
+  max-width: 28ch;
+  flex: 1;
+}
+
+/* ── CTA — solid sky-blue button, white uppercase text ────────────────────── */
+.nav-cards .nav-cards-cta {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-tertiary-text);
+  background-color: var(--color-tertiary);
+  border-radius: var(--border-radius-s);
+  padding: 0.75rem 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.125rem;
+  margin-top: auto;
+  transition: background-color 0.3s ease;
+}
+
+.nav-cards .nav-cards-link:hover .nav-cards-cta {
+  background-color: var(--color-tertiary-hover);
+  color: var(--color-tertiary-text);
+}
+
+/* ── Compact variant ──────────────────────────────────────────────────────── */
+.nav-cards.compact .nav-cards-link {
+  padding: var(--spacing-2) var(--spacing-3);
+}
+
+.nav-cards.compact .nav-cards-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: var(--spacing-2);
+}
+
+.nav-cards.compact .nav-cards-body h2,
+.nav-cards.compact .nav-cards-body h3 {
+  font-size: 1.25rem;
+}

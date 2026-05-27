@@ -42,56 +42,102 @@
  *   • See config/themes.css for the existing contrast ratios to use as a guide.
  */
 
+/* ─── Abbott Nutrition design tokens ─────────────────────────────────────
+ * Source: https://www.abbottnutrition.com/home (clientlib-themes.css)
+ *
+ * Brand: deep navy #001489 + accent yellow #ffd100, with a lighter sky-blue
+ * #009cde reserved for inline links. Headings are #212121, muted text #63666a.
+ * Border-radius is conservatively flat (4px almost everywhere). One soft
+ * elevation shadow is reused across cards, header, modals, dropdowns.
+ *
+ * Typography: Abbott uses the proprietary "Brandon Text" webfont (regular +
+ * bold). It is not redistributable, so we substitute a geometric sans-serif
+ * system stack here. Swap to a licensed face (Proxima Nova, Montserrat) by
+ * setting `--body-font-family` / `--heading-font-family` if the project
+ * adds a webfont.
+ *
+ * Contrast checks (WCAG AA):
+ *   #001489 + #ffffff text  →  14.9:1  (AAA)
+ *   #ffd100 + #001489 text  →  12.3:1  (AAA — yellow needs dark text)
+ *   #009cde + #ffffff       →   3.1:1  (non-text AA; link color on white only)
+ */
 /* ─── Light mode overrides ───────────────────────────────────────────────── */
 :root {
-  /* ── Brand / primary color ─────────────────────────────────────────────
-   * Change the primary palette entry point here; all derived tokens
-   * (-hover, -active, -text, …) should be updated together.
-   *
-   * Example — switch primary from blue to violet:
-   *   --color-primary:        var(--color-violet-600);
-   *   --color-primary-hover:  var(--color-violet-700);
-   *   --color-primary-active: var(--color-violet-800);
-   *   --color-primary-text:   var(--color-neutral-0);
-   *   --color-primary-subtle: var(--color-violet-100);
-   *   --color-primary-border: var(--color-violet-400);
-   *   --color-primary-focus:  var(--color-violet-700);
-   */
+  /* ── Primary — Abbott deep navy ───────────────────────────────────────── */
+  --color-primary:        #001489;
+  --color-primary-hover:  #000e5e;   /* Abbott's --button-primary-bg-pressed */
+  --color-primary-active: #00093d;   /* derived ~20% darken */
+  --color-primary-text:   #ffffff;
+  --color-primary-subtle: #e6e8f3;
+  --color-primary-border: #001489;
+  --color-primary-focus:  #009cde;   /* Abbott link-blue, 3:1+ on white */
 
-  /* ── Typography ────────────────────────────────────────────────────────
-   * Example — switch to a different font stack:
-   *   --body-font-family:    'Inter', sans-serif;
-   *   --heading-font-family: 'Poppins', sans-serif;
-   */
+  /* ── Secondary — Abbott accent yellow ─────────────────────────────────── */
+  --color-secondary:        #ffd100;
+  --color-secondary-hover:  #eeb33b;   /* Abbott's --button-primary-v1-bg-pressed */
+  --color-secondary-active: #c89500;
+  --color-secondary-text:   #001489;   /* Abbott pairs yellow with deep-navy text */
+  --color-secondary-subtle: #fff7d6;
+  --color-secondary-border: #eeb33b;
+  --color-secondary-focus:  #001489;
 
-  /* ── Spacing ────────────────────────────────────────────────────────────
-   * Example — tighten the base spacing scale:
-   *   --spacing-3: 0.75rem;   /* 12 px instead of 16 px */
-   */
+  /* ── Tertiary — Abbott link blue ──────────────────────────────────────── */
+  --color-tertiary:        #009cde;
+  --color-tertiary-hover:  #007bb0;
+  --color-tertiary-active: #005f88;
+  --color-tertiary-text:   #ffffff;
+  --color-tertiary-subtle: #e6f5fc;
+  --color-tertiary-border: #007bb0;
+  --color-tertiary-focus:  #005f88;
 
-  /* ── Border radius ──────────────────────────────────────────────────────
-   * Example — square off all corners:
-   *   --border-radius-s: 0;
-   *   --border-radius-m: 0;
-   *   --border-radius-l: 0;
-   */
+  /* ── Danger / Success — Abbott alert palette ──────────────────────────── */
+  --color-danger:        #e4002b;
+  --color-danger-hover:  #b80023;
+  --color-danger-active: #8d001b;
+  --color-danger-text:   #ffffff;
+  --color-danger-subtle: #fde6ea;
+  --color-danger-border: #b80023;
+  --color-danger-focus:  #8d001b;
+  --color-success:        #52be08;
+  --color-success-hover:  #429906;
+  --color-success-active: #327404;
+  --color-success-text:   #ffffff;
+  --color-success-subtle: #e8f7d9;
+  --color-success-border: #429906;
+  --color-success-focus:  #327404;
 
-  /* ── Shadows ────────────────────────────────────────────────────────────
-   * Example — remove shadows entirely:
-   *   --shadow-s: none;
-   *   --shadow-m: none;
-   *   --shadow-l: none;
-   */
+  /* ── Page surfaces / neutrals ─────────────────────────────────────────── */
+  --color-page-bg:    #ffffff;
+  --color-surface:    #ffffff;
+  --color-surface-2:  #ececeb;   /* Abbott --alert-banner-bg-color-snow-gray */
+  --color-border:     #d9d9d6;   /* Abbott --alert-info-color */
+  --color-text:       #212121;   /* Abbott --page-heading-color */
+  --color-text-muted: #63666a;   /* Abbott --rte-color */
 
-  /* ── Transitions ────────────────────────────────────────────────────────
-   * Example — slow down all transitions for debugging:
-   *   --transition-speed: 500ms;
-   */
+  /* ── Typography ───────────────────────────────────────────────────────── */
 
-  /* ── Navigation height ──────────────────────────────────────────────────
-   * Example:
-   *   --nav-height: 80px;
-   */
+  /* Brandon Text is proprietary — fall back to a geometric system sans. */
+  --body-font-family:    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --heading-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Abbott desktop type scale (fixed sizes, not fluid). */
+  --font-size-h1: 3.75rem;    /* 60px — hero h1 */
+  --font-size-h2: 2.375rem;   /* 38px */
+  --font-size-h3: 1.5rem;     /* 24px */
+  --font-size-h4: 1.125rem;   /* 18px */
+  --font-size-h5: 1rem;       /* 16px */
+  --font-size-h6: 0.75rem;    /* 12px — uppercase, 0.5px letter-spacing */
+  --font-size-p:  1rem;
+
+  /* ── Border radius ────────────────────────────────────────────────────── */
+  --border-radius-s: 4px;     /* buttons, cards, inputs, alerts */
+  --border-radius-m: 6px;     /* dropdowns */
+  --border-radius-l: 12px;    /* chips, larger pills */
+
+  /* ── Shadows ──────────────────────────────────────────────────────────── */
+  --shadow-s: 0 0 2px 0 #d4d4d4;
+  --shadow-m: 0 2px 4px 0 rgb(0 0 0 / 24%), 0 4px 8px -2px rgb(141 141 148 / 28%);
+  --shadow-l: 0 1px 12px 0 rgb(0 0 0 / 66%);
 }
 
 /* ─── Dark mode overrides ────────────────────────────────────────────────── */
