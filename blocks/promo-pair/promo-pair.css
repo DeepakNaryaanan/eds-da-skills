@@ -1,0 +1,94 @@
+/*
+ * promo-pair block styles
+ *
+ * Two-column promotional card pair. Mobile: stacked. Desktop (760px+): side-by-side.
+ * All selectors scoped to .promo-pair.
+ */
+
+/* ── Grid ─────────────────────────────────────────────────────────────────── */
+.promo-pair .promo-pair-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (width >= 760px) {
+  .promo-pair .promo-pair-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-4);
+  }
+}
+
+/* ── Card ─────────────────────────────────────────────────────────────────── */
+.promo-pair .promo-pair-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius-m);
+  overflow: hidden;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: box-shadow var(--transition-base);
+}
+
+.promo-pair .promo-pair-card:hover {
+  box-shadow: var(--shadow-m);
+}
+
+/* ── Image ────────────────────────────────────────────────────────────────── */
+.promo-pair .promo-pair-image {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.promo-pair .promo-pair-image picture,
+.promo-pair .promo-pair-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 400ms var(--transition-ease);
+}
+
+.promo-pair .promo-pair-card:hover .promo-pair-image img {
+  transform: scale(1.04);
+}
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+.promo-pair .promo-pair-body {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-4);
+  flex: 1;
+}
+
+.promo-pair .promo-pair-body h2,
+.promo-pair .promo-pair-body h3 {
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-3);
+  line-height: 1.25;
+}
+
+/* ── Description ──────────────────────────────────────────────────────────── */
+.promo-pair .promo-pair-desc {
+  font-size: var(--font-size-p);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--spacing-4);
+  flex: 1;
+  line-height: 1.6;
+}
+
+/* ── CTA ──────────────────────────────────────────────────────────────────── */
+.promo-pair .promo-pair-cta {
+  align-self: flex-start;
+}
+
+/* ── Tinted variant ───────────────────────────────────────────────────────── */
+.promo-pair.tinted .promo-pair-card {
+  background-color: var(--color-primary-subtle);
+  border-color: var(--color-primary-border);
+}

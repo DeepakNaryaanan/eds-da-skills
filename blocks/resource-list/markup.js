@@ -1,13 +1,26 @@
+/**
+ * HTML templates for the resource-list block.
+ *
+ * MARKUP      — root list container
+ * ITEM_MARKUP — individual resource list item
+ */
+
 export const MARKUP = /* html */`
-<div class="resource-list-root">
+<ul class="resource-list-items">
   {items}
-</div>
+</ul>
 `;
 
 export const ITEM_MARKUP = /* html */`
-<div class="resource-list-item">
-  {content}
-</div>
+<li class="resource-list-item">
+  {thumbnail}
+  <div class="resource-list-body">
+    {eyebrow}
+    {title}
+    {description}
+    {date}
+  </div>
+</li>
 `;
 
 export default MARKUP;

@@ -1,5 +1,126 @@
-/* Skeleton styles for the resource-list block. */
+/*
+ * resource-list block styles
+ *
+ * Stacked list of linked resources with optional thumbnails. Mobile-first:
+ * single column stacked → thumbnail + body side-by-side at 632px.
+ * All selectors scoped to .resource-list.
+ */
 
-.resource-list {
+/* ── List container ───────────────────────────────────────────────────────── */
+.resource-list .resource-list-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+/* ── Item ─────────────────────────────────────────────────────────────────── */
+.resource-list .resource-list-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding-bottom: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.resource-list .resource-list-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+@media (width >= 632px) {
+  .resource-list .resource-list-item {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--spacing-4);
+  }
+}
+
+/* ── Thumbnail ────────────────────────────────────────────────────────────── */
+.resource-list .resource-list-thumbnail {
+  flex-shrink: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--border-radius-m);
+}
+
+@media (width >= 632px) {
+  .resource-list .resource-list-thumbnail {
+    width: 200px;
+    aspect-ratio: auto;
+    height: 130px;
+  }
+}
+
+.resource-list .resource-list-thumbnail img,
+.resource-list .resource-list-thumbnail picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
+}
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+.resource-list .resource-list-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  flex: 1;
+}
+
+/* ── Eyebrow ──────────────────────────────────────────────────────────────── */
+.resource-list .resource-list-eyebrow {
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+}
+
+/* ── Title link ───────────────────────────────────────────────────────────── */
+.resource-list .resource-list-title {
+  font-size: var(--font-size-h5);
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: none;
+  line-height: 1.3;
+  transition: color var(--transition-base);
+}
+
+.resource-list .resource-list-title:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.resource-list .resource-list-title:focus-visible {
+  outline: 3px solid var(--color-primary-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Description ──────────────────────────────────────────────────────────── */
+.resource-list .resource-list-desc {
+  font-size: var(--font-size-p);
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Date ─────────────────────────────────────────────────────────────────── */
+.resource-list .resource-list-date {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  display: block;
+}
+
+/* ── Compact variant ──────────────────────────────────────────────────────── */
+.resource-list.compact .resource-list-item {
+  padding-bottom: var(--spacing-3);
+}
+
+.resource-list.compact .resource-list-title {
+  font-size: var(--font-size-p);
 }
