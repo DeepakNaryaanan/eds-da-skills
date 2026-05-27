@@ -1,22 +1,22 @@
 /*
  * promo-pair block styles
  *
- * Matches Abbott Nutrition's .m-card.m-card--large specialty-nutrition pair.
- * Abbott source tokens (from clientlib-themes.css):
- *   --card-border-radius: 4px; --card-box-shadow: 0 2px 4px 0 rgba(0,0,0,0.24),
- *   0 4px 8px -2px rgba(141,141,148,0.28); --card-body-padding: 1rem 1rem 1.5rem;
- *   --card-media-border-radius: 4px 4px 0 0; --card-large-media-height: 220px.
- *   CTA is .a-link.a-link--icon (underlined link with arrow, not filled button).
+ * Matches Abbott Nutrition's article-card design:
+ *   - White card with a thin grey border + very soft shadow
+ *   - Image fills the card top (no rounded corners on the image edge)
+ *   - Regular-weight dark heading (not bold)
+ *   - Dark body copy (not muted)
+ *   - "Learn More" rendered as a sky-blue bold underlined text link
+ *     — NOT a button, no arrow icon
  *
- * Layout: 1-col mobile → 2-col equal at 760px (no gap change needed).
- * All selectors scoped to .promo-pair.
+ * Layout: 1-col mobile → 2-col equal at 760px+.
  */
 
 /* ── Grid ─────────────────────────────────────────────────────────────────── */
 .promo-pair .promo-pair-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-3);
+  gap: var(--spacing-4);
   list-style: none;
   padding: 0;
   margin: 0;
@@ -25,41 +25,31 @@
 @media (width >= 760px) {
   .promo-pair .promo-pair-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-3);
+    gap: var(--spacing-4);
   }
 }
 
 /* ── Card ─────────────────────────────────────────────────────────────────── */
-/*
- * Abbott: white card, 4px radius, medium shadow, no border line.
- * Hover lifts shadow — no background colour change (unlike nav-cards).
- */
 .promo-pair .promo-pair-card {
   display: flex;
   flex-direction: column;
-  border-radius: var(--border-radius-s);   /* 4px — Abbott */
-  overflow: hidden;
   background-color: var(--color-surface);
-  box-shadow: var(--shadow-m);
-  border: none;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-s);
+  box-shadow: var(--shadow-s);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
 }
 
 .promo-pair .promo-pair-card:hover {
-  box-shadow: var(--shadow-l);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-m);
 }
 
 /* ── Image ────────────────────────────────────────────────────────────────── */
-/*
- * Abbott: --card-large-media-height: 220px desktop / 220px mobile.
- * Border radius only on top corners: 4px 4px 0 0.
- */
 .promo-pair .promo-pair-image {
   overflow: hidden;
   height: 220px;
   flex-shrink: 0;
-  border-radius: var(--border-radius-s) var(--border-radius-s) 0 0;
 }
 
 .promo-pair .promo-pair-image picture,
@@ -68,81 +58,55 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 400ms ease-in-out;
-}
-
-.promo-pair .promo-pair-card:hover .promo-pair-image img {
-  transform: scale(1.04);
 }
 
 /* ── Body ─────────────────────────────────────────────────────────────────── */
-/*
- * Abbott: --card-body-padding: 1rem 1rem 1.5rem 1rem
- */
 .promo-pair .promo-pair-body {
   display: flex;
   flex-direction: column;
-  padding: 1rem 1rem 1.5rem;
+  padding: var(--spacing-4);
   flex: 1;
+  gap: var(--spacing-3);
 }
 
-/* Heading — Abbott: .m-card__title at 1.125rem (h4); font-brandontext-regular
-   (we use font-weight:700 on Helvetica to compensate for no Brandon Text bold) */
+/* Heading — regular weight (not bold), dark text */
 .promo-pair .promo-pair-body h2,
 .promo-pair .promo-pair-body h3 {
-  font-size: var(--font-size-h4);   /* 1.125rem */
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 400;
   color: var(--color-text);
-  margin: 0 0 var(--spacing-2);
+  margin: 0;
   line-height: 1.3;
 }
 
-/* ── Description ──────────────────────────────────────────────────────────── */
-/*
- * Abbott: .m-card__description p — 0.875rem, Georgia, color #616161.
- * We use the system sans stack at the same size with the muted token.
- */
+/* Description — dark text (not muted), full readable size */
 .promo-pair .promo-pair-desc {
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-  margin: 0 0 var(--spacing-3);
+  font-size: 1rem;
+  color: var(--color-text);
+  margin: 0;
   flex: 1;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-/* ── CTA link ─────────────────────────────────────────────────────────────── */
-/*
- * Abbott: .a-link.a-link--icon — underlined link with trailing arrow icon.
- * Uses --mega-menu-link-color: #001489 (navy) as the link colour.
- */
+/* ── "Learn More" CTA — sky-blue bold underlined text link ────────────────── */
 .promo-pair .promo-pair-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.875rem;
+  display: inline-block;
+  font-size: 1rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-tertiary);
   text-decoration: underline;
-  letter-spacing: 0.81px;
-  line-height: 1.125rem;
+  line-height: 1.5;
   align-self: flex-start;
   transition: color 0.2s ease;
-}
-
-.promo-pair .promo-pair-cta::after {
-  content: "\2192";
-  font-weight: 400;
-  text-decoration: none;
-  display: inline-block;
-  transition: transform 0.2s ease;
+  background: none;
+  border: none;
+  padding: 0;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .promo-pair .promo-pair-cta:hover {
-  color: var(--color-primary-hover);
-}
-
-.promo-pair .promo-pair-cta:hover::after {
-  transform: translateX(3px);
+  color: var(--color-tertiary-hover);
 }
 
 .promo-pair .promo-pair-cta:focus-visible {
@@ -154,6 +118,5 @@
 /* ── Tinted variant ───────────────────────────────────────────────────────── */
 .promo-pair.tinted .promo-pair-card {
   background-color: var(--color-primary-subtle);
-  border: 1px solid var(--color-primary-border);
-  box-shadow: var(--shadow-s);
+  border-color: var(--color-primary-border);
 }

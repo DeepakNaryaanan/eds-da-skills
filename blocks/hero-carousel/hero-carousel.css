@@ -1,55 +1,34 @@
 /*
  * hero-carousel block styles
  *
- * Full-width auto-rotating carousel matching Abbott Nutrition's o-hero-carousel
- * component. Mobile-first; enhanced at 760px and 992px. All selectors scoped
- * to .hero-carousel.
- *
- * Abbott source: .o-hero-carousel, .m-hero, .m-hero__content, .m-hero__extras
- *   Arrow: 40×40 white circles; dots: 8px white border, filled when active.
- *   Slide layout: full-bleed image with content panel left-aligned on desktop,
- *   centred on mobile. CTA is the abbott navy outline button on light slides.
+ * Matches the Abbott Nutrition home-page hero design:
+ *   - Constrained-width image (sits inside the section container, not full-bleed)
+ *   - Dark heading + body text overlaid on the photo's left side (no gradient)
+ *   - Solid sky-blue CTA button with white uppercase text
+ *   - Thin chevron prev/next arrows in the gutter outside the image
+ *   - Small dot indicators centred below the image
  */
 
-/* ── Full-bleed section reset ─────────────────────────────────────────────── */
-/*
- * The hero carousel must span the full viewport width, but the EDS section
- * constrains children to max-width:1200px with padding. We break out by
- * using a negative-margin technique so the block does not create a horizontal
- * scroll on any container.
- */
-.hero-carousel-wrapper {
-  padding: 0 !important;
-  max-width: 100% !important;
-  margin-inline: 0 !important;
-}
-
-/* The section itself should have no vertical margin above the hero */
-.section:first-of-type:has(.hero-carousel-wrapper),
-.section:first-of-type .hero-carousel-wrapper {
-  margin-top: 0;
-}
-
-/* ── Block container ──────────────────────────────────────────────────────── */
+/* ── Carousel container ───────────────────────────────────────────────────── */
 .hero-carousel {
+  --hero-h: 320px;
+
   position: relative;
-  overflow: hidden;
-  background-color: var(--color-neutral-900);
-  /* Abbott medium hero: 500px desktop */
-  min-height: 320px;
-  margin-top: 0;
-  margin-bottom: 0;
+  padding-inline: 0;
+  padding-block-end: var(--spacing-4);
 }
 
-@media (width >= 760px) {
+@media (width >= 632px) {
   .hero-carousel {
-    min-height: 480px;
+    --hero-h: 400px;
+
+    padding-inline: 3rem;
   }
 }
 
 @media (width >= 992px) {
   .hero-carousel {
-    min-height: 500px;
+    --hero-h: 480px;
   }
 }
 
@@ -57,27 +36,26 @@
 .hero-carousel .hero-carousel-track {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: var(--hero-h);
+  overflow: hidden;
+  background-color: var(--color-surface-2);
 }
 
 /* ── Slides ───────────────────────────────────────────────────────────────── */
 .hero-carousel .hero-carousel-slide {
   position: absolute;
   inset: 0;
-  display: flex;
-  flex-direction: column;
+  display: block;
   opacity: 0;
   transition: opacity 600ms ease-in-out;
   pointer-events: none;
 }
 
 .hero-carousel .hero-carousel-slide--active {
-  position: relative;
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Reduced-motion: instant cut between slides */
 @media (prefers-reduced-motion: reduce) {
   .hero-carousel .hero-carousel-slide {
     transition: none;
@@ -100,66 +78,51 @@
   display: block;
 }
 
-/* ── Slide body ───────────────────────────────────────────────────────────── */
-/*
- * Abbott's m-hero: content sits in a container-width box left-aligned on
- * desktop, centred on mobile. Gradient overlay darkens the image on the
- * text side so white copy is legible at 4.5:1+.
- */
+/* ── Slide body — overlays the left side of the image ─────────────────────── */
 .hero-carousel .hero-carousel-slide-body {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  text-align: center;
-  padding: var(--spacing-5) var(--spacing-3) calc(var(--spacing-5) + 32px);
-  min-height: 320px;
-  background: linear-gradient(to top, rgb(0 0 0 / 72%) 0%, rgb(0 0 0 / 35%) 55%, transparent 100%);
-  color: var(--color-neutral-0);
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--spacing-4) var(--spacing-3);
+  color: var(--color-text);
+  max-width: 100%;
 }
 
 @media (width >= 760px) {
   .hero-carousel .hero-carousel-slide-body {
-    min-height: 480px;
-    padding: var(--spacing-5) var(--spacing-5) calc(var(--spacing-5) + 40px);
-    justify-content: center;
-    align-items: flex-start;
-    text-align: left;
-    max-width: 50%;
-    /* Left-side fade matching Abbott */
-    background: linear-gradient(to right, rgb(0 0 0 / 65%) 0%, rgb(0 0 0 / 35%) 65%, transparent 100%);
+    padding: var(--spacing-4) var(--spacing-4) var(--spacing-4) var(--spacing-5);
+    max-width: 55%;
   }
 }
 
 @media (width >= 992px) {
   .hero-carousel .hero-carousel-slide-body {
-    min-height: 500px;
-    /* Abbott uses --hero-container-xl-width:1110px internally; we keep it
-       simple: 40% of viewport width fits comfortably without overflowing */
-    max-width: 600px;
-    padding: 2.5rem 4rem 2.5rem 4rem;
+    padding: var(--spacing-5) var(--spacing-4) var(--spacing-5) 5rem;
+    max-width: 50%;
   }
 }
 
-/* Eyebrow — Abbott: .m-hero__title h6; small, uppercase, spaced, muted white */
-.hero-carousel .hero-carousel-slide-body > p:first-child {
+/* Eyebrow (optional first paragraph) */
+.hero-carousel .hero-carousel-slide-body > p:first-child:not(:only-child) {
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: rgb(255 255 255 / 85%);
+  color: var(--color-text-muted);
   margin: 0 0 var(--spacing-2);
   line-height: 1rem;
 }
 
-/* Heading — Abbott: h1.m-hero__header at 3.75rem desktop / 2.375rem tablet */
+/* Heading — dark text on the photo's lighter area */
 .hero-carousel .hero-carousel-slide-body h1,
 .hero-carousel .hero-carousel-slide-body h2 {
-  font-size: var(--font-size-h2);       /* 2.375rem */
+  font-size: var(--font-size-h2);
   font-weight: 700;
-  color: var(--color-neutral-0);
+  color: var(--color-text);
   margin: 0 0 var(--spacing-3);
   line-height: 1.15;
   letter-spacing: 0;
@@ -168,116 +131,103 @@
 @media (width >= 992px) {
   .hero-carousel .hero-carousel-slide-body h1,
   .hero-carousel .hero-carousel-slide-body h2 {
-    font-size: var(--font-size-h1);     /* 3.75rem — Abbott desktop hero */
-    line-height: 1;
+    font-size: 3rem;
+    line-height: 1.05;
   }
 }
 
-/* Body paragraph — Abbott: .m-hero__body p at 1.125rem Georgia on live site;
-   we use Helvetica at 1rem so it reads well over the image. */
-.hero-carousel .hero-carousel-slide-body p:not(:first-child) {
+.hero-carousel .hero-carousel-slide-body p:not(:first-child),
+.hero-carousel .hero-carousel-slide-body > p:only-child {
   font-size: 1.125rem;
-  color: rgb(255 255 255 / 90%);
+  color: var(--color-text);
   margin: 0 0 var(--spacing-4);
   max-width: 480px;
-  line-height: 1.5rem;
+  line-height: 1.5;
 }
 
-/* CTA button — Abbott uses an outline/ghost pill on hero images.
-   The global .button class applies the filled navy style; we override here
-   for the white ghost treatment used on dark slide backgrounds. */
-.hero-carousel .hero-carousel-slide-body a.button {
-  align-self: flex-start;
-  background-color: transparent;
-  color: var(--color-neutral-0);
-  border: 1px solid var(--color-neutral-0);
+/* CTA — solid sky-blue button (Abbott tertiary), white uppercase text */
+.hero-carousel .hero-carousel-slide-body a.button,
+.hero-carousel .hero-carousel-slide-body .button-container a {
+  display: inline-block;
+  background-color: var(--color-tertiary);
+  color: var(--color-tertiary-text);
+  border: none;
   border-radius: var(--border-radius-s);
-  padding: 13px 32px;
+  padding: 0.75rem 2rem;
   font-size: 0.875rem;
   font-weight: 700;
-  letter-spacing: 0.81px;
+  letter-spacing: 0.5px;
   line-height: 1.125rem;
   text-transform: uppercase;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
-.hero-carousel .hero-carousel-slide-body a.button:hover {
-  background-color: var(--color-neutral-0);
-  color: var(--color-primary);
+.hero-carousel .hero-carousel-slide-body a.button:hover,
+.hero-carousel .hero-carousel-slide-body .button-container a:hover {
+  background-color: var(--color-tertiary-hover);
+  color: var(--color-tertiary-text);
 }
 
-.hero-carousel .hero-carousel-slide-body a.button:focus-visible {
+.hero-carousel .hero-carousel-slide-body a.button:focus-visible,
+.hero-carousel .hero-carousel-slide-body .button-container a:focus-visible {
   outline: 3px solid var(--color-primary-focus);
   outline-offset: 2px;
 }
 
-@media (width < 760px) {
-  .hero-carousel .hero-carousel-slide-body a.button {
-    align-self: center;
-  }
-}
+/* ── Prev / Next chevron arrows ───────────────────────────────────────────── */
 
-/* ── Dark variant overlay ─────────────────────────────────────────────────── */
-.hero-carousel[data-theme="dark"] .hero-carousel-slide-body {
-  background: linear-gradient(to top, rgb(0 0 0 / 85%) 0%, rgb(0 0 0 / 50%) 55%, transparent 100%);
-}
-
-/* ── Prev / Next arrow buttons ────────────────────────────────────────────── */
 /*
- * Abbott source: --hero-carousel-arrow-width/height: 40px; border-radius: 50%;
- * background: #fff; color: #000 (dark icon). Semi-transparent on hover.
+ * Thin chevrons positioned in the gutter outside the image (within the
+ * carousel's horizontal padding). Vertically aligned to the centre of the
+ * track, not the whole block (which also contains dots below).
  */
 .hero-carousel .hero-carousel-prev,
 .hero-carousel .hero-carousel-next {
   position: absolute;
-  top: 50%;
+  top: calc(var(--hero-h) / 2);
   transform: translateY(-50%);
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 2rem;
+  height: 2rem;
   border: none;
-  border-radius: 50%;
-  background: rgb(255 255 255 / 90%);
-  color: var(--color-neutral-900);
+  background: transparent;
+  color: var(--color-text-muted);
   cursor: pointer;
   padding: 0;
-  transition: background 0.3s ease, transform 0.15s ease;
-  /* Push the dots indicator down so arrows don't overlap on mobile */
-  margin-top: -16px;
+  transition: color 0.2s ease;
 }
 
 .hero-carousel .hero-carousel-prev {
-  left: var(--spacing-3);
+  left: 0.5rem;
 }
 
 .hero-carousel .hero-carousel-next {
-  right: var(--spacing-3);
+  right: 0.5rem;
 }
 
 .hero-carousel .hero-carousel-prev:hover,
 .hero-carousel .hero-carousel-next:hover {
-  background: var(--color-neutral-0);
-  transform: translateY(-50%) scale(1.08);
+  color: var(--color-text);
 }
 
 .hero-carousel .hero-carousel-prev:focus-visible,
 .hero-carousel .hero-carousel-next:focus-visible {
   outline: 3px solid var(--color-primary-focus);
   outline-offset: 2px;
+  border-radius: 4px;
 }
 
-/* Arrow SVG-like text character — slightly larger for Abbott sizing */
 .hero-carousel .hero-carousel-arrow {
-  font-size: 1.5rem;
+  font-size: 2rem;
   line-height: 1;
-  font-weight: 400;
-  color: var(--color-neutral-900);
+  font-weight: 300;
 }
 
-/* Hide arrows on small mobile — dot nav is sufficient */
+/* Hide chevrons on small mobile — dot nav is sufficient */
 @media (width < 632px) {
   .hero-carousel .hero-carousel-prev,
   .hero-carousel .hero-carousel-next {
@@ -285,40 +235,34 @@
   }
 }
 
-/* ── Dot indicators ───────────────────────────────────────────────────────── */
-/*
- * Abbott source: --indicator-width/height: 8px; border: 1px solid #63666a;
- * filled=transparent, active fill = #fff on hero (light dots on dark image).
- * Bottom position: --hero-carousel-slick-dots-bottom: 24px.
- */
+/* ── Dot indicators — centred row beneath the image ───────────────────────── */
 .hero-carousel .hero-carousel-indicators {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
+  position: relative;
   display: flex;
-  gap: 0.5rem;
+  justify-content: center;
   align-items: center;
+  gap: 0.625rem;
+  margin-top: var(--spacing-4);
 }
 
 .hero-carousel .hero-carousel-indicator {
-  width: 8px;
-  height: 8px;
+  width: 0.5rem;
+  height: 0.5rem;
   border-radius: 50%;
-  border: 1px solid var(--color-neutral-0);
+  border: 1px solid var(--color-text-muted);
   background: transparent;
   cursor: pointer;
   padding: 0;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .hero-carousel .hero-carousel-indicator[aria-selected="true"] {
-  background: var(--color-neutral-0);
+  background-color: var(--color-text);
+  border-color: var(--color-text);
 }
 
 .hero-carousel .hero-carousel-indicator:hover {
-  background: rgb(255 255 255 / 60%);
+  background-color: var(--color-text-muted);
 }
 
 .hero-carousel .hero-carousel-indicator:focus-visible {

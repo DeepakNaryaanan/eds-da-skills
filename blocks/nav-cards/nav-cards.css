@@ -1,23 +1,23 @@
 /*
  * nav-cards block styles
  *
- * Matches Abbott Nutrition's o-features-card / navigation destination tiles.
- * Abbott source tokens (from clientlib-themes.css):
- *   --tiles-bg: #fff; --tiles-border-top: 8px solid #ffd100;
- *   --tiles-box-shadow: 0 2px 4px 0 rgba(0,0,0,0.24);
- *   --tiles-bg-hover: #001489; --tiles-border-top-hover: 8px solid #001489;
- *   --tiles-padding: 24px 24px 20px;
- *   Text on hover turns white. Icon turns white on hover.
+ * Matches Abbott Nutrition's destination-card section:
+ *   - No card chrome (no background, border, or shadow on tiles)
+ *   - Line-art icon centred above
+ *   - Regular-weight dark heading, dark body copy
+ *   - Solid sky-blue uppercase CTA button
+ *   - Generous gutter between cards
  *
- * Grid: 1-col mobile → 2-col (632px) → 3-col (760px) → 5-col (1272px).
- * All selectors scoped to .nav-cards.
+ * Grid: 1 col mobile → 2 cols at 632px → 3 cols at 760px+. The auto-fit
+ * fallback supports 4 or 5 cards on wider viewports without forcing a
+ * specific column count.
  */
 
 /* ── Grid container ───────────────────────────────────────────────────────── */
 .nav-cards .nav-cards-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-3);
+  gap: var(--spacing-5);
   list-style: none;
   padding: 0;
   margin: 0;
@@ -26,20 +26,21 @@
 @media (width >= 632px) {
   .nav-cards .nav-cards-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-5);
   }
 }
 
 @media (width >= 760px) {
   .nav-cards .nav-cards-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
   }
 }
 
 @media (width >= 1272px) {
   .nav-cards .nav-cards-grid {
-    /* Abbott: 5 equal columns matching the 5 primary destinations */
-    grid-template-columns: repeat(5, 1fr);
-    gap: var(--spacing-3);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 4rem;
   }
 }
 
@@ -48,52 +49,42 @@
   display: flex;
 }
 
-/* ── Card link wrapper ────────────────────────────────────────────────────── */
-/*
- * Abbott: white card, 8px yellow top border, subtle shadow.
- * On hover: background goes navy, border-top turns navy, all text turns white.
- */
+/* ── Card link wrapper — transparent, centred column ──────────────────────── */
 .nav-cards .nav-cards-link {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 24px 24px 20px;
-  background-color: var(--color-surface);
-  border-top: 8px solid var(--color-secondary);  /* Abbott #ffd100 yellow */
-  border-radius: var(--border-radius-s);
-  box-shadow: var(--shadow-s);
+  padding: var(--spacing-3);
+  background: transparent;
+  border: none;
+  box-shadow: none;
   text-decoration: none;
   color: var(--color-text);
-  transition: background-color 0.3s ease, border-top-color 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
+  border-radius: var(--border-radius-s);
+  transition: opacity 0.2s ease;
 }
 
 .nav-cards .nav-cards-link:hover {
-  background-color: var(--color-primary);
-  border-top-color: var(--color-primary);
-  box-shadow: var(--shadow-m);
-  color: var(--color-neutral-0);
+  opacity: 0.9;
+  color: var(--color-text);
 }
 
 .nav-cards .nav-cards-link:focus-visible {
   outline: 3px solid var(--color-primary-focus);
-  outline-offset: 2px;
+  outline-offset: 4px;
 }
 
 /* ── Icon ─────────────────────────────────────────────────────────────────── */
-/*
- * Abbott: icon centered above heading. Grey (#888b8d) normally, white on hover.
- * Size: ~80px for the picture icon images used here.
- */
 .nav-cards .nav-cards-icon {
-  width: 80px;
-  height: 80px;
+  width: 96px;
+  height: 96px;
   margin-bottom: var(--spacing-3);
-  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .nav-cards .nav-cards-icon img,
@@ -102,12 +93,6 @@
   height: 100%;
   object-fit: contain;
   display: block;
-  transition: filter 0.3s ease;
-}
-
-/* Tint the icon on hover so it reads as white on navy (approximate inversion) */
-.nav-cards .nav-cards-link:hover .nav-cards-icon img {
-  filter: brightness(0) invert(1);
 }
 
 /* ── Body ─────────────────────────────────────────────────────────────────── */
@@ -116,79 +101,69 @@
   flex-direction: column;
   flex: 1;
   align-items: center;
+  width: 100%;
 }
 
-/* Heading — Abbott: .o-features-card__title h3 at 1.5rem */
+/* Heading — regular-weight dark text, larger than the previous tile size */
 .nav-cards .nav-cards-body h2,
 .nav-cards .nav-cards-body h3 {
-  font-size: var(--font-size-h4);   /* 1.125rem — matches Abbott h4 tile size */
-  font-weight: 700;
+  font-size: 1.75rem;
+  font-weight: 400;
   color: var(--color-text);
-  margin: 0 0 var(--spacing-2);
-  line-height: 1.3;
-  transition: color 0.3s ease;
+  margin: 0 0 var(--spacing-3);
+  line-height: 1.2;
 }
 
-.nav-cards .nav-cards-link:hover .nav-cards-body h2,
-.nav-cards .nav-cards-link:hover .nav-cards-body h3 {
-  color: var(--color-neutral-0);
+@media (width >= 992px) {
+  .nav-cards .nav-cards-body h2,
+  .nav-cards .nav-cards-body h3 {
+    font-size: 2rem;
+  }
 }
 
 /* ── Description ──────────────────────────────────────────────────────────── */
-/*
- * Abbott: .o-features-card__content p — 0.875rem, center-aligned,
- * color #63666a normally, white on hover.
- */
 .nav-cards .nav-cards-desc {
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-  margin: 0 0 var(--spacing-3);
+  font-size: 1rem;
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-4);
+  line-height: 1.5;
+  max-width: 28ch;
   flex: 1;
-  line-height: 1.4;
-  transition: color 0.3s ease;
 }
 
-.nav-cards .nav-cards-link:hover .nav-cards-desc {
-  color: rgb(255 255 255 / 85%);
-}
-
-/* ── CTA label ────────────────────────────────────────────────────────────── */
-/*
- * Abbott: small primary button .a-button--sm at bottom of each tile.
- * On navy bg (hover), CTA uses yellow — matching --button-primary-v1-bg.
- */
+/* ── CTA — solid sky-blue button, white uppercase text ────────────────────── */
 .nav-cards .nav-cards-cta {
   display: inline-block;
   font-size: 0.875rem;
   font-weight: 700;
-  color: var(--color-neutral-0);
-  background-color: var(--color-primary);
+  color: var(--color-tertiary-text);
+  background-color: var(--color-tertiary);
   border-radius: var(--border-radius-s);
-  padding: 7px 16px;
+  padding: 0.75rem 2rem;
   text-transform: uppercase;
-  letter-spacing: 0.81px;
+  letter-spacing: 0.5px;
   line-height: 1.125rem;
   margin-top: auto;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .nav-cards .nav-cards-link:hover .nav-cards-cta {
-  background-color: var(--color-secondary);    /* Abbott yellow on hover */
-  color: var(--color-primary);                  /* Navy text on yellow */
+  background-color: var(--color-tertiary-hover);
+  color: var(--color-tertiary-text);
 }
 
 /* ── Compact variant ──────────────────────────────────────────────────────── */
 .nav-cards.compact .nav-cards-link {
-  padding: var(--spacing-3) var(--spacing-3) var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
 }
 
 .nav-cards.compact .nav-cards-icon {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   margin-bottom: var(--spacing-2);
 }
 
 .nav-cards.compact .nav-cards-body h2,
 .nav-cards.compact .nav-cards-body h3 {
-  font-size: var(--font-size-h5);
+  font-size: 1.25rem;
 }
