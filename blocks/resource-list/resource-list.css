@@ -1,58 +1,77 @@
 /*
  * resource-list block styles
  *
- * Stacked list of linked resources with optional thumbnails. Mobile-first:
- * single column stacked → thumbnail + body side-by-side at 632px.
+ * Matches Abbott Nutrition's .m-card.m-card--large article card grid.
+ * Abbott source tokens:
+ *   --card-border-radius: 4px; --card-box-shadow: 0 2px 4px 0 rgba(0,0,0,0.24),
+ *   0 4px 8px -2px rgba(141,141,148,0.28); --card-media-height: 160px;
+ *   --card-large-media-height: 220px; --card-body-padding: 1rem 1rem 1.5rem.
+ *   Eyebrow (category tag) is absent from the live Abbott cards — they use
+ *   the card title + description + underlined "Learn More" link only.
+ *
+ * Layout: 1-col mobile → 2-col (760px) → 3-col (992px).
  * All selectors scoped to .resource-list.
  */
 
 /* ── List container ───────────────────────────────────────────────────────── */
+/*
+ * Abbott renders cards in a Bootstrap column row. We use CSS Grid for
+ * equivalent equal-width columns with natural row height.
+ */
 .resource-list .resource-list-items {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-3);
 }
 
-/* ── Item ─────────────────────────────────────────────────────────────────── */
+@media (width >= 760px) {
+  .resource-list .resource-list-items {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 992px) {
+  .resource-list .resource-list-items {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-3);
+  }
+}
+
+/* ── Item — card shape ────────────────────────────────────────────────────── */
+/*
+ * Abbott: white card, 4px radius, medium shadow.
+ * Hover: slight lift + deeper shadow (matching tiles pattern).
+ */
 .resource-list .resource-list-item {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-3);
-  padding-bottom: var(--spacing-4);
-  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-s);   /* 4px — Abbott */
+  box-shadow: var(--shadow-m);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.resource-list .resource-list-item:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-@media (width >= 632px) {
-  .resource-list .resource-list-item {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: var(--spacing-4);
-  }
+.resource-list .resource-list-item:hover {
+  box-shadow: var(--shadow-l);
+  transform: translateY(-2px);
 }
 
 /* ── Thumbnail ────────────────────────────────────────────────────────────── */
+/*
+ * Abbott: --card-large-media-height: 220px; rounded top corners only.
+ * The placeholder SVGs are 240×135 (≈16:9) — we keep a fixed height so
+ * real images and SVG placeholders both look consistent.
+ */
 .resource-list .resource-list-thumbnail {
   flex-shrink: 0;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 220px;
   overflow: hidden;
-  border-radius: var(--border-radius-m);
-}
-
-@media (width >= 632px) {
-  .resource-list .resource-list-thumbnail {
-    width: 200px;
-    aspect-ratio: auto;
-    height: 130px;
-  }
+  border-radius: var(--border-radius-s) var(--border-radius-s) 0 0;
 }
 
 .resource-list .resource-list-thumbnail img,
@@ -61,37 +80,56 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 400ms ease-in-out;
+}
+
+.resource-list .resource-list-item:hover .resource-list-thumbnail img {
+  transform: scale(1.04);
 }
 
 /* ── Body ─────────────────────────────────────────────────────────────────── */
+/*
+ * Abbott: --card-body-padding: 1rem 1rem 1.5rem 1rem
+ */
 .resource-list .resource-list-body {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: var(--spacing-2);
+  padding: 1rem 1rem 1.5rem;
   flex: 1;
 }
 
-/* ── Eyebrow ──────────────────────────────────────────────────────────────── */
+/* ── Eyebrow / tag ────────────────────────────────────────────────────────── */
+/*
+ * Abbott cards don't show an eyebrow on the homepage cards, but we keep the
+ * element styled for pages that use it: small, uppercase, navy, no margin gap.
+ */
 .resource-list .resource-list-eyebrow {
-  font-size: var(--font-size-small);
+  display: block;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.5px;
   color: var(--color-primary);
+  line-height: 1rem;
 }
 
 /* ── Title link ───────────────────────────────────────────────────────────── */
+/*
+ * Abbott: .m-card__title h5 — 1.125rem brandon-regular (we use 700 Helvetica).
+ * Link inherits dark text, underlined "Learn More" CTA is separate below.
+ */
 .resource-list .resource-list-title {
-  font-size: var(--font-size-h5);
+  font-size: 1.125rem;
   font-weight: 700;
   color: var(--color-text);
   text-decoration: none;
   line-height: 1.3;
-  transition: color var(--transition-base);
+  transition: color 0.2s ease;
 }
 
 .resource-list .resource-list-title:hover {
-  color: var(--color-primary-hover);
+  color: var(--color-primary);
   text-decoration: underline;
 }
 
@@ -102,25 +140,94 @@
 }
 
 /* ── Description ──────────────────────────────────────────────────────────── */
+/*
+ * Abbott: .m-card__description p — 0.875rem, #63666a (muted).
+ */
 .resource-list .resource-list-desc {
-  font-size: var(--font-size-p);
+  font-size: 0.875rem;
   color: var(--color-text-muted);
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.4;
+  flex: 1;
+}
+
+/* ── "Learn More" CTA link — appended by JS after description ─────────────── */
+/*
+ * Abbott: .a-link.a-link--icon — underlined, navy, with trailing › arrow.
+ * The resource-list JS outputs this as .resource-list-link appended to body.
+ */
+.resource-list .resource-list-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: underline;
+  letter-spacing: 0;
+  line-height: 1.25rem;
+  margin-top: auto;
+  transition: color 0.2s ease;
+}
+
+.resource-list .resource-list-link::after {
+  content: "\203A";   /* › single right angle */
+  font-weight: 400;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.resource-list .resource-list-link:hover {
+  color: var(--color-primary-hover);
+}
+
+.resource-list .resource-list-link:hover::after {
+  transform: translateX(2px);
 }
 
 /* ── Date ─────────────────────────────────────────────────────────────────── */
 .resource-list .resource-list-date {
-  font-size: var(--font-size-small);
+  font-size: 0.75rem;
   color: var(--color-text-muted);
   display: block;
+  line-height: 1rem;
 }
 
 /* ── Compact variant ──────────────────────────────────────────────────────── */
+/*
+ * Text-only layout: no card chrome. Items displayed as a stacked list.
+ */
+.resource-list.compact .resource-list-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
 .resource-list.compact .resource-list-item {
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
   padding-bottom: var(--spacing-3);
+  border-bottom: 1px solid var(--color-border);
+  transform: none;
+  transition: none;
+}
+
+.resource-list.compact .resource-list-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.resource-list.compact .resource-list-item:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.resource-list.compact .resource-list-body {
+  padding: 0;
 }
 
 .resource-list.compact .resource-list-title {
-  font-size: var(--font-size-p);
+  font-size: 1rem;
 }

@@ -20,16 +20,21 @@ import { MARKUP, CARD_MARKUP } from './markup.js';
 function buildCardHtml(row) {
   const [imageCell, bodyCell] = row.children;
 
-  // Image — lazy loaded (below the fold)
+  // Image — lazy loaded (below the fold).
+  // Data URI placeholder images are passed through as-is; createOptimizedPicture
+  // cannot produce valid srcset URLs from a data URI (no server path).
   let imageHtml = '';
   if (imageCell) {
     const img = imageCell.querySelector('picture > img');
     if (img) {
-      const optimized = createOptimizedPicture(img.src, img.alt ?? '', false, [
-        { media: '(width >= 760px)', width: '600' },
-        { width: '400' },
-      ]);
-      imageHtml = `<div class="promo-pair-image">${optimized.outerHTML}</div>`;
+      const isDataUri = img.src.startsWith('data:');
+      const pictureEl = isDataUri
+        ? imageCell.querySelector('picture')
+        : createOptimizedPicture(img.src, img.alt ?? '', false, [
+          { media: '(width >= 760px)', width: '600' },
+          { width: '400' },
+        ]);
+      if (pictureEl) imageHtml = `<div class="promo-pair-image">${pictureEl.outerHTML}</div>`;
     }
   }
 
@@ -48,8 +53,10 @@ function buildCardHtml(row) {
   const descHtml = descEl ? `<p class="promo-pair-desc">${descEl.innerHTML}</p>` : '';
 
   const linkEl = bodyCell.querySelector('a');
+  // Use promo-pair-cta class without .button so the global button decorator
+  // does not override the Abbott link-style CTA treatment.
   const ctaHtml = linkEl
-    ? `<a class="promo-pair-cta button" href="${linkEl.href}">${linkEl.textContent.trim()}</a>`
+    ? `<a class="promo-pair-cta" href="${linkEl.href}">${linkEl.textContent.trim()}</a>`
     : '';
 
   return CARD_MARKUP

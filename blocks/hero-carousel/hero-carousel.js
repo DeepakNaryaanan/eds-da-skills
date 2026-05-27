@@ -222,6 +222,7 @@ export default function decorate(block) {
   block.addEventListener('focusin', () => stopAutoplay(block));
   block.addEventListener('focusout', () => startAutoplay(block));
 
-  // Start auto-play only if there are multiple slides
-  if (total > 1) startAutoplay(block);
+  // Start auto-play only if there are multiple slides and no reduced-motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (total > 1 && !prefersReducedMotion) startAutoplay(block);
 }

@@ -3,6 +3,9 @@
  *
  * MARKUP      — root grid container
  * CARD_MARKUP — individual card item
+ *
+ * Abbott pattern: each card is a full-anchor tile, icon centred above
+ * heading + description + button-style CTA. Hover turns the whole card navy.
  */
 
 export const MARKUP = /* html */`

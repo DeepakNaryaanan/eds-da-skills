@@ -5,6 +5,10 @@
  * references). Each authored row is one resource item. The title link is the
  * primary CTA; thumbnail, eyebrow, description, and date are optional.
  *
+ * Renders as an Abbott-style m-card large grid: full-bleed thumbnail image,
+ * card body with title, description, and a "Learn More" underlined link CTA
+ * matching Abbott's .a-link--icon pattern.
+ *
  * Content model (see block.md):
  *   Each row — two cells: thumbnail `<picture>` (optional) | body (title link,
  *   eyebrow, description, date)
@@ -40,19 +44,21 @@ function looksLikeDate(text) {
  * Extracts sub-fields from a resource body cell.
  *
  * Sub-fields are identified by semantic formatting rather than cell position:
- * - A heading or bold-containing paragraph that wraps an `<a>` → title
+ * - A heading or bold-containing paragraph that wraps an `<a>` → title (href
+ *   is also used as the "Learn More" CTA destination)
  * - An `<em>` or `<code>` short text → eyebrow / tag
  * - A plain `<p>` → description
  * - Text matching a date pattern → date
  *
  * @param {Element} bodyCell The body cell element
- * @returns {{ titleHtml: string, eyebrowHtml: string, descHtml: string, dateHtml: string }}
+ * @returns {{ titleHtml: string, eyebrowHtml: string, descHtml: string, dateHtml: string, ctaHtml: string }}
  */
 function extractBodyFields(bodyCell) {
   let titleHtml = '';
   let eyebrowHtml = '';
   let descHtml = '';
   let dateHtml = '';
+  let ctaHtml = '';
 
   [...bodyCell.children].forEach((el) => {
     const tag = el.tagName.toLowerCase();
@@ -61,6 +67,8 @@ function extractBodyFields(bodyCell) {
     if (!titleHtml && el.querySelector('a')) {
       const link = el.querySelector('a');
       titleHtml = `<a class="resource-list-title" href="${link.href}">${link.textContent.trim()}</a>`;
+      // Build "Learn More" CTA pointing to the same href (Abbott pattern)
+      ctaHtml = `<a class="resource-list-link" href="${link.href}">Learn More</a>`;
       return;
     }
 
@@ -84,7 +92,7 @@ function extractBodyFields(bodyCell) {
   });
 
   return {
-    titleHtml, eyebrowHtml, descHtml, dateHtml,
+    titleHtml, eyebrowHtml, descHtml, dateHtml, ctaHtml,
   };
 }
 
@@ -116,21 +124,30 @@ function buildItemHtml(row, isCompact) {
   if (!bodyCell) return '';
 
   const {
-    titleHtml, eyebrowHtml, descHtml, dateHtml,
+    titleHtml, eyebrowHtml, descHtml, dateHtml, ctaHtml,
   } = extractBodyFields(bodyCell);
 
   // Title link is required
   if (!titleHtml) return '';
 
-  // Thumbnail: optimized picture
+  // Thumbnail: optimized picture — wider for card layout.
+  // Data URI placeholder images are passed through as-is since createOptimizedPicture
+  // cannot build srcset URLs from them (they have no server path to parameterise).
   let thumbnailHtml = '';
   if (imageCell) {
     const img = imageCell.querySelector('picture > img');
     if (img) {
-      const optimized = createOptimizedPicture(img.src, img.alt ?? '', false, [
-        { width: '240' },
-      ]);
-      thumbnailHtml = `<div class="resource-list-thumbnail">${optimized.outerHTML}</div>`;
+      const isDataUri = img.src.startsWith('data:');
+      const pictureEl = isDataUri
+        ? imageCell.querySelector('picture')
+        : createOptimizedPicture(img.src, img.alt ?? '', false, [
+          { media: '(width >= 992px)', width: '480' },
+          { media: '(width >= 760px)', width: '360' },
+          { width: '480' },
+        ]);
+      if (pictureEl) {
+        thumbnailHtml = `<div class="resource-list-thumbnail">${pictureEl.outerHTML}</div>`;
+      }
     }
   }
 
@@ -139,7 +156,8 @@ function buildItemHtml(row, isCompact) {
     .replace('{eyebrow}', eyebrowHtml)
     .replace('{title}', titleHtml)
     .replace('{description}', descHtml)
-    .replace('{date}', dateHtml);
+    .replace('{date}', dateHtml)
+    .replace('{cta}', ctaHtml);
 }
 
 /**

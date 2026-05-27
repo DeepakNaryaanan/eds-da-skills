@@ -45,15 +45,20 @@ function buildCardHtml(row) {
     ? `${headingEl.textContent.trim()} — ${ctaText}`
     : ctaText;
 
-  // Icon: optimized picture or raw HTML from the icon cell
+  // Icon: optimized picture or raw HTML from the icon cell.
+  // Data URI placeholder images are passed through as-is; createOptimizedPicture
+  // cannot produce valid srcset URLs from a data URI (no server path).
   let iconHtml = '';
   if (iconCell) {
     const img = iconCell.querySelector('picture > img');
     if (img) {
-      const optimized = createOptimizedPicture(img.src, img.alt ?? '', false, [
-        { width: '80' },
-      ]);
-      iconHtml = `<div class="nav-cards-icon">${optimized.outerHTML}</div>`;
+      const isDataUri = img.src.startsWith('data:');
+      const pictureEl = isDataUri
+        ? iconCell.querySelector('picture')
+        : createOptimizedPicture(img.src, img.alt ?? '', false, [{ width: '80' }]);
+      if (pictureEl) {
+        iconHtml = `<div class="nav-cards-icon">${pictureEl.outerHTML}</div>`;
+      }
     } else if (iconCell.innerHTML.trim()) {
       iconHtml = `<div class="nav-cards-icon">${iconCell.innerHTML}</div>`;
     }

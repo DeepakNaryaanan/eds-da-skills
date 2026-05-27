@@ -2,7 +2,10 @@
  * HTML templates for the resource-list block.
  *
  * MARKUP      — root list container
- * ITEM_MARKUP — individual resource list item
+ * ITEM_MARKUP — individual resource list item (card variant)
+ *
+ * Abbott pattern: full-bleed thumbnail image on top, card body below with
+ * title, description, and a "Learn More" underlined CTA link.
  */
 
 export const MARKUP = /* html */`
@@ -19,6 +22,7 @@ export const ITEM_MARKUP = /* html */`
     {title}
     {description}
     {date}
+    {cta}
   </div>
 </li>
 `;
