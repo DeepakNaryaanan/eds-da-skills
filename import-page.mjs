@@ -34,25 +34,24 @@ function parseArgs(argv) {
   const rest = argv.slice(2);
   for (let i = 0; i < rest.length; i += 1) {
     const a = rest[i];
-    if (a === '--slug') { args.slug = rest[i + 1]; i += 1; }
-    else if (a === '--out') { args.out = rest[i + 1]; i += 1; }
-    else if (a === '-h' || a === '--help') { args.help = true; }
-    else if (!args.url) { args.url = a; }
+    if (a === '--slug') { args.slug = rest[i + 1]; i += 1; } else if (a === '--out') { args.out = rest[i + 1]; i += 1; } else if (a === '-h' || a === '--help') { args.help = true; } else if (!args.url) { args.url = a; }
   }
   return args;
 }
 
 function printHelpAndExit() {
-  process.stdout.write(`Usage: node import-page.mjs <url> [--slug name] [--out dir]\n\n`
-    + `  <url>          Source URL to scrape (required)\n`
-    + `  --slug name    Output basename (default: derived from URL path)\n`
-    + `  --out dir      Output directory (default: import-work)\n`);
+  process.stdout.write('Usage: node import-page.mjs <url> [--slug name] [--out dir]\n\n'
+    + '  <url>          Source URL to scrape (required)\n'
+    + '  --slug name    Output basename (default: derived from URL path)\n'
+    + '  --out dir      Output directory (default: import-work)\n');
   process.exit(0);
 }
 
 // ---------- Tiny HTML helpers ----------
 
-const DECODE = { amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", apos: "'", nbsp: ' ' };
+const DECODE = {
+  amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", apos: "'", nbsp: ' ',
+};
 function decode(s) {
   if (!s) return '';
   return s
@@ -362,9 +361,9 @@ async function main() {
 
   process.stdout.write(`\nWrote ${htmlPath}\n`);
   process.stdout.write(`Wrote ${path.join(outDir, `${slug}.metadata.json`)}\n`);
-  process.stdout.write(`\nPreview locally with the dev server, then:\n`);
+  process.stdout.write('\nPreview locally with the dev server, then:\n');
   process.stdout.write(`  cp ${htmlPath} tests/${slug}-test.html\n`);
-  process.stdout.write(`  npx -y @adobe/aem-cli up --no-open --html-folder tests\n`);
+  process.stdout.write('  npx -y @adobe/aem-cli up --no-open --html-folder tests\n');
   process.stdout.write(`  open http://localhost:3000/${slug}-test.html\n`);
 }
 

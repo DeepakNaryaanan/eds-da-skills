@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ISI Bar — Session Persistence Test Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--
+      Second page used by TC-04: sessionStorage state persistence across navigation.
+      The spec expands the bar on isi-bar-test.html, navigates here, and asserts
+      that the bar loads expanded on this page too (same browser session).
+    -->
+    <meta name="nav"    content="/tests/fragments/nav" />
+    <meta name="footer" content="/tests/fragments/footer" />
+
+    <!--
+      Wire the local ISI fragment fixture so the fragment-loaded path is exercised.
+      The isi-fragment meta key is read by fetchFragmentHtml before the block's
+      own authored fragment path row.
+    -->
+    <meta name="isi-fragment" content="/tests/fragments/isi" />
+
+    <script nonce="aem" src="/scripts/aem.js" type="module"></script>
+    <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <header></header>
+
+    <main>
+      <div class="section">
+        <h1>ISI Bar — Session Persistence Test</h1>
+        <p>
+          This page is the second page in the TC-04 cross-navigation sessionStorage
+          persistence test. The Playwright spec expands the ISI bar on the primary
+          test page, navigates here, and asserts that the panel is still expanded.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="isi-bar" data-block-name="isi-bar">
+          <!-- Row 0: Summary text (required) -->
+          <div>
+            <div>
+              <p>DUOPA has important safety information. <a href="/prescribing-information">See full Prescribing Information</a>.</p>
+            </div>
+          </div>
+          <!-- Row 1: Fragment path (optional) — uses meta override from head instead -->
+        </div>
+      </div>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+/* ── stat-bar ───────────────────────────────────────────────────────────────
+ * A horizontal strip of clinical statistics.
+ * Each stat: optional icon · bold value · short label.
+ *
+ * Variants:
+ *   .stat-bar.animated — count-up animation on scroll-enter (JS-driven)
+ *   .stat-bar.dark     — dark background band (--color-primary) with white text
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── Block shell ── */
+.stat-bar {
+  background-color: var(--color-surface);
+  padding-block: var(--spacing-3);
+}
+
+/* ── Dark variant ── */
+.stat-bar.dark {
+  background-color: var(--color-primary);
+  color: var(--color-primary-text);
+}
+
+/* ── List reset ── */
+.stat-bar .stat-bar-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0 auto;
+  max-width: var(--container-max-width-xl, 71.25rem);
+  padding: 0 var(--spacing-3);
+  gap: var(--spacing-3);
+}
+
+/* ── Stat item — mobile: full-width block ── */
+.stat-bar .stat-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-block: var(--spacing-2, 8px);
+}
+
+/* ── Icon ── */
+.stat-bar .stat-bar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-block-end: var(--spacing-2, 8px);
+  flex-shrink: 0;
+}
+
+.stat-bar .stat-bar-icon picture {
+  display: block;
+  width: 48px;
+  height: 48px;
+}
+
+.stat-bar .stat-bar-icon img {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+/* ── Stat value ── */
+.stat-bar .stat-bar-value {
+  font-size: var(--font-size-display4, 1.625rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--color-primary);
+}
+
+.stat-bar.dark .stat-bar-value {
+  color: var(--color-primary-text);
+}
+
+/* ── Stat label ── */
+.stat-bar .stat-bar-label {
+  font-size: var(--font-size-small, 0.875rem);
+  font-weight: 500;
+  line-height: 1.4;
+  margin: var(--spacing-1, 4px) 0 0;
+  color: var(--color-text-muted);
+}
+
+.stat-bar.dark .stat-bar-label {
+  color: var(--color-primary-text);
+  opacity: 0.85;
+}
+
+/* ── Tablet and up (md: 760px) — horizontal flex row ── */
+@media (width >= 760px) {
+  .stat-bar {
+    padding-block: var(--spacing-4);
+  }
+
+  .stat-bar .stat-bar-list {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--spacing-4);
+    padding-inline: var(--spacing-4);
+  }
+
+  .stat-bar .stat-bar-item {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .stat-bar .stat-bar-icon {
+    width: 64px;
+    height: 64px;
+    margin-block-end: var(--spacing-2, 8px);
+  }
+
+  .stat-bar .stat-bar-icon picture {
+    width: 64px;
+    height: 64px;
+  }
+
+  .stat-bar .stat-bar-icon img {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+/* ── Desktop (lg: 992px) — increase gap ── */
+@media (width >= 992px) {
+  .stat-bar .stat-bar-list {
+    gap: var(--spacing-5);
+    padding-inline: var(--spacing-5);
+  }
+}
+
+/* ── Wide (xl: 1272px) — cap inner width ── */
+@media (width >= 1272px) {
+  .stat-bar .stat-bar-list {
+    padding-inline: 0;
+  }
+}
+
+/* ── Animated variant: reduced-motion guard ── */
+@media (prefers-reduced-motion: reduce) {
+  .stat-bar.animated .stat-bar-value {
+    transition: none;
+  }
+}

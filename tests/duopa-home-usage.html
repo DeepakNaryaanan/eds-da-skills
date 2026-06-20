@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>DUOPA — Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--
+      Self-contained test page: nav and footer point to local draft fragments
+      so the page works without a live CMS.
+    -->
+    <meta name="nav"    content="/tests/fragments/nav" />
+    <meta name="footer" content="/tests/fragments/footer" />
+
+    <!--
+      The isi-bar block loads the ISI fragment from /fragments/isi by default.
+      The local fixture at tests/fragments/isi.plain.html serves this path
+      when running with --html-folder tests.
+    -->
+
+    <script nonce="aem" src="/scripts/aem.js" type="module"></script>
+    <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <header></header>
+
+    <main>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           SECTION 1 — Hero Carousel
+           Full-width rotating hero. Each row is one slide.
+           Structure: cell 1 = <picture>, cell 2 = eyebrow + h2 + body + CTA.
+           ══════════════════════════════════════════════════════════════════ -->
+      <div class="section">
+        <div class="hero-carousel" data-block-name="hero-carousel">
+
+          <!-- Slide 1: Primary messaging -->
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='560'%3E%3Crect width='1440' height='560' fill='%23003366'/%3E%3Ctext x='50%25' y='45%25' dominant-baseline='middle' text-anchor='middle' font-size='32' fill='%23ffffff' font-family='Arial'%3EDUOPA Hero — Slide 1%3C/text%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-size='18' fill='%23e8651a' font-family='Arial'%3ECarbidopa%2FLevodopa Enteral Suspension%3C/text%3E%3C/svg%3E"
+                  alt="DUOPA treatment device and patient living an active life"
+                  width="1440"
+                  height="560"
+                />
+              </picture>
+            </div>
+            <div>
+              <p>For Adults With Advanced Parkinson's Disease</p>
+              <h2>More "On" Time. Fewer Motor Fluctuations.</h2>
+              <p>DUOPA continuously delivers carbidopa/levodopa directly to the small intestine, helping reduce "Off" episodes throughout the day.</p>
+              <p><a href="/what-is-duopa">Learn How DUOPA Works</a></p>
+            </div>
+          </div>
+
+          <!-- Slide 2: Clinical data emphasis -->
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='560'%3E%3Crect width='1440' height='560' fill='%23e8651a'/%3E%3Ctext x='50%25' y='45%25' dominant-baseline='middle' text-anchor='middle' font-size='32' fill='%23ffffff' font-family='Arial'%3EDUOPA Hero — Slide 2%3C/text%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-size='18' fill='%23003366' font-family='Arial'%3EClinical Trial Results%3C/text%3E%3C/svg%3E"
+                  alt="Clinical trial results chart showing improved 'On' time"
+                  width="1440"
+                  height="560"
+                />
+              </picture>
+            </div>
+            <div>
+              <p>Clinical Evidence</p>
+              <h2>74% of Patients Achieved Greater "On" Time</h2>
+              <p>In a pivotal clinical trial, DUOPA significantly reduced daily "Off" time compared to oral carbidopa/levodopa.</p>
+              <p><a href="/clinical-data">View Clinical Data</a></p>
+            </div>
+          </div>
+
+          <!-- Slide 3: Support program -->
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='560'%3E%3Crect width='1440' height='560' fill='%23f0f4f8'/%3E%3Ctext x='50%25' y='45%25' dominant-baseline='middle' text-anchor='middle' font-size='32' fill='%23003366' font-family='Arial'%3EDUOPA Hero — Slide 3%3C/text%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-size='18' fill='%23e8651a' font-family='Arial'%3EPatient Support Program%3C/text%3E%3C/svg%3E"
+                  alt="Patient and caregiver receiving support from a healthcare coordinator"
+                  width="1440"
+                  height="560"
+                />
+              </picture>
+            </div>
+            <div>
+              <p>DUOPA Support</p>
+              <h2>You Are Not Alone on This Journey</h2>
+              <p>The DUOPA Support program provides one-on-one guidance, insurance support, and caregiver resources to help you get started and stay on track.</p>
+              <p><a href="/patient-resources">Explore Patient Support</a></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           SECTION 2 — Stat Bar (Default)
+           Key clinical statistics strip immediately below the hero.
+           Structure: each row = one stat; cells = icon | value | label.
+           ══════════════════════════════════════════════════════════════════ -->
+      <div class="section">
+        <div class="stat-bar" data-block-name="stat-bar">
+
+          <!-- Stat 1: "Off" time reduction -->
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23e8651a'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23fff' font-family='Arial'%3E%E2%8F%B1%3C/text%3E%3C/svg%3E"
+                  alt=""
+                  width="48"
+                  height="48"
+                />
+              </picture>
+            </div>
+            <div><p>4 hours less</p></div>
+            <div><p>"Off" time per day</p></div>
+          </div>
+
+          <!-- Stat 2: Patient outcomes -->
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23003366'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23fff' font-family='Arial'%3E%E2%98%91%3C/text%3E%3C/svg%3E"
+                  alt=""
+                  width="48"
+                  height="48"
+                />
+              </picture>
+            </div>
+            <div><p>74%</p></div>
+            <div><p>Of patients achieved greater "On" time</p></div>
+          </div>
+
+          <!-- Stat 3: Continuous delivery — no icon -->
+          <div>
+            <div></div>
+            <div><p>16+ hours</p></div>
+            <div><p>Of continuous drug delivery daily</p></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           SECTION 3 — Nav Cards
+           Quick-navigation cards below the stat strip.
+           Structure: each row = one card; cells = icon | heading + body + CTA.
+           ══════════════════════════════════════════════════════════════════ -->
+      <div class="section">
+        <div class="nav-cards" data-block-name="nav-cards">
+
+          <!-- Card 1: What is DUOPA? -->
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23003366'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='32' fill='%23fff' font-family='Arial'%3E%3F%3C/text%3E%3C/svg%3E"
+                  alt=""
+                  width="64"
+                  height="64"
+                />
+              </picture>
+            </div>
+            <div>
+              <h3>What Is DUOPA?</h3>
+              <p>Learn how DUOPA works and why continuous intestinal delivery can help reduce motor fluctuations.</p>
+              <p><a href="/what-is-duopa">Learn More</a></p>
+            </div>
+          </div>
+
+          <!-- Card 2: For Patients -->
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23e8651a'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='32' fill='%23fff' font-family='Arial'%3E%E2%9D%A4%3C/text%3E%3C/svg%3E"
+                  alt=""
+                  width="64"
+                  height="64"
+                />
+              </picture>
+            </div>
+            <div>
+              <h3>For Patients &amp; Caregivers</h3>
+              <p>Find patient support resources, insurance guidance, and tools to help you navigate your DUOPA therapy.</p>
+              <p><a href="/patient-resources">Patient Resources</a></p>
+            </div>
+          </div>
+
+          <!-- Card 3: For HCPs -->
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23003366'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='32' fill='%23fff' font-family='Arial'%3E%E2%80%A2%3C/text%3E%3C/svg%3E"
+                  alt=""
+                  width="64"
+                  height="64"
+                />
+              </picture>
+            </div>
+            <div>
+              <h3>Healthcare Professionals</h3>
+              <p>Access prescribing information, clinical data, reimbursement resources, and patient case studies.</p>
+              <p><a href="/hcp">HCP Resources</a></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           SECTION 4 — "More About DUOPA" tabs
+           Tabbed content presenting key product messages.
+           Structure: each row = one tab; cells = label | content.
+           ══════════════════════════════════════════════════════════════════ -->
+      <div class="section">
+        <h2>Understanding DUOPA</h2>
+        <p>DUOPA is designed for patients with advanced Parkinson's disease who still experience motor fluctuations despite optimised oral therapy.</p>
+
+        <div class="tabs" data-block-name="tabs">
+
+          <!-- Tab 1: How it works -->
+          <div>
+            <div>How It Works</div>
+            <div>
+              <h3>Continuous Intestinal Delivery</h3>
+              <p>Unlike oral tablets, DUOPA delivers a precisely metered dose of carbidopa/levodopa directly to the small intestine via a portable infusion pump and a PEG-J tube. This bypasses the stomach, reducing variability in drug absorption and smoothing dopamine levels throughout the day.</p>
+              <p>The pump runs for up to 16 hours per day, maintaining steady medication levels during waking hours.</p>
+            </div>
+          </div>
+
+          <!-- Tab 2: Clinical data -->
+          <div>
+            <div>Clinical Data</div>
+            <div>
+              <h3>Proven Reduction in "Off" Time</h3>
+              <p>In the pivotal double-blind clinical trial (LCIG-2010-01), patients treated with DUOPA experienced a statistically significant reduction in mean daily "Off" time of approximately 4 hours compared to those receiving oral carbidopa/levodopa.</p>
+              <p>74% of DUOPA-treated patients achieved a greater reduction in "Off" time than the oral treatment group.</p>
+              <p><a href="/clinical-data">View full trial data</a></p>
+            </div>
+          </div>
+
+          <!-- Tab 3: Device & carrying cases -->
+          <div>
+            <div>Device &amp; Carrying Cases</div>
+            <div>
+              <h3>A Portable Solution for Daily Life</h3>
+              <p>The DUOPA infusion pump is compact and designed to be worn discreetly. Multiple carrying case styles are available so patients can adapt the device to their daily routine — from a waist-worn pouch to a shoulder bag.</p>
+              <p><a href="/carrying-cases">Browse Carrying Case Styles</a></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           SECTION 5 — Default body content
+           Informational section without a block — standard authored text.
+           ══════════════════════════════════════════════════════════════════ -->
+      <div class="section">
+        <h2>Is DUOPA Right for Your Patient?</h2>
+        <p>DUOPA may be appropriate for adults with advanced Parkinson's disease who:</p>
+        <ul>
+          <li>Experience at least 3 hours of daily "Off" time despite optimised oral therapy</li>
+          <li>Have a confirmed response to levodopa</li>
+          <li>Are willing and able to manage a PEG-J tube and portable infusion pump</li>
+        </ul>
+        <p>Talk to a movement disorder specialist about whether DUOPA is right for you or your patient. You can also call the DUOPA Support team at <strong>1-800-DUOPA-RX</strong> for personalised assistance.</p>
+        <p><a href="/what-is-duopa">Learn more about DUOPA therapy</a></p>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           SECTION 6 — ISI Bar (Default sticky)
+           Sticky collapsible Important Safety Information bar.
+           Required on every patient-facing page for regulatory compliance.
+           Structure:
+             Row 1 = Summary text (required)
+             Row 2 = Fragment path (optional — defaults to /fragments/isi)
+           The block renders as a fixed <aside> at the bottom of the viewport.
+           ══════════════════════════════════════════════════════════════════ -->
+      <div class="section">
+        <div class="isi-bar" data-block-name="isi-bar">
+          <!-- Row 1: One-line ISI summary always visible in the collapsed bar -->
+          <div>
+            <div>
+              <p>DUOPA has important safety information including a Boxed Warning. <a href="/prescribing-information">See full Prescribing Information</a>.</p>
+            </div>
+          </div>
+          <!--
+            Row 2 (fragment path) intentionally omitted.
+            The block will use the default /fragments/isi path, which is
+            served locally from tests/fragments/isi.plain.html.
+          -->
+        </div>
+      </div>
+
+    </main>
+
+    <footer></footer>
+  </body>
+</html>

@@ -239,6 +239,204 @@
           </div>
         </div>
 
+        <!-- ════════════════════════════════════════════════════════════════
+             stat-bar — Default
+             Three-column strip: icon (optional), bold value, descriptor label.
+             Typically placed immediately below the hero.
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">stat-bar — Default</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">stat-bar</div>
+          <!--
+            Authored structure:
+              Each row = one stat.
+              Cell 1 = icon <picture> (optional — leave blank if no icon)
+              Cell 2 = value (required)
+              Cell 3 = label (required)
+          -->
+          <div class="stat-bar" data-block-name="stat-bar">
+            <!-- Row 1: stat with icon -->
+            <div>
+              <div>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23e8651a'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23fff' font-family='Arial'%3E%E2%8F%B1%3C/text%3E%3C/svg%3E"
+                    alt=""
+                    width="48"
+                    height="48"
+                  />
+                </picture>
+              </div>
+              <div><p>4 hours less</p></div>
+              <div><p>"Off" time per day</p></div>
+            </div>
+            <!-- Row 2: stat with icon -->
+            <div>
+              <div>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23003366'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23fff' font-family='Arial'%3E%E2%98%91%3C/text%3E%3C/svg%3E"
+                    alt=""
+                    width="48"
+                    height="48"
+                  />
+                </picture>
+              </div>
+              <div><p>74%</p></div>
+              <div><p>Of patients achieved greater "On" time</p></div>
+            </div>
+            <!-- Row 3: stat without icon (empty first cell) -->
+            <div>
+              <div></div>
+              <div><p>16+ hours</p></div>
+              <div><p>Of continuous drug delivery daily</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             stat-bar (animated) — Animated Variant
+             Stat values count up from zero when the strip enters the viewport.
+             Values must be plain integers or decimals for animation to trigger.
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">stat-bar (animated) — Animated Variant</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">stat-bar (animated)</div>
+          <!--
+            Authored structure: same as default.
+            Add "animated" as a block variation (second word in the block name cell).
+            Values must be plain numbers (e.g. "4", "74") for the counter to animate.
+            Non-numeric values display as-is.
+          -->
+          <div class="stat-bar animated" data-block-name="stat-bar">
+            <div>
+              <div></div>
+              <div><p>4</p></div>
+              <div><p>Hours less "Off" time per day</p></div>
+            </div>
+            <div>
+              <div></div>
+              <div><p>74</p></div>
+              <div><p>% of patients with greater "On" time</p></div>
+            </div>
+            <div>
+              <div></div>
+              <div><p>16</p></div>
+              <div><p>Hours of continuous delivery daily</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             stat-bar (dark) — Dark Variant
+             Renders on a dark primary-colour band with white text.
+             Apply to a section that has a dark section background.
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">stat-bar (dark) — Dark Variant</h2>
+        <div class="library-entry" style="background-color: var(--color-primary); padding: 2rem;">
+          <div class="library-entry-label" style="color: var(--color-primary-text); border-color: rgba(255,255,255,0.3);">stat-bar (dark)</div>
+          <!--
+            Authored structure: same as default.
+            Add "dark" as a block variation.
+            Use on sections with a dark/primary-colour background.
+          -->
+          <div class="stat-bar dark" data-block-name="stat-bar">
+            <div>
+              <div>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23ffffff'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23003366' font-family='Arial'%3E%E2%8F%B1%3C/text%3E%3C/svg%3E"
+                    alt=""
+                    width="48"
+                    height="48"
+                  />
+                </picture>
+              </div>
+              <div><p>4 hours less</p></div>
+              <div><p>"Off" time per day</p></div>
+            </div>
+            <div>
+              <div>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23ffffff'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23003366' font-family='Arial'%3E%E2%98%91%3C/text%3E%3C/svg%3E"
+                    alt=""
+                    width="48"
+                    height="48"
+                  />
+                </picture>
+              </div>
+              <div><p>74%</p></div>
+              <div><p>Of patients achieved greater "On" time</p></div>
+            </div>
+            <div>
+              <div></div>
+              <div><p>16+ hours</p></div>
+              <div><p>Of continuous drug delivery daily</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             isi-bar — Default (sticky)
+             Sticky collapsible ISI bar fixed to the bottom of the viewport.
+             Required on every patient-facing page for regulatory compliance.
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">isi-bar — Default (sticky)</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">isi-bar</div>
+          <!--
+            Authored structure:
+              Row 1 = Summary text (required) — one-line ISI summary always visible in the collapsed bar.
+              Row 2 = Fragment path (optional) — path to the ISI fragment; defaults to /fragments/isi if omitted.
+
+            The block renders a fixed <aside> at the bottom of the viewport.
+            Collapsed state: shows the summary line + "See More" toggle button.
+            Expanded state: reveals scrollable full ISI text loaded from the fragment.
+            sessionStorage key "isi-expanded" persists the user's open/closed preference.
+          -->
+          <div class="isi-bar" data-block-name="isi-bar">
+            <!-- Row 1: Summary text (required) -->
+            <div>
+              <div>
+                <p>DUOPA has important safety information. <a href="/prescribing-information">See full Prescribing Information</a>.</p>
+              </div>
+            </div>
+            <!-- Row 2: Fragment path (optional) — omit to use default /fragments/isi -->
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             isi-bar (inline) — Inline Variant
+             Non-sticky version. Renders the ISI content inline at the block's
+             position in the page flow. Use on pages that already have a global
+             sticky ISI bar (e.g. sub-pages within a layout that includes the
+             sticky bar globally).
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">isi-bar (inline) — Inline Variant</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">isi-bar (inline)</div>
+          <!--
+            Authored structure: identical to default.
+            Add "inline" as a block variation (second word in the block name cell).
+            Use when a fixed-position ISI bar would double-stack with the site-wide sticky bar.
+          -->
+          <div class="isi-bar inline" data-block-name="isi-bar">
+            <!-- Row 1: Summary text (required) -->
+            <div>
+              <div>
+                <p>Important Safety Information: Please read the full Prescribing Information before use.</p>
+              </div>
+            </div>
+            <!-- Row 2: Fragment path (optional) — specify only when using a non-standard ISI fragment -->
+            <div>
+              <div>
+                <p>/fragments/isi</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </main>
   </body>

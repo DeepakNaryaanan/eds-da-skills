@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ISI Bar — Block Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--
+      Self-contained test page: nav and footer point to local draft fragments
+      so the page works with `npx -y @adobe/aem-cli up --html-folder tests`.
+    -->
+    <meta name="nav"    content="/tests/fragments/nav" />
+    <meta name="footer" content="/tests/fragments/footer" />
+
+    <!--
+      isi-fragment meta key allows fragment-loader.js to use this value instead
+      of the default /fragments/isi path. Intentionally left absent here so the
+      block exercises the fallback path (fragment not found → fallback content).
+      To test a real fragment, add:
+        <meta name="isi-fragment" content="/tests/fragments/isi-fragment" />
+    -->
+
+    <script nonce="aem" src="/scripts/aem.js" type="module"></script>
+    <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <header></header>
+
+    <main>
+      <!-- ─── Page content (enough height to verify sticky behavior) ────── -->
+      <div class="section">
+        <h1>DUOPA — ISI Bar Test Page</h1>
+        <p>
+          This page exercises the <strong>ISI Bar</strong> block in both its
+          Default (sticky) and Inline variants. Scroll down to confirm the sticky
+          bar remains at the bottom of the viewport as content scrolls past.
+        </p>
+        <p>
+          DUOPA (carbidopa/levodopa enteral suspension) is a prescription medicine
+          used in adults with advanced Parkinson's disease.
+        </p>
+        <p>Paragraph 1 of filler content.</p>
+        <p>Paragraph 2 of filler content.</p>
+        <p>Paragraph 3 of filler content.</p>
+        <p>Paragraph 4 of filler content.</p>
+        <p>Paragraph 5 of filler content.</p>
+        <p>Paragraph 6 of filler content.</p>
+        <p>Paragraph 7 of filler content.</p>
+        <p>Paragraph 8 of filler content.</p>
+        <p>Paragraph 9 of filler content.</p>
+        <p>Paragraph 10 — scroll position marker.</p>
+      </div>
+
+      <!-- ─── Section 2: more content to scroll past ───────────────────── -->
+      <div class="section">
+        <h2>Section Two — Additional Content</h2>
+        <p>
+          Continue scrolling. The sticky ISI bar should remain fixed at the
+          bottom of the viewport at all scroll positions.
+        </p>
+        <p>Paragraph A of filler content.</p>
+        <p>Paragraph B of filler content.</p>
+        <p>Paragraph C of filler content.</p>
+        <p>Paragraph D of filler content.</p>
+        <p>Paragraph E of filler content.</p>
+        <p>Paragraph F of filler content.</p>
+        <p>Paragraph G of filler content.</p>
+      </div>
+
+      <!-- ─── Default (sticky) ISI Bar ─────────────────────────────────── -->
+      <!--
+        AEM block table structure:
+          Row 0 → Summary text (required)
+          Row 1 → Fragment path (optional) — intentionally omitted here to
+                  exercise the graceful-degradation fallback path
+      -->
+      <div class="section">
+        <div class="isi-bar" data-block-name="isi-bar">
+          <!-- Row 0: Summary text (required) -->
+          <div>
+            <div>
+              <p>DUOPA has important safety information. <a href="/prescribing-information">See full Prescribing Information</a>.</p>
+            </div>
+          </div>
+          <!-- Row 1: Fragment path (optional) — omitted to trigger fallback -->
+        </div>
+      </div>
+
+      <!-- ─── Section 3: Inline variant demonstration ───────────────────── -->
+      <div class="section">
+        <h2>Inline ISI Bar (non-sticky variant)</h2>
+        <p>
+          The inline variant renders the ISI content at the block's position in
+          page flow rather than as a fixed overlay. Use on pages that already
+          have a global sticky ISI bar.
+        </p>
+
+        <!--
+          ISI Bar (inline) variant.
+          Row 0 → Summary text (required)
+          Row 1 → Fragment path (optional) — set to a non-existent path to
+                  test the graceful-degradation branch
+        -->
+        <div class="isi-bar inline" data-block-name="isi-bar">
+          <!-- Row 0: Summary text (required) -->
+          <div>
+            <div>
+              <p>Important Safety Information: Please read the full Prescribing Information before use.</p>
+            </div>
+          </div>
+          <!-- Row 1: Fragment path (optional) — intentionally invalid path -->
+          <div>
+            <div>
+              <p>/fragments/isi-does-not-exist</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── Section 4: Edge-case — empty summary cell ─────────────────── -->
+      <div class="section">
+        <h2>Edge Case: Empty Summary</h2>
+        <p>
+          The block below has an empty summary cell. The decorate function must
+          fall back to the default summary string without throwing.
+        </p>
+        <!--
+          ISI Bar (inline) with an empty summary row to test defensive fallback.
+        -->
+        <div class="isi-bar inline" data-block-name="isi-bar">
+          <div>
+            <div><p></p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <p>End of page content. The default sticky ISI bar above should be
+        visible at the bottom of the viewport when this text is in view.</p>
+      </div>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>

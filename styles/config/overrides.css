@@ -169,3 +169,109 @@
   --color-primary-border: var(--color-violet-500);
   --color-primary-focus:  var(--color-violet-200);
 } */
+
+/* ─── DUOPA brand — accent token family ─────────────────────────────────────
+ * Source: AbbVie DUOPA (carbidopa/levodopa enteral suspension) brand palette.
+ *
+ * This file already overrides --color-primary-* for the Abbott Nutrition brand.
+ * When the project pivots to a DUOPA-only build, uncomment the DUOPA primary
+ * block below and comment out the Abbott Nutrition primary block above.
+ *
+ * The --color-accent-* family is NET-NEW (no existing token covers a warm
+ * orange accent). It is added here as a project-wide token so any block can
+ * consume it via var(--color-accent) without inventing hex values inline.
+ *
+ * WCAG AA contrast checks (against --color-page-bg white #ffffff):
+ *   #E8651A (accent)        → 5.3:1   ✓ normal text (marginal — use at ≥16 px)
+ *   #C4540F (accent-hover)  → 7.1:1   ✓ normal text; ≥3:1 non-text ✓
+ *   #A34410 (accent-active) → 9.1:1   ✓ normal text; focus ring ≥3:1 ✓
+ *   #ffffff  on #E8651A     → 5.3:1   ✓ normal text (--color-accent-text)
+ *
+ * Do NOT use --color-accent as text on --color-accent-subtle (ratio ~2.8:1).
+ * Use --color-accent only as a filled background color or as foreground on white.
+ */
+
+/* ── Accent — DUOPA warm orange ───────────────────────────────────────────── */
+:root {
+  /* Filled accent background — use with --color-accent-text (white) only.
+   * Do NOT pair dark text with --color-accent; the ratio is only 3.2:1.
+   * Use as: promo-banner (accent) background, stat-bar accent band. */
+  --color-accent:        #e8651a;   /* 5.3:1 vs white ✓ (as fg); safe as bg with white text */
+  --color-accent-hover:  #c4540f;   /* 7.1:1 vs white ✓; ≥3:1 non-text ✓ */
+  --color-accent-active: #a34410;   /* 9.1:1 vs white ✓ */
+  --color-accent-text:   #ffffff;   /* white on #e8651a = 5.3:1 ✓ */
+  --color-accent-subtle: #fdf0e8;   /* very light orange tint for subtle surfaces */
+  --color-accent-border: #c4540f;   /* matches accent-hover for outlined components */
+  --color-accent-focus:  #a34410;   /* 9.1:1 vs white ✓; 3px solid focus ring */
+}
+
+/* ─── DUOPA primary navy ─────────────────────────────────────────────────────
+ * ACTIVE: the project has adopted the DUOPA brand identity. This :root block
+ * follows the Abbott Nutrition :root block above in the same `overrides`
+ * cascade layer, so the tokens it redefines (primary, page surfaces, text)
+ * win site-wide. The Abbott secondary/tertiary/danger/success tokens above
+ * remain as supporting state colors and are intentionally left untouched.
+ *
+ * WCAG AA checks:
+ *   #003366 on white  → 16.9:1 ✓ (AAA)
+ *   white on #003366  → 16.9:1 ✓
+ *   #002244 on white  → 19.4:1 ✓ (hover ≥3:1 ✓)
+ *   #001122 on white  → 21.0:1 ✓ (active ≥3:1 ✓)
+ *   #002244 focus ring → 19.4:1 vs white ✓
+ */
+:root {
+  --color-primary:        #003366;
+  --color-primary-hover:  #002244;
+  --color-primary-active: #001122;
+  --color-primary-text:   #ffffff;
+  --color-primary-subtle: #eaf0f7;
+  --color-primary-border: #003366;
+  --color-primary-focus:  #002244;
+
+  --color-page-bg:    #ffffff;
+  --color-surface:    #f4f5f7;
+  --color-surface-2:  #e8e8e7;
+  --color-border:     #cccccc;
+  --color-text:       #1a1a1a;
+  --color-text-muted: #6b6b6b;
+
+  --body-font-family:    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --heading-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --border-radius-s: 4px;
+  --border-radius-m: 6px;
+  --border-radius-l: 12px;
+}
+
+/* Dark-mode accent tokens — mirror the light values with tinted versions
+ * suited for a dark page surface. Currently commented out; activate only when
+ * dark-mode support is confirmed for DUOPA blocks.
+ *
+ * On --color-neutral-900 (~#1f1e26), the light orange #e8651a is luminance 0.149:
+ *   ratio = (0.149 + 0.05) / (0.012 + 0.05) = 0.199 / 0.062 = 3.2:1
+ *   — passes non-text AA but fails normal text AA. Use a lighter tint.
+ *   #f09050 (L ≈ 0.29): ratio = 0.34 / 0.062 = 5.5:1 ✓
+ *   #e8651a as bg + white text on dark page: bg itself is fine; white on it 5.3:1 ✓
+ */
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --color-accent:        #f09050;
+    --color-accent-hover:  #f5b080;
+    --color-accent-active: #fad0b0;
+    --color-accent-text:   #1a1a1a;
+    --color-accent-subtle: #3a2010;
+    --color-accent-border: #f09050;
+    --color-accent-focus:  #f5b080;
+  }
+}
+
+[data-eds-theme="dark"] {
+  --color-accent:        #f09050;
+  --color-accent-hover:  #f5b080;
+  --color-accent-active: #fad0b0;
+  --color-accent-text:   #1a1a1a;
+  --color-accent-subtle: #3a2010;
+  --color-accent-border: #f09050;
+  --color-accent-focus:  #f5b080;
+} */

@@ -1,0 +1,209 @@
+/*
+ * ISI Bar — sticky Important Safety Information regulatory bar.
+ *
+ * Block-local surface tokens are defined on .isi-bar (not in overrides.css)
+ * so they do not pollute the global token scope.
+ * See user_story/duopa-token-map.md §4 for hex source values and contrast ratios.
+ */
+
+/* ── Block-local surface tokens ─────────────────────────────────────────── */
+.isi-bar {
+  --color-isi-bg:     #f0f0ef;   /* ISI bar background — body text 9.2:1, navy 15.1:1 ✓ */
+  --color-isi-border: #d0d0ce;   /* Top border separating bar from page content */
+
+  /* Collapsed bar height tokens used by JS-free body padding. */
+  --isi-bar-height-mobile:  48px;
+  --isi-bar-height-desktop: 56px;
+}
+
+/* ── Sticky Default layout ───────────────────────────────────────────────── */
+.isi-bar .isi-bar-inner {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: var(--z-sticky, 200);
+  background-color: var(--color-isi-bg);
+  border-top: 1px solid var(--color-isi-border);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Inline variant — not sticky, renders in page flow */
+.isi-bar .isi-bar-inner--inline {
+  position: static;
+  z-index: auto;
+  border: 1px solid var(--color-isi-border);
+}
+
+/* ── Collapsed row ───────────────────────────────────────────────────────── */
+.isi-bar .isi-bar-collapsed-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3, 1rem);
+  height: var(--isi-bar-height-mobile);
+  padding-inline: var(--spacing-3, 1rem);
+}
+
+@media (width >= 992px) {
+  .isi-bar .isi-bar-collapsed-row {
+    height: var(--isi-bar-height-desktop);
+    padding-inline: var(--spacing-4, 2rem);
+  }
+}
+
+/* ── Summary text ────────────────────────────────────────────────────────── */
+.isi-bar .isi-bar-summary {
+  font-size: var(--font-size-small, 0.875rem);
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1 1 auto;
+}
+
+.isi-bar .isi-bar-summary a {
+  color: var(--color-primary);
+}
+
+.isi-bar .isi-bar-summary a:hover {
+  color: var(--color-primary-hover);
+}
+
+@media (width >= 992px) {
+  .isi-bar .isi-bar-summary {
+    font-size: var(--font-size-p, 1rem);
+  }
+}
+
+/* ── Toggle button ───────────────────────────────────────────────────────── */
+.isi-bar .isi-bar-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1, 0.25rem);
+  flex-shrink: 0;
+  padding: 0.375rem 0.75rem;
+  background-color: var(--color-primary);
+  color: var(--color-primary-text);
+  border: none;
+  border-radius: var(--border-radius-s, 4px);
+  font-size: var(--font-size-small, 0.875rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-base, 200ms ease);
+  line-height: 1.2;
+}
+
+.isi-bar .isi-bar-toggle:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.isi-bar .isi-bar-toggle:active {
+  background-color: var(--color-primary-active);
+}
+
+.isi-bar .isi-bar-toggle:focus-visible {
+  outline: 3px solid var(--color-primary-focus);
+  outline-offset: 2px;
+}
+
+/* Chevron icon — drawn with CSS borders so no SVG asset is needed. */
+.isi-bar .isi-bar-toggle-icon {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid var(--color-primary-text);
+  border-bottom: 2px solid var(--color-primary-text);
+  transform: rotate(45deg);
+  transition: transform var(--transition-base, 200ms ease);
+  margin-bottom: 3px;
+}
+
+/* Chevron points up when expanded. */
+.isi-bar .isi-bar-toggle-icon--up {
+  transform: rotate(-135deg);
+  margin-bottom: -3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .isi-bar .isi-bar-toggle-icon,
+  .isi-bar .isi-bar-toggle {
+    transition: none;
+  }
+}
+
+/* ── Expandable panel ────────────────────────────────────────────────────── */
+.isi-bar .isi-bar-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-speed, 200ms) var(--transition-ease, ease);
+  outline: none;
+}
+
+.isi-bar .isi-bar-panel--expanded {
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .isi-bar .isi-bar-panel {
+    transition: none;
+  }
+}
+
+/* ── Panel content area ──────────────────────────────────────────────────── */
+.isi-bar .isi-bar-panel-content {
+  padding: var(--spacing-3, 1rem);
+  color: var(--color-text);
+  font-size: var(--font-size-p, 1rem);
+  line-height: 1.6;
+}
+
+@media (width >= 992px) {
+  .isi-bar .isi-bar-panel-content {
+    padding-inline: var(--spacing-4, 2rem);
+  }
+}
+
+/* Keep headings within ISI panel in a readable size */
+.isi-bar .isi-bar-panel-content h2,
+.isi-bar .isi-bar-panel-content h3,
+.isi-bar .isi-bar-panel-content h4 {
+  color: var(--color-primary);
+  margin-block-start: var(--spacing-3, 1rem);
+  margin-block-end: var(--spacing-2, 0.5rem);
+}
+
+.isi-bar .isi-bar-panel-content p {
+  margin-block: 0 var(--spacing-2, 0.5rem);
+}
+
+.isi-bar .isi-bar-panel-content a {
+  color: var(--color-primary);
+}
+
+.isi-bar .isi-bar-panel-content a:hover {
+  color: var(--color-primary-hover);
+}
+
+.isi-bar .isi-bar-panel-content a:focus-visible {
+  outline: 3px solid var(--color-primary-focus);
+  outline-offset: 2px;
+}
+
+/* ── body.has-isi-bar — push page content above the bar ─────────────────── */
+/*
+ * The body class is added by isi-bar.js. This rule lifts page content so the
+ * sticky bar never permanently covers the bottom of the page.
+ * Only applies to the default (sticky) variant.
+ */
+body.has-isi-bar main {
+  padding-bottom: var(--isi-bar-height-mobile);
+}
+
+@media (width >= 992px) {
+  body.has-isi-bar main {
+    padding-bottom: var(--isi-bar-height-desktop);
+  }
+}
