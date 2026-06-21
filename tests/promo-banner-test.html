@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Promo Banner — Test Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="nav" content="/tests/fragments/nav" />
+    <meta name="footer" content="/tests/fragments/footer" />
+    <script nonce="aem" src="/scripts/aem.js" type="module"></script>
+    <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+
+      <!-- ── Section 1: Default variant — heading + body + one CTA (TC-01, TC-06, TC-09, TC-12) ── -->
+      <div class="section">
+        <h2>Default Variant — Heading + Body + One CTA</h2>
+
+        <div class="promo-banner" data-block-name="promo-banner">
+          <div>
+            <div>
+              <h2>Need help managing your DUOPA therapy?</h2>
+            </div>
+            <div>
+              <p>Our dedicated support team is here to answer your questions and guide you through every step of treatment.</p>
+              <p><a href="/support">Get Support</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 2: Default variant — heading + two CTAs (TC-02, TC-03) ── -->
+      <div class="section">
+        <h2>Default Variant — Two CTAs (flex row at desktop)</h2>
+
+        <div class="promo-banner" data-block-name="promo-banner">
+          <div>
+            <div>
+              <h2>Start your journey with DUOPA</h2>
+            </div>
+            <div>
+              <p>Speak to your neurologist or download the patient guide to learn more about continuous intestinal gel delivery.</p>
+              <p><a href="/patient-guide">Download the Guide</a></p>
+              <p><a href="/find-a-doctor">Find a Doctor</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 3: Default variant — heading only, no body, no CTA (TC-06 edge) ── -->
+      <div class="section">
+        <h2>Default Variant — Heading Only (no body, no CTA)</h2>
+
+        <div class="promo-banner" data-block-name="promo-banner">
+          <div>
+            <div>
+              <h3>Learn about DUOPA today</h3>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 4: Dark variant — heading + body + one CTA (TC-04, TC-08, TC-10) ── -->
+      <div class="section">
+        <h2>Dark Variant</h2>
+
+        <div class="promo-banner dark" data-block-name="promo-banner">
+          <div>
+            <div>
+              <h2>Talk to your healthcare provider</h2>
+            </div>
+            <div>
+              <p>Discuss whether DUOPA is right for you. Our clinical team can help you evaluate all your options.</p>
+              <p><a href="/hcp">Find a Specialist</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 5: Accent variant — heading + body + two CTAs (TC-05) ── -->
+      <div class="section">
+        <h2>Accent Variant</h2>
+
+        <div class="promo-banner accent" data-block-name="promo-banner">
+          <div>
+            <div>
+              <h2>Abbott Patient Assistance Program</h2>
+            </div>
+            <div>
+              <p>Eligible patients may receive DUOPA at no cost. See if you qualify today.</p>
+              <p><a href="/assistance">Check Eligibility</a></p>
+              <p><a href="/enroll">Enroll Now</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 6: Empty block — must not throw (TC-07) ── -->
+      <div class="section">
+        <h2>Empty Block — No-Crash Test (TC-07)</h2>
+        <div class="promo-banner" data-block-name="promo-banner">
+        </div>
+      </div>
+
+      <!-- ── Section 7: h1 authored — must be downgraded to h2 (TC-11) ── -->
+      <div class="section">
+        <h2>h1 Downgrade Test (TC-11)</h2>
+
+        <div class="promo-banner" data-block-name="promo-banner">
+          <div>
+            <div>
+              <h1>This heading started as an h1 and must be rendered as h2</h1>
+            </div>
+            <div>
+              <p>The block must not introduce an h1 into the page.</p>
+              <p><a href="/test">Verify Heading Level</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <footer></footer>
+  </body>
+</html>

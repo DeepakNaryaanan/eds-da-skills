@@ -1,0 +1,153 @@
+/* ── promo-banner ────────────────────────────────────────────────────────────
+ * Full-width promotional CTA banner.
+ *
+ * Variants:
+ *   .promo-banner.dark   — navy primary bg (#003366) with white text
+ *   .promo-banner.accent — brand orange bg (#e8651a) with white text
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── Block shell — full-bleed background band ── */
+.promo-banner {
+  background-color: var(--color-primary-subtle);
+  color: var(--color-text);
+  padding-block: var(--spacing-5);
+}
+
+/* ── Dark variant ── */
+.promo-banner.dark {
+  background-color: var(--color-primary);
+  color: var(--color-primary-text);
+}
+
+/* ── Accent variant ── */
+.promo-banner.accent {
+  background-color: var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+/* ── Inner container — centred text column ── */
+.promo-banner .promo-banner-inner {
+  margin-inline: auto;
+  padding-inline: var(--spacing-3);
+  max-width: 50rem; /* ~800px — promo-banner-inner-max per token-map */
+}
+
+/* ── Heading ── */
+.promo-banner .promo-banner-inner h2,
+.promo-banner .promo-banner-inner h3 {
+  font-size: var(--font-size-h2);
+  margin-block-end: var(--spacing-3);
+}
+
+/* ── Body copy ── */
+.promo-banner .promo-banner-inner p {
+  font-size: var(--font-size-p);
+  margin-block-end: var(--spacing-3);
+}
+
+/* ── CTA container — stacked on mobile ── */
+.promo-banner .promo-banner-ctas {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+}
+
+/* ── CTA buttons — inherit global .button styles; variant overrides below ── */
+.promo-banner .promo-banner-ctas a.button {
+  display: inline-block;
+}
+
+/* Dark variant — outlined white buttons */
+.promo-banner.dark .promo-banner-ctas a.button {
+  background-color: transparent;
+  border-color: var(--color-primary-text);
+  color: var(--color-primary-text);
+}
+
+.promo-banner.dark .promo-banner-ctas a.button:hover {
+  background-color: var(--color-primary-subtle);
+  border-color: var(--color-primary-subtle);
+  color: var(--color-primary);
+}
+
+.promo-banner.dark .promo-banner-ctas a.button:active {
+  background-color: var(--color-primary-subtle);
+  border-color: var(--color-primary-subtle);
+  color: var(--color-primary-active);
+}
+
+/* Dark variant — white focus ring (navy bg context) */
+.promo-banner.dark .promo-banner-ctas a.button:focus-visible {
+  outline: 3px solid var(--color-primary-text);
+  outline-offset: 2px;
+}
+
+/* Accent variant — white-bg buttons with accent text */
+.promo-banner.accent .promo-banner-ctas a.button {
+  background-color: var(--color-primary-text);
+  border-color: var(--color-primary-text);
+  color: var(--color-accent);
+}
+
+.promo-banner.accent .promo-banner-ctas a.button:hover {
+  color: var(--color-accent-hover);
+}
+
+.promo-banner.accent .promo-banner-ctas a.button:active {
+  color: var(--color-accent-active);
+}
+
+/* Accent variant — navy focus ring (visible on orange bg) */
+.promo-banner.accent .promo-banner-ctas a.button:focus-visible {
+  outline: 3px solid var(--color-primary-focus);
+  outline-offset: 2px;
+}
+
+/* Default variant — standard focus ring */
+.promo-banner .promo-banner-ctas a.button:focus-visible {
+  outline: 3px solid var(--color-primary-focus);
+  outline-offset: 2px;
+}
+
+/* Dark variant heading / body — color already set by .promo-banner.dark */
+.promo-banner.dark .promo-banner-inner h2,
+.promo-banner.dark .promo-banner-inner h3,
+.promo-banner.dark .promo-banner-inner p {
+  color: var(--color-primary-text);
+}
+
+/* Accent variant heading / body */
+.promo-banner.accent .promo-banner-inner h2,
+.promo-banner.accent .promo-banner-inner h3,
+.promo-banner.accent .promo-banner-inner p {
+  color: var(--color-accent-text);
+}
+
+/* ── Tablet and up (md: 760px) — CTAs in a flex row ── */
+@media (width >= 760px) {
+  .promo-banner .promo-banner-inner {
+    max-width: var(--container-max-width-md);
+    padding-inline: 0;
+  }
+
+  .promo-banner .promo-banner-ctas {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+/* ── Desktop (lg: 992px) ── */
+@media (width >= 992px) {
+  .promo-banner .promo-banner-inner {
+    max-width: var(--container-max-width-lg);
+  }
+}
+
+/* ── Wide (xl: 1272px) — cap at 800px text column ── */
+@media (width >= 1272px) {
+  .promo-banner .promo-banner-inner {
+    max-width: 50rem;
+  }
+}
