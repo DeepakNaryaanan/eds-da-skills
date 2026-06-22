@@ -106,7 +106,17 @@
   }
 }
 
-/* Eyebrow (optional first paragraph) */
+/* Body paragraphs — declared before eyebrow to satisfy specificity order */
+.hero-carousel .hero-carousel-slide-body p:not(:first-child),
+.hero-carousel .hero-carousel-slide-body > p:only-child {
+  font-size: 1.125rem;
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-4);
+  max-width: 480px;
+  line-height: 1.5;
+}
+
+/* Eyebrow (optional first paragraph — higher specificity, so follows body rule) */
 .hero-carousel .hero-carousel-slide-body > p:first-child:not(:only-child) {
   font-size: 0.75rem;
   font-weight: 700;
@@ -134,15 +144,6 @@
     font-size: 3rem;
     line-height: 1.05;
   }
-}
-
-.hero-carousel .hero-carousel-slide-body p:not(:first-child),
-.hero-carousel .hero-carousel-slide-body > p:only-child {
-  font-size: 1.125rem;
-  color: var(--color-text);
-  margin: 0 0 var(--spacing-4);
-  max-width: 480px;
-  line-height: 1.5;
 }
 
 /* CTA — solid sky-blue button (Abbott tertiary), white uppercase text */

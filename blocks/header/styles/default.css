@@ -11,7 +11,7 @@ header {
 
 .header.block {
   position: fixed;
-  inset: 0 0 auto 0;
+  inset: 0 0 auto;
   z-index: 50;
   background: var(--header-bg);
   color: var(--header-fg);

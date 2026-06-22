@@ -67,6 +67,11 @@
   color: var(--color-primary);
 }
 
+/* Panel content link base — declared before any a:hover rules */
+.isi-bar .isi-bar-panel-content a {
+  color: var(--color-primary);
+}
+
 .isi-bar .isi-bar-summary a:hover {
   color: var(--color-primary-hover);
 }
@@ -171,16 +176,11 @@
 .isi-bar .isi-bar-panel-content h3,
 .isi-bar .isi-bar-panel-content h4 {
   color: var(--color-primary);
-  margin-block-start: var(--spacing-3, 1rem);
-  margin-block-end: var(--spacing-2, 0.5rem);
+  margin-block: var(--spacing-3, 1rem) var(--spacing-2, 0.5rem);
 }
 
 .isi-bar .isi-bar-panel-content p {
   margin-block: 0 var(--spacing-2, 0.5rem);
-}
-
-.isi-bar .isi-bar-panel-content a {
-  color: var(--color-primary);
 }
 
 .isi-bar .isi-bar-panel-content a:hover {
@@ -193,6 +193,7 @@
 }
 
 /* ── body.has-isi-bar — push page content above the bar ─────────────────── */
+
 /*
  * The body class is added by isi-bar.js. This rule lifts page content so the
  * sticky bar never permanently covers the bottom of the page.

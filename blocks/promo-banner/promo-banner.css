@@ -58,13 +58,42 @@
   display: inline-block;
 }
 
-/* Dark variant — outlined white buttons */
+/* Default variant — standard focus ring */
+.promo-banner .promo-banner-ctas a.button:focus-visible {
+  outline: 3px solid var(--color-primary-focus);
+  outline-offset: 2px;
+}
+
+/* Accent variant — base rule before any pseudo-class rules */
+.promo-banner.accent .promo-banner-ctas a.button {
+  background-color: var(--color-primary-text);
+  border-color: var(--color-primary-text);
+  color: var(--color-accent);
+}
+
+/* Dark variant — base rule before any pseudo-class rules */
 .promo-banner.dark .promo-banner-ctas a.button {
   background-color: transparent;
   border-color: var(--color-primary-text);
   color: var(--color-primary-text);
 }
 
+/* Accent variant — interactive states */
+.promo-banner.accent .promo-banner-ctas a.button:hover {
+  color: var(--color-accent-hover);
+}
+
+.promo-banner.accent .promo-banner-ctas a.button:active {
+  color: var(--color-accent-active);
+}
+
+/* Accent variant — navy focus ring (visible on orange bg) */
+.promo-banner.accent .promo-banner-ctas a.button:focus-visible {
+  outline: 3px solid var(--color-primary-focus);
+  outline-offset: 2px;
+}
+
+/* Dark variant — interactive states */
 .promo-banner.dark .promo-banner-ctas a.button:hover {
   background-color: var(--color-primary-subtle);
   border-color: var(--color-primary-subtle);
@@ -80,33 +109,6 @@
 /* Dark variant — white focus ring (navy bg context) */
 .promo-banner.dark .promo-banner-ctas a.button:focus-visible {
   outline: 3px solid var(--color-primary-text);
-  outline-offset: 2px;
-}
-
-/* Accent variant — white-bg buttons with accent text */
-.promo-banner.accent .promo-banner-ctas a.button {
-  background-color: var(--color-primary-text);
-  border-color: var(--color-primary-text);
-  color: var(--color-accent);
-}
-
-.promo-banner.accent .promo-banner-ctas a.button:hover {
-  color: var(--color-accent-hover);
-}
-
-.promo-banner.accent .promo-banner-ctas a.button:active {
-  color: var(--color-accent-active);
-}
-
-/* Accent variant — navy focus ring (visible on orange bg) */
-.promo-banner.accent .promo-banner-ctas a.button:focus-visible {
-  outline: 3px solid var(--color-primary-focus);
-  outline-offset: 2px;
-}
-
-/* Default variant — standard focus ring */
-.promo-banner .promo-banner-ctas a.button:focus-visible {
-  outline: 3px solid var(--color-primary-focus);
   outline-offset: 2px;
 }
 
@@ -132,8 +134,7 @@
   }
 
   .promo-banner .promo-banner-ctas {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     align-items: center;
   }
 }
