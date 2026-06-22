@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>DUOPA — How It Works</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Local nav/footer fragments keep this page self-contained without a live CMS -->
+    <meta name="nav" content="/tests/fragments/nav" />
+    <meta name="footer" content="/tests/fragments/footer" />
+    <script nonce="aem" src="/scripts/aem.js" type="module"></script>
+    <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+
+      <!-- ── Section 1: Page intro (default content — no block) ── -->
+      <div class="section">
+        <h1>How DUOPA Works</h1>
+        <p>DUOPA (carbidopa and levodopa enteral suspension) is an intestinal gel that delivers medication continuously for up to 16 hours. The sections below explain the science, the procedure, and what patients can expect.</p>
+      </div>
+
+      <!-- ── Section 2: Default split-section — image left, text right ──
+           Represents the canonical "how it works" feature row.
+           Authors copy the split-section block exactly as shown in the library.
+      ── -->
+      <div class="section">
+        <div class="split-section" data-block-name="split-section">
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23003366'/%3E%3Ctext x='400' y='310' text-anchor='middle' font-size='40' fill='%23ffffff' font-family='Arial'%3EProduct Image%3C/text%3E%3C/svg%3E"
+                  alt="DUOPA pump device shown in clinical setting"
+                  width="800"
+                  height="600"
+                />
+              </picture>
+            </div>
+            <div>
+              <p>The Device</p>
+              <h2>A Portable Pump Designed for Daily Life</h2>
+              <p>The DUOPA system uses a small, wearable pump that delivers the gel directly into the small intestine through a tube. Most patients wear it comfortably under clothing during waking hours.</p>
+              <p><a href="#device-details">Learn About the Device</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 3: Reverse split-section — image right, text left ──
+           Alternating the layout creates visual rhythm across feature rows.
+           Section uses var(--color-surface) for a subtle background band.
+      ── -->
+      <div class="section" style="background-color: var(--color-surface)">
+        <div class="split-section reverse" data-block-name="split-section">
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23e8651a'/%3E%3Ctext x='400' y='310' text-anchor='middle' font-size='40' fill='%23ffffff' font-family='Arial'%3EPatient Photo%3C/text%3E%3C/svg%3E"
+                  alt="Patient using the DUOPA system at home with a caregiver nearby"
+                  width="800"
+                  height="600"
+                />
+              </picture>
+            </div>
+            <div>
+              <p>Patient Outcomes</p>
+              <h2>More "On" Time. Less Disruption.</h2>
+              <p>In clinical studies, 74% of patients achieved significantly greater "On" time compared to oral levodopa therapy, enabling more daily activity without troublesome dyskinesia.</p>
+              <p><a href="#clinical-data">Review the Clinical Data</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 4: Wide-media split-section — 60/40, image left ──
+           Wide media gives more visual weight to a technically detailed image
+           (e.g. a procedure diagram or close-up product shot).
+      ── -->
+      <div class="section">
+        <div class="split-section wide-media" data-block-name="split-section">
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'%3E%3Crect width='1200' height='800' fill='%23002244'/%3E%3Ctext x='600' y='410' text-anchor='middle' font-size='48' fill='%23ffffff' font-family='Arial'%3EProcedure Diagram%3C/text%3E%3C/svg%3E"
+                  alt="Diagram of the PEG-J procedure showing tube placement into the small intestine"
+                  width="1200"
+                  height="800"
+                />
+              </picture>
+            </div>
+            <div>
+              <p>The Procedure</p>
+              <h3>How the Tube Is Placed</h3>
+              <p>A gastroenterologist performs a PEG-J (percutaneous endoscopic gastrostomy with jejunal extension) procedure to place the tube directly into the small intestine — typically under sedation as a same-day procedure.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 5: Wide-media reverse — 60/40, image right ──
+           Completes the alternating feature sequence. Used here for
+           HCP-oriented content where the image supports the clinical message.
+      ── -->
+      <div class="section" style="background-color: var(--color-surface)">
+        <div class="split-section wide-media reverse" data-block-name="split-section">
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'%3E%3Crect width='1200' height='800' fill='%23001122'/%3E%3Ctext x='600' y='410' text-anchor='middle' font-size='48' fill='%23ffffff' font-family='Arial'%3EHCP Consultation%3C/text%3E%3C/svg%3E"
+                  alt="Healthcare provider discussing DUOPA candidacy criteria with a neurologist"
+                  width="1200"
+                  height="800"
+                />
+              </picture>
+            </div>
+            <div>
+              <p>For Healthcare Providers</p>
+              <h3>Identifying the Right Candidate</h3>
+              <p>Consider DUOPA for patients with advanced Parkinson's disease who experience motor fluctuations not adequately controlled on optimised oral levodopa regimens.</p>
+              <p><a href="#hcp-resources">Access HCP Resources</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 6: Closing default content (no block) ──
+           Adjacent default content shows the block does not collide with
+           surrounding page prose.
+      ── -->
+      <div class="section">
+        <h2>Important Safety Information</h2>
+        <p>DUOPA is indicated for the treatment of motor fluctuations in patients with advanced Parkinson's disease. It is not appropriate for all patients. Please consult the full Prescribing Information before initiating therapy.</p>
+        <p><a href="/prescribing-information">See Full Prescribing Information</a></p>
+      </div>
+
+    </main>
+    <footer></footer>
+  </body>
+</html>

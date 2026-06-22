@@ -34,7 +34,17 @@ function parseArgs(argv) {
   const rest = argv.slice(2);
   for (let i = 0; i < rest.length; i += 1) {
     const a = rest[i];
-    if (a === '--slug') { args.slug = rest[i + 1]; i += 1; } else if (a === '--out') { args.out = rest[i + 1]; i += 1; } else if (a === '-h' || a === '--help') { args.help = true; } else if (!args.url) { args.url = a; }
+    if (a === '--slug') {
+      args.slug = rest[i + 1];
+      i += 1;
+    } else if (a === '--out') {
+      args.out = rest[i + 1];
+      i += 1;
+    } else if (a === '-h' || a === '--help') {
+      args.help = true;
+    } else if (!args.url) {
+      args.url = a;
+    }
   }
   return args;
 }

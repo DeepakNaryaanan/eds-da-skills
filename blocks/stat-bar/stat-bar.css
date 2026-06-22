@@ -9,6 +9,9 @@
 
 /* ── Block shell ── */
 .stat-bar {
+  /* Local sizing token — overridden per breakpoint below (mixin-style DRY). */
+  --stat-bar-icon-size: 48px;
+
   background-color: var(--color-surface);
   padding-block: var(--spacing-3);
 }
@@ -45,22 +48,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: var(--stat-bar-icon-size);
+  height: var(--stat-bar-icon-size);
   margin-block-end: var(--spacing-2, 8px);
   flex-shrink: 0;
 }
 
 .stat-bar .stat-bar-icon picture {
   display: block;
-  width: 48px;
-  height: 48px;
+  width: var(--stat-bar-icon-size);
+  height: var(--stat-bar-icon-size);
 }
 
 .stat-bar .stat-bar-icon img {
   display: block;
-  width: 48px;
-  height: 48px;
+  width: var(--stat-bar-icon-size);
+  height: var(--stat-bar-icon-size);
   object-fit: contain;
 }
 
@@ -94,6 +97,9 @@
 /* ── Tablet and up (md: 760px) — horizontal flex row ── */
 @media (width >= 760px) {
   .stat-bar {
+    /* Larger icons from tablet up — single override drives all icon rules. */
+    --stat-bar-icon-size: 64px;
+
     padding-block: var(--spacing-4);
   }
 
@@ -108,22 +114,6 @@
   .stat-bar .stat-bar-item {
     flex: 1 1 0;
     min-width: 0;
-  }
-
-  .stat-bar .stat-bar-icon {
-    width: 64px;
-    height: 64px;
-    margin-block-end: var(--spacing-2, 8px);
-  }
-
-  .stat-bar .stat-bar-icon picture {
-    width: 64px;
-    height: 64px;
-  }
-
-  .stat-bar .stat-bar-icon img {
-    width: 64px;
-    height: 64px;
   }
 }
 

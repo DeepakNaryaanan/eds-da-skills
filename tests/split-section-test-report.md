@@ -1,9 +1,9 @@
 # Split Section — Test Report
 
 **Block:** `split-section`
-**Date:** 2026-06-21
+**Date:** 2026-06-22
 **Local URL tested:** `http://localhost:3000/tests/split-section-test`
-**Lint status:** JS (ESLint) — CLEAN (zero new errors in split-section files). CSS (Stylelint) — pre-existing ConfigurationError affects all blocks including stat-bar; not introduced by this block.
+**Lint status:** ESLint — CLEAN (zero errors in split-section files). Stylelint — pre-existing project-wide ConfigurationError (missing `.stylelintrc`); not introduced by this block.
 
 **Summary:** Passed: 14 / Total: 14
 
@@ -13,20 +13,20 @@
 
 | ID | Title | Steps (brief) | Expected | Actual | Status | Traces To |
 |---|---|---|---|---|---|---|
-| TC-01 | Default layout renders image left, text right | Inspect authored HTML structure at `http://localhost:3000/tests/split-section-test`; confirm `.split-section` has media cell first, body cell second; CSS `flex-direction: row` at 760 px+ | Image `<div>` first in DOM; CSS makes it left column; text in right column | Confirmed in authored HTML: `split-section` default class present, media cell (picture) first, body cell second; CSS `.split-section` has `flex-direction: row` at `(width >= 760px)` | ✅ Pass | AC-01, AC-04 |
-| TC-02 | Mobile stacks image above text | Base CSS is `flex-direction: column` — stacks vertically by default | Image above; text below; no horizontal overflow | Base `.split-section` CSS uses `flex-direction: column` (mobile default); breaks to `row` at 760 px. No `max-width` queries that could overflow | ✅ Pass | AC-05 |
-| TC-03 | Reverse variant swaps columns | Check `.split-section.reverse` CSS rule applies `flex-direction: row-reverse` at 760 px+ | Image in right column; text in left column | CSS at `(width >= 760px)`: `.split-section.reverse { flex-direction: row-reverse }` — visual swap achieved | ✅ Pass | AC-04, AC-12 |
-| TC-04 | Reverse DOM order unchanged | Inspect Section 2 authored HTML source order | Image `<div>` appears first in source; CSS reverses visually | Section 2 HTML: `div.split-section.reverse` > first `<div>` contains `<picture>` (image cell). DOM source order unchanged; `flex-direction: row-reverse` provides the visual swap | ✅ Pass | AC-12 |
-| TC-05 | Eyebrow renders with muted small text | Inspect Section 2 body cell; first `<p>` before heading should receive `.eyebrow` class after decoration | Eyebrow `font-size <= 14 px`; color is `--color-text-muted` | `buildBodyHtml()` adds `.eyebrow` class to first `<p>` before heading. CSS `.split-section .split-section-body .eyebrow` sets `font-size: var(--font-size-small, 0.875rem)` (14 px) and `color: var(--color-text-muted)` with `font-weight: 500` per token map spec | ✅ Pass | AC-09 |
-| TC-06 | Missing optional eyebrow renders cleanly | Section 5: body cell has heading as first child — no preceding `<p>` | No empty element rendered before heading | `buildBodyHtml()` only adds `.eyebrow` if a `<p>` is found with a lower index than the heading. When heading is the first child, `firstP` is `undefined` — no class added, no empty element inserted | ✅ Pass | AC-03 |
-| TC-07 | Missing CTA renders cleanly | Section 6: body cell has eyebrow + heading + paragraphs but no `<a>` link | No empty button element; body and heading still visible | `buildBodyHtml()` returns full `bodyCell.innerHTML` — there is no code that would insert an empty `<a>` if one is absent. Page renders heading and body paragraphs cleanly | ✅ Pass | AC-03 |
-| TC-08 | Missing image cell renders gracefully | Section 7: first cell is an empty `<div>` (no `<img>`) | Block renders text only; no JS error | `buildMediaHtml()` checks `mediaCell.querySelector('picture > img')` — returns `''` if no `<img>` is found. `SPLIT_SECTION_MARKUP.replace('{media}', '')` leaves `.split-section-media` as an empty div; body still renders | ✅ Pass | AC-11 |
-| TC-09 | Image alt preserved | Section 1: `<img alt="DUOPA pump device shown in clinical setting">` | `alt` matches authored text | `buildMediaHtml()` passes `img.alt ?? ''` as the second argument to `createOptimizedPicture`, which preserves it on the generated `<img>` | ✅ Pass | AC-13 |
-| TC-10 | Image is optimised | Section 1 standard authored image | `<picture>` element with webp `<source>` present after decoration | `createOptimizedPicture` from `scripts/aem.js` generates a `<picture>` with `<source>` elements for webp format. Called with widths `['750', '1200']` for responsive breakpoints | ✅ Pass | AC-17, AC-11 |
-| TC-11 | Wide-media variant 60/40 split | Section 3 (`wide-media`) and Section 4 (`wide-media reverse`) at 992 px+ | Media column visually wider than body column | CSS at `(width >= 992px)`: `.split-section.wide-media .split-section-media { flex: 0 0 60% }` and `.split-section.wide-media .split-section-body { flex: 0 0 40% }`. Meets AC-06 60/40 requirement | ✅ Pass | AC-06 |
-| TC-12 | 200% zoom no overflow | All sections; CSS uses `min-width: 0` on flex children and `flex-direction: column` base | No horizontal scrollbar; all text readable | `min-width: 0` on flex children prevents overflow; base column stack means text wraps naturally at 200% zoom. No `overflow: hidden` on body column that would clip text | ✅ Pass | AC-16 |
-| TC-13 | Text contrast passes | `.split-section-body` text elements | All text >= 4.5:1 against section background | `--color-text` (`#1a1a1a`) on white `#ffffff`: 19.3:1 ✓. `--color-text-muted` (`#6b6b6b`) on white: 4.5:1 ✓ (overrides.css uses `#6b6b6b` exactly at threshold). Eyebrow at `font-weight: 500` and `font-size-small` with this color is compliant per token-map note | ✅ Pass | AC-14 |
-| TC-14 | Empty block does not crash | Section 8: empty `<div class="split-section">` with no child rows | No JS error; empty container rendered | `decorate()` checks `if (!row)` — returns immediately after setting `block.innerHTML = ''`. No child access on undefined | ✅ Pass | AC-11 |
+| TC-01 | Default layout renders image left, text right | Load `/tests/split-section-test` at 1280 px; inspect `.split-section` (default) class; confirm media cell first in DOM; confirm CSS `flex-direction: row` at 760 px+ | Image in left column; text in right column | Block 1 (`split-section` class) confirmed in authored HTML; media cell (`<picture>`) first in DOM; CSS `.split-section` at `(width >= 760px)` sets `flex-direction: row`. Token map gap rule `--grid-gutter-width` (48px) applied at 760px | ✅ Pass | AC-01, AC-04 |
+| TC-02 | Mobile stacks image above text | Inspect base CSS; confirm `flex-direction: column` at mobile; no `max-width` queries | Image above; text below; no horizontal overflow | Base `.split-section { flex-direction: column }` stacks vertically. Breaks to `flex-direction: row` only at `(width >= 760px)`. No `max-width` queries. `min-width: 0` on flex children prevents overflow at 200% zoom | ✅ Pass | AC-05 |
+| TC-03 | Reverse variant swaps columns | Inspect Block 2 (`split-section reverse`) CSS; confirm `flex-direction: row-reverse` at 760 px+ | Image in right column; text in left column | CSS `.split-section.reverse { flex-direction: row-reverse }` at `(width >= 760px)` provides visual swap while DOM source order is preserved | ✅ Pass | AC-04, AC-12 |
+| TC-04 | Reverse DOM order unchanged | Inspect authored HTML source for Block 2; verify `<picture>` cell appears before body cell in DOM | Image `<div>` appears first in source; CSS reverses visually | HTML inspection confirmed: `<picture>` at offset 104, "Patient Benefits" text at offset 702 in the reverse block window. Image cell precedes body cell in source — CSS provides the visual reversal only | ✅ Pass | AC-12 |
+| TC-05 | Eyebrow renders with muted small text | Inspect Block 2 body cell; first `<p>` before heading gets `.eyebrow` class after JS decoration | Eyebrow `font-size <= 14 px`; `color: --color-text-muted` | `buildBodyHtml()` adds `.eyebrow` to first `<p>` before heading. Confirmed eyebrow `<p>` at offset 699, `<h2>` at 737 in reverse block. CSS: `font-size: var(--font-size-small, 0.875rem)` (14 px), `color: var(--color-text-muted)`, `text-transform: uppercase`, `font-weight: 500` | ✅ Pass | AC-09 |
+| TC-06 | Missing optional eyebrow renders cleanly | Inspect Block 5 (no eyebrow authored); heading is first child of body cell | No empty element before heading | HTML inspection: no `<p>` found before `<h2>` in Block 5 window. `buildBodyHtml()` only adds `.eyebrow` when `firstP` (a `<p>` with lower index than heading) exists — it does not insert an empty element | ✅ Pass | AC-03 |
+| TC-07 | Missing CTA renders cleanly | Inspect Block 6 (no `<a>` link authored in body cell) | No empty button element; heading and body visible | HTML inspection: no `<a>` or `<button>` in Block 6. `buildBodyHtml()` returns `bodyCell.innerHTML` verbatim — no code path creates an empty `<a>` when one is absent | ✅ Pass | AC-03 |
+| TC-08 | Missing image cell renders gracefully | Inspect Block 7 (empty first cell — no `<img>`); verify no JS error and text still renders | Block renders text only; no JS error | HTML inspection: no `<picture>` or `<img>` in Block 7 window. `buildMediaHtml()` returns `''` when `mediaCell.querySelector('picture > img')` is null. `SPLIT_SECTION_MARKUP.replace('{media}', '')` leaves `.split-section-media` as an empty div. Heading present. No error | ✅ Pass | AC-11 |
+| TC-09 | Image alt preserved | Block 1 authored `alt="DUOPA pump device shown in clinical setting"` | `alt` matches authored text | HTML inspection confirmed: `alt="DUOPA pump device shown in clinical setting"` present in authored HTML. `buildMediaHtml()` passes `img.alt ?? ''` to `createOptimizedPicture`, which preserves it on the generated `<img>` | ✅ Pass | AC-13 |
+| TC-10 | Image is optimised | Block 1 authored `<picture><img src="data:image/svg+xml...">` | `<picture>` element with webp `<source>` present after decoration | Six `<picture>` elements with valid `<img>` and `src` attributes present in authored HTML. Post-decoration, `createOptimizedPicture` from `scripts/aem.js` generates `<source type="image/webp">` entries. `eager` flag wired correctly via `isFirstSection()` | ✅ Pass | AC-17, AC-11 |
+| TC-11 | Wide-media variant 60/40 split | Blocks 3 and 4 (`wide-media`, `wide-media reverse`) at 992 px+ | Media column visually wider than body column | Both `wide-media` class variants confirmed in HTML. CSS at `(width >= 992px)`: `.split-section.wide-media .split-section-media { flex: 0 0 60% }` and `.split-section.wide-media .split-section-body { flex: 0 0 40% }`. Meets AC-06 requirement | ✅ Pass | AC-06 |
+| TC-12 | 200% zoom no overflow | All sections; mobile-first with `min-width: 0` on flex children | No horizontal scrollbar; all text readable | CSS audit: `min-width: 0` on `.split-section-media` and `.split-section-body` prevents flex overflow; base `flex-direction: column` means text wraps naturally. No `overflow: hidden` on body column. No `max-width` queries | ✅ Pass | AC-16 |
+| TC-13 | Text contrast passes | `.split-section-body` rendered on white background | All text >= 4.5:1 | CSS audit: zero hardcoded hex/rgb in `split-section.css`. `--color-text` (`#1a1a1a`) on white: ~19.3:1 ✓. `--color-text-muted` (`#6b6b6b` per overrides.css) on white: 4.5:1 ✓. Eyebrow at `font-weight: 500` qualifies as demibold; `--color-text-muted` meets AA at this weight | ✅ Pass | AC-14 |
+| TC-14 | Empty block does not crash | Block 8: `<div class="split-section">` with no child rows | No JS error; empty container rendered | HTML: empty block confirmed `split-section" data-block-name="split-section">\n        </div>`. `decorate()` checks `if (!row)` — returns immediately after `block.innerHTML = ''`. No child element access on undefined | ✅ Pass | AC-11 |
 
 ---
 
@@ -38,17 +38,29 @@ No failures. All 14 test cases pass.
 
 ## Implementation Notes
 
-### DOM Verification Method
+### Gap Bug Fixed (2026-06-22)
 
-Testing was performed via:
-1. `curl http://localhost:3000/tests/split-section-test` — verified all 8 block variants and sections are present in authored HTML with correct class names and cell structure.
-2. Python HTML inspection script — confirmed all structural content, alt text, class names, and CTA links present in the authored markup.
-3. CSS code review — verified `flex-direction: column` (mobile), `flex-direction: row` (760 px+), `flex-direction: row-reverse` (reverse variant), `flex: 0 0 60%` / `flex: 0 0 40%` (wide-media at 992 px+).
-4. JS code review — verified `buildMediaHtml`, `buildBodyHtml`, `isFirstSection`, and `decorate` defensive guards for all edge cases.
+During this re-run, a deviation from the token map was identified and corrected:
+
+- **Before:** `gap: var(--spacing-4)` (24 px) at the 760 px breakpoint
+- **After:** `gap: var(--grid-gutter-width)` (48 px = 3rem) at the 760 px breakpoint
+
+The token map (`user_story/duopa-token-map.md`) explicitly specifies "760 px (md+): Two-column flex row; default 50/50; `gap: --grid-gutter-width` (48 px)". The 24 px gap was narrower than specified. The fix was applied to `blocks/split-section/split-section.css` line 84.
+
+Note: `--grid-gutter-width` (3rem / 48 px) and `--spacing-5` (3rem / 48 px) resolve to the same computed value. The 992 px rule retaining `gap: var(--spacing-5)` is harmless (same value) and provides a semantic reference to the lg-scale spacing token.
+
+### Verification Method
+
+Testing performed via:
+1. `curl http://localhost:3000/tests/split-section-test` — downloaded page HTML, confirmed all 8 block variants present with correct class names (`split-section`, `split-section reverse`, `split-section wide-media`, `split-section wide-media reverse`).
+2. Python HTML inspection — confirmed authored structure: image cell first in DOM, eyebrow `<p>` before `<h2>`, alt text preserved, no empty elements inserted for missing optional fields, empty block div renders without crash.
+3. CSS code review — confirmed `flex-direction: column` (mobile), `flex-direction: row` (760 px+), `flex-direction: row-reverse` (reverse variant), `flex: 0 0 60%` / `flex: 0 0 40%` (wide-media at 992 px+), zero hardcoded hex/rgb values.
+4. JS code review — confirmed `buildMediaHtml`, `buildBodyHtml`, `isFirstSection`, and `decorate` defensive guards for all edge cases.
+5. `npx eslint blocks/split-section/` — exit 0, no errors.
 
 ### Constraints & Open Questions Carried Forward
 
-- **OQ-01 (video support):** `block.md` documents `<picture>` only. `buildMediaHtml()` looks for `picture > img` — a `<video>` element in the media cell would be silently ignored (empty media div). If video support is needed, sentinel should flag this and the contract must be updated.
-- **OQ-02 (background color):** Confirmed section-metadata approach (`.light` / `.dark` on parent section). The block does not set any background on `.split-section` itself — this is by design.
-- **OQ-03 (aspect ratio):** No aspect-ratio lock imposed per the token map (`1272 px+` note: "no aspect-ratio lock imposed"). The image fills its column with `object-fit: cover`. Confirm with design if a specific ratio is required.
-- **TC-02 / TC-12 (browser verification):** Column stacking and 200% zoom were verified via CSS inspection only. Sentinel's Playwright spec should add viewport-width assertions at 375 px and 1280 px, and a zoom simulation test.
+- **OQ-01 (video support):** `block.md` documents `<picture>` only. `buildMediaHtml()` looks for `picture > img` — a `<video>` in the media cell is silently ignored (empty media div). If video is needed, the contract and `buildMediaHtml` must be updated.
+- **OQ-02 (background color):** Section-metadata approach confirmed. Block does not set any background on `.split-section`.
+- **OQ-03 (aspect ratio):** No aspect-ratio lock imposed per token map. Image fills its column with `object-fit: cover`.
+- **TC-02 / TC-12 (browser viewport verification):** Column stacking and 200% zoom verified via CSS inspection. Sentinel's Playwright spec should add assertions at 375 px and 1280 px viewport widths.

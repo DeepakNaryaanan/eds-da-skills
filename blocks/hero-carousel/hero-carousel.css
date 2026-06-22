@@ -22,7 +22,7 @@
   .hero-carousel {
     --hero-h: 400px;
 
-    padding-inline: 3rem;
+    padding-inline: var(--spacing-5);
   }
 }
 
@@ -47,7 +47,7 @@
   inset: 0;
   display: block;
   opacity: 0;
-  transition: opacity 600ms ease-in-out;
+  transition: opacity var(--duration-slower) var(--ease-in-out);
   pointer-events: none;
 }
 
@@ -160,7 +160,7 @@
   line-height: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: background-color var(--duration-slow) var(--ease-standard);
 }
 
 .hero-carousel .hero-carousel-slide-body a.button:hover,
@@ -198,7 +198,7 @@
   color: var(--color-text-muted);
   cursor: pointer;
   padding: 0;
-  transition: color 0.2s ease;
+  transition: color var(--duration-base) var(--ease-standard);
 }
 
 .hero-carousel .hero-carousel-prev {
@@ -253,7 +253,7 @@
   background: transparent;
   cursor: pointer;
   padding: 0;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: background-color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard);
 }
 
 .hero-carousel .hero-carousel-indicator[aria-selected="true"] {

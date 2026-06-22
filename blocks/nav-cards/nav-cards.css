@@ -33,7 +33,7 @@
 @media (width >= 760px) {
   .nav-cards .nav-cards-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
+    gap: var(--spacing-5);
   }
 }
 
@@ -63,7 +63,7 @@
   color: var(--color-text);
   width: 100%;
   border-radius: var(--border-radius-s);
-  transition: opacity 0.2s ease;
+  transition: opacity var(--duration-base) var(--ease-standard);
 }
 
 .nav-cards .nav-cards-link:hover {
@@ -123,7 +123,7 @@
 
 /* ── Description ──────────────────────────────────────────────────────────── */
 .nav-cards .nav-cards-desc {
-  font-size: 1rem;
+  font-size: var(--font-size-p);
   color: var(--color-text);
   margin: 0 0 var(--spacing-4);
   line-height: 1.5;
@@ -144,7 +144,7 @@
   letter-spacing: 0.5px;
   line-height: 1.125rem;
   margin-top: auto;
-  transition: background-color 0.3s ease;
+  transition: background-color var(--duration-slow) var(--ease-standard);
 }
 
 .nav-cards .nav-cards-link:hover .nav-cards-cta {

@@ -81,7 +81,7 @@
   .split-section {
     flex-direction: row;
     align-items: stretch;
-    gap: var(--spacing-4);
+    gap: var(--grid-gutter-width);
   }
 
   /* Default 50/50 split */

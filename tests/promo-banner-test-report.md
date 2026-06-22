@@ -1,7 +1,7 @@
 # Promo Banner — Test Report
 
 **Block:** promo-banner
-**Date:** 2026-06-21
+**Date:** 2026-06-22
 **Local URL tested:** http://localhost:3000/tests/promo-banner-test.html
 **Lint status:** ESLint clean (0 errors on block files). Stylelint has a pre-existing project-wide ConfigurationError (no `.stylelintrc` — affects all blocks, not introduced by this block).
 
@@ -34,11 +34,13 @@
 
 **Status:** Blocked — cannot be fully verified via `curl` or DOM inspection alone; requires visual rendering in a browser at actual viewport width.
 
-**What was checked:** The `.promo-banner` element has no `max-width` set and no inline width constraint. The `.promo-banner-inner` div holds the `max-width: 50rem` constraint. The AEM section system renders each block in a full-width div by default. This is structurally correct.
+**What was checked:** The `.promo-banner` element has no `max-width` set. The `.promo-banner-inner` div holds the text column constraint (`50rem` at xl). The AEM section system generates a `.promo-banner-wrapper` div at runtime (via `decorateBlocks`); `docs/blocks.md` prohibits targeting this class in block CSS. The global rule `main > .section > div` applies `max-width: 1200px; padding-inline: 24px` to that wrapper, capping background spread at 1248px total (1200px + 2×24px). At viewports wider than 1248px, the banner background does not fill the full viewport width.
 
-**What requires browser verification:** Sentinel should confirm with a Playwright `page.evaluate(() => document.querySelector('.promo-banner').getBoundingClientRect().width)` check against `page.viewportSize().width`.
+**Decision:** This is a known project-level constraint — the same limitation exists on the `stat-bar` block and is accepted by the project. The `docs/blocks.md` explicitly prohibits using `.{blockname}-wrapper` selectors in block CSS to override it. This is a project architecture decision that requires a global CSS change (removing the max-width from `main > .section > div`) or sentinel adding a Playwright assertion that caps the check at the wrapper width.
 
-**Risk:** Low — the pattern matches the stat-bar block which passed sentinel review with the same full-bleed approach.
+**What requires browser verification:** Sentinel should confirm that `.promo-banner` width matches its `.promo-banner-wrapper` parent width, and that on a 1280px viewport the banner visually fills the visible area (which it will, since 1280px < 1248px max — actually 1280px > 1248px; banner would have side margins at 1280px). Sentinel should document this as a known caveat or escalate to the orchestrator for a global CSS fix.
+
+**Risk:** Medium — at very wide viewports (> 1248px) the banner background does not span 100% of viewport. Acceptable if the project targets max 1200px content width.
 
 ---
 

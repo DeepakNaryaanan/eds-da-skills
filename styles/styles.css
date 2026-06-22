@@ -105,9 +105,20 @@
   --shadow-m: 0 4px 6px oklch(0% 0 0deg / 10%), 0 2px 4px oklch(0% 0 0deg / 8%);
   --shadow-l: 0 10px 15px oklch(0% 0 0deg / 10%), 0 4px 6px oklch(0% 0 0deg / 8%);
 
+  /* ── Motion: duration scale ── */
+  --duration-fast:   150ms;   /* micro fades — tab panel swap */
+  --duration-base:   200ms;   /* default hover/active colour transitions */
+  --duration-slow:   300ms;   /* larger surface colour transitions */
+  --duration-slower: 600ms;   /* hero slide cross-fade */
+
+  /* ── Motion: easing functions ── */
+  --ease-standard: ease;
+  --ease-in-out:   ease-in-out;
+  --ease-out:      ease-out;
+
   /* ── Transitions ── */
-  --transition-speed: 200ms;
-  --transition-ease: ease;
+  --transition-speed: var(--duration-base);
+  --transition-ease: var(--ease-standard);
   --transition-base: var(--transition-speed) var(--transition-ease);
 
   /* ── Z-index scale ── */
