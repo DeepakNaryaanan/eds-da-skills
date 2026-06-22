@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Resource List — Block Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--
+      Self-contained test page: nav and footer point to local draft fragments
+      so the page works with `npx -y @adobe/aem-cli up --html-folder tests`.
+    -->
+    <meta name="nav"    content="/tests/fragments/nav" />
+    <meta name="footer" content="/tests/fragments/footer" />
+
+    <script nonce="aem" src="/scripts/aem.js" type="module"></script>
+    <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <header></header>
+
+    <main>
+      <div class="section">
+        <h2>Latest News</h2>
+        <div class="resource-list">
+          <div>
+            <div>
+              <picture>
+                <img src="/images/abbott/news-preserving-muscle.jpg" alt="A woman reads on a laptop computer while sitting on her couch." width="1410" height="614" />
+              </picture>
+            </div>
+            <div>
+              <p><a href="/articles/preserving-muscle">Preserving Muscle When Trying to Lose Weight</a></p>
+              <p><em>Fitness &amp; Nutrition</em></p>
+              <p>On a weight loss journey? Follow these tips to help maintain muscle while losing weight.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <img src="/images/abbott/news-daily-water-intake.jpg" alt="How much water should you drink per day" width="1410" height="614" />
+              </picture>
+            </div>
+            <div>
+              <p><a href="/articles/daily-water-intake">How Much Water Should You Drink Per Day?</a></p>
+              <p><em>Hydration</em></p>
+              <p>Here's what you need to know about your daily fluid intake.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <img src="/images/abbott/news-healthy-eating.jpg" alt="Healthy eating and diet concept — natural rich in protein food on table" width="1410" height="614" />
+              </picture>
+            </div>
+            <div>
+              <p><a href="/articles/protein-myths">Are You Getting It Wrong on Protein? Here's How to Get It Right</a></p>
+              <p><em>Protein &amp; Muscle Health</em></p>
+              <p>Learn the truth about protein myths and make your food work better for you.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+/*
+ * promo-pair block styles
+ *
+ * Abbott Nutrition specialty-nutrition pattern:
+ *   - Light-grey section band (scoped via :has() so the band spans the section)
+ *   - Two white tiles with subtle shadow
+ *   - 3:2 cover image, dark heading + body copy
+ *   - Solid navy uppercase CTA button
+ *
+ * Grid: 1 col mobile → 2 cols at 760px+.
+ */
+
+/* ── Section band ─────────────────────────────────────────────────────────────
+ * The grey background belongs to the whole section, not just the block, so it
+ * is applied to the section wrapper that contains the block. Scoped through the
+ * block class to keep the rule self-contained. */
+.section:has(.promo-pair) {
+  background-color: var(--color-surface-2);
+}
+
+/* ── Grid container ───────────────────────────────────────────────────────── */
+.promo-pair .promo-pair-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-4);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (width >= 760px) {
+  .promo-pair .promo-pair-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 992px) {
+  .promo-pair .promo-pair-grid {
+    gap: var(--spacing-5);
+  }
+}
+
+/* ── Tile ─────────────────────────────────────────────────────────────────── */
+.promo-pair .promo-pair-item {
+  display: flex;
+}
+
+.promo-pair .promo-pair-tile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-s);
+  box-shadow: var(--shadow-s);
+  overflow: hidden;
+}
+
+/* ── Image ────────────────────────────────────────────────────────────────── */
+.promo-pair .promo-pair-image {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.promo-pair .promo-pair-image img,
+.promo-pair .promo-pair-image picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+.promo-pair .promo-pair-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: flex-start;
+  padding: var(--spacing-4);
+}
+
+.promo-pair .promo-pair-body h2,
+.promo-pair .promo-pair-body h3 {
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.25;
+  margin: 0 0 var(--spacing-3);
+}
+
+.promo-pair .promo-pair-text {
+  font-size: var(--font-size-p);
+  color: var(--color-text);
+  line-height: 1.5;
+  margin: 0 0 var(--spacing-4);
+  flex: 1;
+}
+
+/* ── CTA — solid navy button, white uppercase text ────────────────────────── */
+.promo-pair .promo-pair-cta {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-primary-text);
+  background-color: var(--color-primary);
+  border-radius: var(--border-radius-s);
+  padding: 0.75rem 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.125rem;
+  text-decoration: none;
+  margin-top: auto;
+  transition: background-color var(--duration-slow) var(--ease-standard);
+}
+
+.promo-pair .promo-pair-cta:hover {
+  background-color: var(--color-primary-hover);
+  color: var(--color-primary-text);
+}
+
+.promo-pair .promo-pair-cta:active {
+  background-color: var(--color-primary-active);
+}
+
+.promo-pair .promo-pair-cta:focus-visible {
+  outline: 3px solid var(--color-primary-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-pair .promo-pair-cta {
+    transition: none;
+  }
+}

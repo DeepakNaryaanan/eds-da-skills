@@ -1,0 +1,124 @@
+/*
+ * resource-list block styles
+ *
+ * Abbott Nutrition "Latest News" pattern:
+ *   - White card with subtle shadow, raised on hover
+ *   - 16:7 cover thumbnail on top
+ *   - Navy linked heading (underline on hover), muted italic category label
+ *   - Dark summary copy
+ *
+ * Grid: 1 col mobile → 2 cols at 760px → 3 cols at 992px+.
+ */
+
+/* ── Grid container ───────────────────────────────────────────────────────── */
+.resource-list .resource-list-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-4);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (width >= 760px) {
+  .resource-list .resource-list-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 992px) {
+  .resource-list .resource-list-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-5);
+  }
+}
+
+/* ── Card ─────────────────────────────────────────────────────────────────── */
+.resource-list .resource-list-item {
+  display: flex;
+}
+
+.resource-list .resource-list-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-s);
+  box-shadow: var(--shadow-s);
+  overflow: hidden;
+  transition: box-shadow var(--duration-base) var(--ease-standard);
+}
+
+.resource-list .resource-list-card:hover {
+  box-shadow: var(--shadow-m);
+}
+
+/* ── Thumbnail ────────────────────────────────────────────────────────────── */
+.resource-list .resource-list-image {
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+}
+
+.resource-list .resource-list-image img,
+.resource-list .resource-list-image picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+.resource-list .resource-list-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--spacing-3);
+}
+
+/* Title — navy link, no underline until hover */
+.resource-list .resource-list-title {
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0 0 var(--spacing-2);
+}
+
+.resource-list .resource-list-title a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.resource-list .resource-list-title a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.resource-list .resource-list-title a:focus-visible {
+  outline: 3px solid var(--color-primary-focus);
+  outline-offset: 2px;
+}
+
+/* ── Category label ───────────────────────────────────────────────────────── */
+.resource-list .resource-list-category {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--spacing-2);
+}
+
+.resource-list .resource-list-category em {
+  font-style: italic;
+}
+
+/* ── Summary ──────────────────────────────────────────────────────────────── */
+.resource-list .resource-list-summary {
+  font-size: var(--font-size-p);
+  color: var(--color-text);
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resource-list .resource-list-card {
+    transition: none;
+  }
+}

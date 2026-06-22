@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Promo Pair — Block Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--
+      Self-contained test page: nav and footer point to local draft fragments
+      so the page works with `npx -y @adobe/aem-cli up --html-folder tests`.
+    -->
+    <meta name="nav"    content="/tests/fragments/nav" />
+    <meta name="footer" content="/tests/fragments/footer" />
+
+    <script nonce="aem" src="/scripts/aem.js" type="module"></script>
+    <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <header></header>
+
+    <main>
+      <div class="section">
+        <div class="promo-pair">
+          <div>
+            <div>
+              <picture>
+                <img src="/images/abbott/promo-pediatric-specialty.jpg" alt="Pediatric Specialty Nutrition Image" width="676" height="440" />
+              </picture>
+            </div>
+            <div>
+              <h3>Pediatric Specialty Nutrition</h3>
+              <p>Abbott offers a variety of products designed to help meet unique nutrition needs of infants and children.</p>
+              <p><a href="/products/pediatric">Explore Products</a></p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <img src="/images/abbott/promo-metabolic-nutrition.jpg" alt="Metabolic Nutrition Image" width="676" height="440" />
+              </picture>
+            </div>
+            <div>
+              <h3>Metabolic Nutrition</h3>
+              <p>Abbott formulas help with the dietary management of inherited metabolic conditions and provide specialized nutrition to infants, children, and adults.</p>
+              <p><a href="/products/metabolic">Explore Products</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>

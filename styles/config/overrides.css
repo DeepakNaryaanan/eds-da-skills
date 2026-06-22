@@ -206,11 +206,12 @@
 }
 
 /* ─── DUOPA primary navy ─────────────────────────────────────────────────────
- * ACTIVE: the project has adopted the DUOPA brand identity. This :root block
- * follows the Abbott Nutrition :root block above in the same `overrides`
- * cascade layer, so the tokens it redefines (primary, page surfaces, text)
- * win site-wide. The Abbott secondary/tertiary/danger/success tokens above
- * remain as supporting state colors and are intentionally left untouched.
+ * INACTIVE on feat/abbott-nutrition-home. This :root block was overriding the
+ * Abbott Nutrition primary/surface/text tokens defined above (it followed them
+ * in the same `overrides` cascade layer, so it won site-wide). It is commented
+ * out so the Abbott brand tokens resolve correctly on this branch. When the
+ * project pivots to a DUOPA-only build, uncomment this block and comment out
+ * the Abbott Nutrition primary block above.
  *
  * WCAG AA checks:
  *   #003366 on white  → 16.9:1 ✓ (AAA)
@@ -219,7 +220,7 @@
  *   #001122 on white  → 21.0:1 ✓ (active ≥3:1 ✓)
  *   #002244 focus ring → 19.4:1 vs white ✓
  */
-:root {
+/* :root {
   --color-primary:        #003366;
   --color-primary-hover:  #002244;
   --color-primary-active: #001122;
@@ -241,7 +242,7 @@
   --border-radius-s: 4px;
   --border-radius-m: 6px;
   --border-radius-l: 12px;
-}
+} */
 
 /* Dark-mode accent tokens — mirror the light values with tinted versions
  * suited for a dark page surface. Currently commented out; activate only when
