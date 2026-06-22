@@ -106,8 +106,8 @@ function pickFirst(html, tag) {
 
 // Pull main content area if present; fall back to <body>.
 function pickMain(html) {
-  const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i);
-  if (main) return main[1];
+  const mainMatch = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i);
+  if (mainMatch) return mainMatch[1];
   const article = html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/i);
   if (article) return article[1];
   const body = html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i);
@@ -123,11 +123,14 @@ function pickImages(html, baseUrl) {
     const tag = m[0];
     const src = (tag.match(/\bsrc=["']([^"']+)["']/i) || [])[1];
     const alt = decode((tag.match(/\balt=["']([^"']*)["']/i) || [])[1] || '');
-    if (!src) continue;
-    if (src.startsWith('data:')) continue;
-    let abs;
-    try { abs = new URL(src, baseUrl).toString(); } catch { continue; }
-    out.push({ src: abs, alt });
+    if (src && !src.startsWith('data:')) {
+      try {
+        const abs = new URL(src, baseUrl).toString();
+        out.push({ src: abs, alt });
+      } catch {
+        // skip images with unparseable URLs
+      }
+    }
   }
   // de-dupe by URL preserving first occurrence
   const seen = new Set();
@@ -146,7 +149,12 @@ async function downloadImage(img, imagesDir) {
     if (!path.extname(base)) {
       const ct = res.headers.get('content-type') || '';
       const ext = (ct.match(/image\/(jpeg|jpg|png|webp|gif|svg\+xml)/) || [])[1];
-      if (ext) base += `.${ext === 'svg+xml' ? 'svg' : (ext === 'jpeg' ? 'jpg' : ext)}`;
+      if (ext) {
+        let normalized = ext;
+        if (ext === 'svg+xml') normalized = 'svg';
+        else if (ext === 'jpeg') normalized = 'jpg';
+        base += `.${normalized}`;
+      }
     }
     base = base.replace(/[^a-zA-Z0-9._-]+/g, '-').toLowerCase();
     const file = path.join(imagesDir, base);
@@ -178,14 +186,14 @@ function pickProse(html, minLen = 40) {
 }
 
 function sliceContent(rawHtml, source) {
-  const main = pickMain(rawHtml);
+  const mainContent = pickMain(rawHtml);
   const title = decode(pickFirst(rawHtml, 'title')) || source.url;
   const description = pickMeta(rawHtml, 'description') || pickMeta(rawHtml, 'og:description');
-  const h1 = stripTags(pickFirst(main, 'h1')) || title;
-  const h2s = pickAll(main, 'h2').map(stripTags).filter(Boolean);
-  const h3s = pickAll(main, 'h3').map(stripTags).filter(Boolean);
-  const prose = pickProse(main);
-  const images = pickImages(main, source.url);
+  const h1 = stripTags(pickFirst(mainContent, 'h1')) || title;
+  const h2s = pickAll(mainContent, 'h2').map(stripTags).filter(Boolean);
+  const h3s = pickAll(mainContent, 'h3').map(stripTags).filter(Boolean);
+  const prose = pickProse(mainContent);
+  const images = pickImages(mainContent, source.url);
 
   // Section 1 — patient-resources slots
   const eyebrow = (h2s[0] || 'About').toUpperCase();
@@ -237,6 +245,7 @@ function pictureFor(img, fallbackLabel) {
     return `<picture><img src="${escapeHtml(img.localPath)}" alt="${escapeHtml(img.alt || fallbackLabel)}"/></picture>`;
   }
   const label = encodeURIComponent(fallbackLabel);
+  // eslint-disable-next-line max-len
   const svg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect width='600' height='400' fill='%23cbd5e1'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='28' fill='%23475569'%3E${label}%3C/text%3E%3C/svg%3E`;
   return `<picture><img src="${svg}" alt="${escapeHtml(fallbackLabel)}"/></picture>`;
 }
