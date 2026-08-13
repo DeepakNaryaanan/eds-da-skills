@@ -98,7 +98,7 @@
 /* ── CTA — solid navy button, white uppercase text ────────────────────────── */
 .promo-pair .promo-pair-cta {
   display: inline-block;
-  font-size: 0.875rem;
+  font-size: var(--btn-font-size-md);
   font-weight: 700;
   color: var(--color-primary-text);
   background-color: var(--color-primary);

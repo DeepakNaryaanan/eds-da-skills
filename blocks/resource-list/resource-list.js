@@ -55,8 +55,10 @@ function buildCardHtml(row) {
       const pictureEl = isDataUri
         ? imageCell.querySelector('picture')
         : createOptimizedPicture(img.src, img.alt ?? '', false, [
-          { media: '(min-width: 760px)', width: '750' },
-          { width: '1410' },
+          // Mobile-first: the no-media entry becomes the <img> baseline (smallest);
+          // wider viewports load the larger source.
+          { media: '(min-width: 760px)', width: '1410' },
+          { width: '750' },
         ]);
       if (pictureEl) {
         imageHtml = `<div class="resource-list-image">${pictureEl.outerHTML}</div>`;
