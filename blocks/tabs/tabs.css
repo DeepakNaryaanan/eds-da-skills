@@ -58,7 +58,7 @@
 
 /* ── Panels ── */
 .tabs .tabs-panel {
-  animation: tabs-fade-in 150ms ease;
+  animation: tabs-fade-in var(--duration-fast) var(--ease-standard);
 }
 
 .tabs .tabs-panel[hidden] {

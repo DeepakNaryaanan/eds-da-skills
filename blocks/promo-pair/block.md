@@ -1,23 +1,14 @@
 # Promo Pair
 
-Two-column promotional card pair. Each row is one promo card with an image, a heading, a description, and an optional CTA link. Typically used to highlight two specialty areas side by side. Stacks to a single column on mobile.
+Two side-by-side promotional tiles on a light-grey section band. Each tile has a cover image, a heading, body copy, and a CTA button. Used to highlight a pair of related destinations such as two product categories.
 
 ## Default
 
-| Promo Pair              |                                                                     |
-|-------------------------|---------------------------------------------------------------------|
-| Image *(optional)*      | Body *(required)*                                                   |
-| `<picture>` element     | Heading (`<h2>` or `<h3>`), description paragraph, CTA link (`<a>`) |
+| Promo Pair                  |                                                            |
+|-----------------------------|------------------------------------------------------------|
+| Image *(optional)*          | Body *(required)*                                          |
+| `<picture>` image (≈3:2)    | Heading (`<h3>`), body paragraph, CTA link (`<a>`)         |
 
-Each row is one promo card. Two rows produce the standard two-column layout. Additional rows wrap into further columns on desktop.
+Each row is one tile. The first cell is an optional cover image; the second cell holds the heading, a body paragraph, and a CTA link. Although named "pair", the block renders as many tiles as authored rows (two columns from 760px up); two rows is the canonical use.
 
-## Variations
-
-### Tinted
-
-| Promo Pair (tinted)     |                                                                     |
-|-------------------------|---------------------------------------------------------------------|
-| Image *(optional)*      | Body *(required)*                                                   |
-| `<picture>` element     | Heading, description paragraph, CTA link                            |
-
-Renders each card with a subtle tinted surface background (`--color-surface`) instead of white.
+The block applies a light-grey background to its containing section so the white tiles read as cards on a band.

@@ -1,0 +1,133 @@
+/* ── split-section ───────────────────────────────────────────────────────────
+ * Two-column layout: image (media) on one side, text (body) on the other.
+ *
+ * Variants:
+ *   .split-section.reverse           — image right, text left (CSS order)
+ *   .split-section.wide-media        — 60 % image / 40 % text; image left
+ *   .split-section.wide-media.reverse — 60/40 split; image right
+ *
+ * Mobile-first: columns stack (image above text) and split at 760 px (md).
+ * The wide-media 60/40 ratio applies at 992 px (lg) and above.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── Block shell ── */
+.split-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Media column ── */
+.split-section .split-section-media {
+  overflow: hidden;
+}
+
+.split-section .split-section-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.split-section .split-section-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Body column ── */
+.split-section .split-section-body {
+  padding-block: var(--spacing-4);
+  padding-inline: var(--spacing-3);
+  color: var(--color-text);
+}
+
+/* ── Eyebrow ── */
+.split-section .split-section-body .eyebrow {
+  font-size: var(--font-size-small, 0.875rem);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-block-end: var(--spacing-2, 0.5rem);
+}
+
+/* ── Heading ── */
+.split-section .split-section-body h2,
+.split-section .split-section-body h3 {
+  margin-block-start: 0;
+  color: var(--color-text);
+}
+
+/* ── Body paragraphs ── */
+.split-section .split-section-body p {
+  color: var(--color-text);
+}
+
+/* ── CTA link / button ── */
+.split-section .split-section-body a.button,
+.split-section .split-section-body .button-container a {
+  display: inline-block;
+  margin-block-start: var(--spacing-3);
+}
+
+.split-section .split-section-body a:focus-visible,
+.split-section .split-section-body button:focus-visible {
+  outline: 3px solid var(--color-primary-focus);
+  outline-offset: 2px;
+}
+
+/* ── Tablet and up (md: 760px) — side-by-side two-column layout ── */
+@media (width >= 760px) {
+  .split-section {
+    flex-direction: row;
+    align-items: stretch;
+    gap: var(--grid-gutter-width);
+  }
+
+  /* Default 50/50 split */
+  .split-section .split-section-media,
+  .split-section .split-section-body {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  .split-section .split-section-body {
+    padding-block: var(--spacing-5);
+    padding-inline: var(--spacing-4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Reverse: image right, text left — CSS only, DOM order unchanged */
+  .split-section.reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+/* ── Desktop (lg: 992px) — wide-media 60/40 split and larger gap ── */
+@media (width >= 992px) {
+  .split-section {
+    gap: var(--spacing-5);
+  }
+
+  .split-section .split-section-body {
+    padding-inline: var(--spacing-5);
+  }
+
+  /* Wide-media: 60% image / 40% text */
+  .split-section.wide-media .split-section-media {
+    flex: 0 0 60%;
+  }
+
+  .split-section.wide-media .split-section-body {
+    flex: 0 0 40%;
+  }
+}
+
+/* ── Large desktop (xl: 1272px) — no layout change; image fills its column ── */
+@media (width >= 1272px) {
+  .split-section .split-section-media img {
+    object-fit: cover;
+  }
+}

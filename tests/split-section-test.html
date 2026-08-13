@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Split Section — Test Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="nav" content="/tests/fragments/nav" />
+    <meta name="footer" content="/tests/fragments/footer" />
+    <script nonce="aem" src="/scripts/aem.js" type="module"></script>
+    <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+
+      <!-- ── Section 1: Default variant — image left, text right (TC-01, TC-02, TC-09, TC-10, TC-13) ── -->
+      <div class="section">
+        <div class="split-section" data-block-name="split-section">
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23003366'/%3E%3Ctext x='400' y='310' text-anchor='middle' font-size='40' fill='%23ffffff' font-family='Arial'%3EProduct Image%3C/text%3E%3C/svg%3E"
+                  alt="DUOPA pump device shown in clinical setting"
+                  width="800"
+                  height="600"
+                />
+              </picture>
+            </div>
+            <div>
+              <p>Clinical Context</p>
+              <h2>Continuous Delivery for Advanced Parkinson's</h2>
+              <p>DUOPA delivers carbidopa and levodopa directly into the small intestine, reducing motor fluctuations and providing up to 16 hours of continuous drug delivery daily.</p>
+              <p><a href="#learn-more">Learn More About DUOPA</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 2: Reverse variant — image right, text left (TC-03, TC-04, TC-05) ── -->
+      <div class="section" style="background-color: var(--color-surface)">
+        <div class="split-section reverse" data-block-name="split-section">
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23e8651a'/%3E%3Ctext x='400' y='310' text-anchor='middle' font-size='40' fill='%23ffffff' font-family='Arial'%3EPatient Photo%3C/text%3E%3C/svg%3E"
+                  alt="Patient using the DUOPA system at home with a caregiver nearby"
+                  width="800"
+                  height="600"
+                />
+              </picture>
+            </div>
+            <div>
+              <p>Patient Benefits</p>
+              <h2>More "On" Time. Less Disruption.</h2>
+              <p>In clinical studies, 74% of patients achieved greater "On" time compared to oral levodopa therapy, enabling more daily activity without troublesome dyskinesia.</p>
+              <p><a href="#patient-stories">Read Patient Stories</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 3: Wide Media variant — 60/40 split, image left (TC-11) ── -->
+      <div class="section">
+        <div class="split-section wide-media" data-block-name="split-section">
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'%3E%3Crect width='1200' height='800' fill='%23002244'/%3E%3Ctext x='600' y='410' text-anchor='middle' font-size='48' fill='%23ffffff' font-family='Arial'%3EWide Media Image%3C/text%3E%3C/svg%3E"
+                  alt="Close-up of the DUOPA enteral tube showing the connection point"
+                  width="1200"
+                  height="800"
+                />
+              </picture>
+            </div>
+            <div>
+              <p>How It Works</p>
+              <h3>Direct Intestinal Infusion</h3>
+              <p>A portable pump delivers a gel suspension of carbidopa/levodopa continuously through a tube placed directly into the small intestine via a PEG-J procedure.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 4: Wide Media Reverse variant — 60/40 split, image right (TC-11) ── -->
+      <div class="section" style="background-color: var(--color-surface)">
+        <div class="split-section wide-media reverse" data-block-name="split-section">
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'%3E%3Crect width='1200' height='800' fill='%23001122'/%3E%3Ctext x='600' y='410' text-anchor='middle' font-size='48' fill='%23ffffff' font-family='Arial'%3EReverse Wide Media%3C/text%3E%3C/svg%3E"
+                  alt="Healthcare provider explaining the DUOPA treatment plan to a patient"
+                  width="1200"
+                  height="800"
+                />
+              </picture>
+            </div>
+            <div>
+              <p>For Healthcare Providers</p>
+              <h3>Candidate Identification</h3>
+              <p>Consider DUOPA for patients with advanced Parkinson's disease who have motor fluctuations that are not adequately controlled on oral levodopa therapy.</p>
+              <p><a href="#hcp-resources">HCP Resources</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 5: Missing optional eyebrow — no eyebrow <p> before heading (TC-06) ── -->
+      <div class="section">
+        <div class="split-section" data-block-name="split-section">
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23427aac'/%3E%3Ctext x='400' y='310' text-anchor='middle' font-size='40' fill='%23ffffff' font-family='Arial'%3ENo Eyebrow%3C/text%3E%3C/svg%3E"
+                  alt="Scientific diagram of carbidopa levodopa molecule structure"
+                  width="800"
+                  height="600"
+                />
+              </picture>
+            </div>
+            <div>
+              <h2>No Eyebrow Paragraph</h2>
+              <p>This block omits the optional eyebrow text. The heading should render cleanly as the first element in the body column, with no empty element before it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 6: Missing CTA — no link authored (TC-07) ── -->
+      <div class="section" style="background-color: var(--color-surface)">
+        <div class="split-section" data-block-name="split-section">
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23669933'/%3E%3Ctext x='400' y='310' text-anchor='middle' font-size='40' fill='%23ffffff' font-family='Arial'%3ENo CTA%3C/text%3E%3C/svg%3E"
+                  alt="Graph showing reduction in off time for DUOPA patients"
+                  width="800"
+                  height="600"
+                />
+              </picture>
+            </div>
+            <div>
+              <p>Study Results</p>
+              <h2>Consistent Efficacy Over Time</h2>
+              <p>The data demonstrates sustained reduction in daily "Off" time across 12 weeks of continuous therapy with no CTA link authored in this block.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 7: Missing image cell — text-only rendering (TC-08) ── -->
+      <div class="section">
+        <div class="split-section" data-block-name="split-section">
+          <div>
+            <div></div>
+            <div>
+              <p>Safety Information</p>
+              <h2>No Image in Media Cell</h2>
+              <p>This block has an empty first cell. The JS must not throw an error. The text column should still render and be readable.</p>
+              <p><a href="#safety">View Full Safety Information</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 8: Empty block — no rows, must not crash (TC-14) ── -->
+      <div class="section" style="background-color: var(--color-surface)">
+        <h2>Empty Block — No-Crash Test</h2>
+        <div class="split-section" data-block-name="split-section">
+        </div>
+      </div>
+
+    </main>
+    <footer></footer>
+  </body>
+</html>

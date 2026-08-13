@@ -1,18 +1,24 @@
 /*
  * promo-pair block styles
  *
- * Matches Abbott Nutrition's article-card design:
- *   - White card with a thin grey border + very soft shadow
- *   - Image fills the card top (no rounded corners on the image edge)
- *   - Regular-weight dark heading (not bold)
- *   - Dark body copy (not muted)
- *   - "Learn More" rendered as a sky-blue bold underlined text link
- *     — NOT a button, no arrow icon
+ * Abbott Nutrition specialty-nutrition pattern:
+ *   - Light-grey section band (scoped via :has() so the band spans the section)
+ *   - Two white tiles with subtle shadow
+ *   - 3:2 cover image, dark heading + body copy
+ *   - Solid navy uppercase CTA button
  *
- * Layout: 1-col mobile → 2-col equal at 760px+.
+ * Grid: 1 col mobile → 2 cols at 760px+.
  */
 
-/* ── Grid ─────────────────────────────────────────────────────────────────── */
+/* ── Section band ─────────────────────────────────────────────────────────────
+ * The grey background belongs to the whole section, not just the block, so it
+ * is applied to the section wrapper that contains the block. Scoped through the
+ * block class to keep the rule self-contained. */
+.section:has(.promo-pair) {
+  background-color: var(--color-surface-2);
+}
+
+/* ── Grid container ───────────────────────────────────────────────────────── */
 .promo-pair .promo-pair-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -25,35 +31,38 @@
 @media (width >= 760px) {
   .promo-pair .promo-pair-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-4);
   }
 }
 
-/* ── Card ─────────────────────────────────────────────────────────────────── */
-.promo-pair .promo-pair-card {
+@media (width >= 992px) {
+  .promo-pair .promo-pair-grid {
+    gap: var(--spacing-5);
+  }
+}
+
+/* ── Tile ─────────────────────────────────────────────────────────────────── */
+.promo-pair .promo-pair-item {
+  display: flex;
+}
+
+.promo-pair .promo-pair-tile {
   display: flex;
   flex-direction: column;
+  width: 100%;
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--border-radius-s);
   box-shadow: var(--shadow-s);
   overflow: hidden;
-  transition: box-shadow 0.2s ease;
-}
-
-.promo-pair .promo-pair-card:hover {
-  box-shadow: var(--shadow-m);
 }
 
 /* ── Image ────────────────────────────────────────────────────────────────── */
 .promo-pair .promo-pair-image {
+  aspect-ratio: 3 / 2;
   overflow: hidden;
-  height: 220px;
-  flex-shrink: 0;
 }
 
-.promo-pair .promo-pair-image picture,
-.promo-pair .promo-pair-image img {
+.promo-pair .promo-pair-image img,
+.promo-pair .promo-pair-image picture {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -64,59 +73,61 @@
 .promo-pair .promo-pair-body {
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-4);
   flex: 1;
-  gap: var(--spacing-3);
+  align-items: flex-start;
+  padding: var(--spacing-4);
 }
 
-/* Heading — regular weight (not bold), dark text */
 .promo-pair .promo-pair-body h2,
 .promo-pair .promo-pair-body h3 {
-  font-size: 1.25rem;
-  font-weight: 400;
+  font-size: var(--font-size-h3);
+  font-weight: 600;
   color: var(--color-text);
-  margin: 0;
-  line-height: 1.3;
+  line-height: 1.25;
+  margin: 0 0 var(--spacing-3);
 }
 
-/* Description — dark text (not muted), full readable size */
-.promo-pair .promo-pair-desc {
-  font-size: 1rem;
+.promo-pair .promo-pair-text {
+  font-size: var(--font-size-p);
   color: var(--color-text);
-  margin: 0;
-  flex: 1;
   line-height: 1.5;
+  margin: 0 0 var(--spacing-4);
+  flex: 1;
 }
 
-/* ── "Learn More" CTA — sky-blue bold underlined text link ────────────────── */
+/* ── CTA — solid navy button, white uppercase text ────────────────────────── */
 .promo-pair .promo-pair-cta {
   display: inline-block;
-  font-size: 1rem;
+  font-size: var(--btn-font-size-md);
   font-weight: 700;
-  color: var(--color-tertiary);
-  text-decoration: underline;
-  line-height: 1.5;
-  align-self: flex-start;
-  transition: color 0.2s ease;
-  background: none;
-  border: none;
-  padding: 0;
-  letter-spacing: 0;
-  text-transform: none;
+  color: var(--color-primary-text);
+  background-color: var(--color-primary);
+  border-radius: var(--border-radius-s);
+  padding: 0.75rem 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.125rem;
+  text-decoration: none;
+  margin-top: auto;
+  transition: background-color var(--duration-slow) var(--ease-standard);
 }
 
 .promo-pair .promo-pair-cta:hover {
-  color: var(--color-tertiary-hover);
+  background-color: var(--color-primary-hover);
+  color: var(--color-primary-text);
+}
+
+.promo-pair .promo-pair-cta:active {
+  background-color: var(--color-primary-active);
 }
 
 .promo-pair .promo-pair-cta:focus-visible {
   outline: 3px solid var(--color-primary-focus);
   outline-offset: 2px;
-  border-radius: 2px;
 }
 
-/* ── Tinted variant ───────────────────────────────────────────────────────── */
-.promo-pair.tinted .promo-pair-card {
-  background-color: var(--color-primary-subtle);
-  border-color: var(--color-primary-border);
+@media (prefers-reduced-motion: reduce) {
+  .promo-pair .promo-pair-cta {
+    transition: none;
+  }
 }

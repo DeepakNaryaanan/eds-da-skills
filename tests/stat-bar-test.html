@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stat Bar — Test Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="nav" content="/tests/fragments/nav" />
+    <meta name="footer" content="/tests/fragments/footer" />
+    <script nonce="aem" src="/scripts/aem.js" type="module"></script>
+    <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+
+      <!-- ── Section 1: Default variant — three stats with icons (TC-01, TC-08) ── -->
+      <div class="section">
+        <h2>Default Variant — Three Stats with Icons</h2>
+
+        <div class="stat-bar" data-block-name="stat-bar">
+          <!-- Row 1: icon + value + label -->
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23e8651a'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23fff' font-family='Arial'%3E%E2%8F%B1%3C/text%3E%3C/svg%3E"
+                  alt=""
+                  width="48"
+                  height="48"
+                />
+              </picture>
+            </div>
+            <div><p>4 hours less</p></div>
+            <div><p>"Off" time per day</p></div>
+          </div>
+
+          <!-- Row 2: icon + value + label -->
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23003366'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23fff' font-family='Arial'%3E%E2%98%91%3C/text%3E%3C/svg%3E"
+                  alt=""
+                  width="48"
+                  height="48"
+                />
+              </picture>
+            </div>
+            <div><p>74%</p></div>
+            <div><p>Of patients achieved greater "On" time</p></div>
+          </div>
+
+          <!-- Row 3: icon + value + label -->
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23e8651a'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23fff' font-family='Arial'%3E%E2%9C%93%3C/text%3E%3C/svg%3E"
+                  alt=""
+                  width="48"
+                  height="48"
+                />
+              </picture>
+            </div>
+            <div><p>16+ hours</p></div>
+            <div><p>Of continuous drug delivery daily</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 2: Default variant — mixed icon / no-icon rows (TC-02, TC-12) ── -->
+      <div class="section">
+        <h2>Default Variant — Missing Icon Row</h2>
+
+        <div class="stat-bar" data-block-name="stat-bar">
+          <!-- Row with populated icon -->
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23003366'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='22' fill='%23fff' font-family='Arial'%3E%2B%3C/text%3E%3C/svg%3E"
+                  alt=""
+                  width="48"
+                  height="48"
+                />
+              </picture>
+            </div>
+            <div><p>3× better</p></div>
+            <div><p>Motor function improvement</p></div>
+          </div>
+
+          <!-- Row with NO icon — empty first cell (TC-02, TC-12) -->
+          <div>
+            <div></div>
+            <div><p>12 weeks</p></div>
+            <div><p>Time to peak efficacy</p></div>
+          </div>
+
+          <div>
+            <div></div>
+            <div><p>1 device</p></div>
+            <div><p>Portable pump, easy to carry</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 3: Animated variant (TC-11) ── -->
+      <div class="section">
+        <h2>Animated Variant</h2>
+
+        <div class="stat-bar animated" data-block-name="stat-bar">
+          <!-- Integer — animates -->
+          <div>
+            <div></div>
+            <div><p>4</p></div>
+            <div><p>Hours less "Off" time per day</p></div>
+          </div>
+          <!-- Integer — animates -->
+          <div>
+            <div></div>
+            <div><p>74</p></div>
+            <div><p>% of patients with greater "On" time</p></div>
+          </div>
+          <!-- Integer — animates -->
+          <div>
+            <div></div>
+            <div><p>16</p></div>
+            <div><p>Hours of continuous delivery daily</p></div>
+          </div>
+          <!-- Non-numeric — must display as-is without animation -->
+          <div>
+            <div></div>
+            <div><p>N/A</p></div>
+            <div><p>Non-numeric value (static display)</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 4: Dark variant ── -->
+      <div class="section" style="background-color: var(--color-primary)">
+        <h2 style="color: var(--color-primary-text)">Dark Variant</h2>
+
+        <div class="stat-bar dark" data-block-name="stat-bar">
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23ffffff'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23003366' font-family='Arial'%3E%E2%8F%B1%3C/text%3E%3C/svg%3E"
+                  alt=""
+                  width="48"
+                  height="48"
+                />
+              </picture>
+            </div>
+            <div><p>4 hours less</p></div>
+            <div><p>"Off" time per day</p></div>
+          </div>
+          <div>
+            <div>
+              <picture>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23ffffff'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23003366' font-family='Arial'%3E%E2%98%91%3C/text%3E%3C/svg%3E"
+                  alt=""
+                  width="48"
+                  height="48"
+                />
+              </picture>
+            </div>
+            <div><p>74%</p></div>
+            <div><p>Of patients achieved greater "On" time</p></div>
+          </div>
+          <div>
+            <div></div>
+            <div><p>16+ hours</p></div>
+            <div><p>Of continuous drug delivery daily</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 5: Four-stat block for wrap test (TC-05) ── -->
+      <div class="section">
+        <h2>Four Stats — Wrap Test</h2>
+
+        <div class="stat-bar" data-block-name="stat-bar">
+          <div>
+            <div></div>
+            <div><p>4 hours</p></div>
+            <div><p>Less "Off" time per day</p></div>
+          </div>
+          <div>
+            <div></div>
+            <div><p>74%</p></div>
+            <div><p>Patients with greater "On" time</p></div>
+          </div>
+          <div>
+            <div></div>
+            <div><p>16+</p></div>
+            <div><p>Hours of continuous delivery</p></div>
+          </div>
+          <div>
+            <div></div>
+            <div><p>2×</p></div>
+            <div><p>Faster titration vs. oral</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Section 6: Empty block — must not crash (TC-06) ── -->
+      <div class="section">
+        <h2>Empty Block — No-Crash Test</h2>
+        <div class="stat-bar" data-block-name="stat-bar">
+        </div>
+      </div>
+
+      <!-- ── Section 7: Single stat — no layout breakage (TC-10) ── -->
+      <div class="section">
+        <h2>Single Stat</h2>
+        <div class="stat-bar" data-block-name="stat-bar">
+          <div>
+            <div></div>
+            <div><p>4 hours less</p></div>
+            <div><p>"Off" time per day</p></div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <footer></footer>
+  </body>
+</html>

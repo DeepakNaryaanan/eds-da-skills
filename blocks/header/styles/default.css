@@ -11,7 +11,7 @@ header {
 
 .header.block {
   position: fixed;
-  inset: 0 0 auto 0;
+  inset: 0 0 auto;
   z-index: 50;
   background: var(--header-bg);
   color: var(--header-fg);
@@ -85,7 +85,7 @@ header {
 }
 
 .header .header-nav-toggle:focus-visible {
-  outline: 3px solid var(--color-action-focus, currentColor);
+  outline: 3px solid var(--color-primary-focus);
   outline-offset: 2px;
   border-radius: 4px;
 }

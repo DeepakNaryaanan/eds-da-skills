@@ -22,7 +22,7 @@
   .hero-carousel {
     --hero-h: 400px;
 
-    padding-inline: 3rem;
+    padding-inline: var(--spacing-5);
   }
 }
 
@@ -47,7 +47,7 @@
   inset: 0;
   display: block;
   opacity: 0;
-  transition: opacity 600ms ease-in-out;
+  transition: opacity var(--duration-slower) var(--ease-in-out);
   pointer-events: none;
 }
 
@@ -106,7 +106,17 @@
   }
 }
 
-/* Eyebrow (optional first paragraph) */
+/* Body paragraphs — declared before eyebrow to satisfy specificity order */
+.hero-carousel .hero-carousel-slide-body p:not(:first-child),
+.hero-carousel .hero-carousel-slide-body > p:only-child {
+  font-size: 1.125rem;
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-4);
+  max-width: 480px;
+  line-height: 1.5;
+}
+
+/* Eyebrow (optional first paragraph — higher specificity, so follows body rule) */
 .hero-carousel .hero-carousel-slide-body > p:first-child:not(:only-child) {
   font-size: 0.75rem;
   font-weight: 700;
@@ -136,15 +146,6 @@
   }
 }
 
-.hero-carousel .hero-carousel-slide-body p:not(:first-child),
-.hero-carousel .hero-carousel-slide-body > p:only-child {
-  font-size: 1.125rem;
-  color: var(--color-text);
-  margin: 0 0 var(--spacing-4);
-  max-width: 480px;
-  line-height: 1.5;
-}
-
 /* CTA — solid sky-blue button (Abbott tertiary), white uppercase text */
 .hero-carousel .hero-carousel-slide-body a.button,
 .hero-carousel .hero-carousel-slide-body .button-container a {
@@ -160,7 +161,7 @@
   line-height: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: background-color var(--duration-slow) var(--ease-standard);
 }
 
 .hero-carousel .hero-carousel-slide-body a.button:hover,
@@ -198,7 +199,7 @@
   color: var(--color-text-muted);
   cursor: pointer;
   padding: 0;
-  transition: color 0.2s ease;
+  transition: color var(--duration-base) var(--ease-standard);
 }
 
 .hero-carousel .hero-carousel-prev {
@@ -253,7 +254,7 @@
   background: transparent;
   cursor: pointer;
   padding: 0;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: background-color var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard);
 }
 
 .hero-carousel .hero-carousel-indicator[aria-selected="true"] {

@@ -239,6 +239,460 @@
           </div>
         </div>
 
+        <!-- ════════════════════════════════════════════════════════════════
+             stat-bar — Default
+             Three-column strip: icon (optional), bold value, descriptor label.
+             Typically placed immediately below the hero.
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">stat-bar — Default</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">stat-bar</div>
+          <!--
+            Authored structure:
+              Each row = one stat.
+              Cell 1 = icon <picture> (optional — leave blank if no icon)
+              Cell 2 = value (required)
+              Cell 3 = label (required)
+          -->
+          <div class="stat-bar" data-block-name="stat-bar">
+            <!-- Row 1: stat with icon -->
+            <div>
+              <div>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23e8651a'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23fff' font-family='Arial'%3E%E2%8F%B1%3C/text%3E%3C/svg%3E"
+                    alt=""
+                    width="48"
+                    height="48"
+                  />
+                </picture>
+              </div>
+              <div><p>4 hours less</p></div>
+              <div><p>"Off" time per day</p></div>
+            </div>
+            <!-- Row 2: stat with icon -->
+            <div>
+              <div>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23003366'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23fff' font-family='Arial'%3E%E2%98%91%3C/text%3E%3C/svg%3E"
+                    alt=""
+                    width="48"
+                    height="48"
+                  />
+                </picture>
+              </div>
+              <div><p>74%</p></div>
+              <div><p>Of patients achieved greater "On" time</p></div>
+            </div>
+            <!-- Row 3: stat without icon (empty first cell) -->
+            <div>
+              <div></div>
+              <div><p>16+ hours</p></div>
+              <div><p>Of continuous drug delivery daily</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             stat-bar (animated) — Animated Variant
+             Stat values count up from zero when the strip enters the viewport.
+             Values must be plain integers or decimals for animation to trigger.
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">stat-bar (animated) — Animated Variant</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">stat-bar (animated)</div>
+          <!--
+            Authored structure: same as default.
+            Add "animated" as a block variation (second word in the block name cell).
+            Values must be plain numbers (e.g. "4", "74") for the counter to animate.
+            Non-numeric values display as-is.
+          -->
+          <div class="stat-bar animated" data-block-name="stat-bar">
+            <div>
+              <div></div>
+              <div><p>4</p></div>
+              <div><p>Hours less "Off" time per day</p></div>
+            </div>
+            <div>
+              <div></div>
+              <div><p>74</p></div>
+              <div><p>% of patients with greater "On" time</p></div>
+            </div>
+            <div>
+              <div></div>
+              <div><p>16</p></div>
+              <div><p>Hours of continuous delivery daily</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             stat-bar (dark) — Dark Variant
+             Renders on a dark primary-colour band with white text.
+             Apply to a section that has a dark section background.
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">stat-bar (dark) — Dark Variant</h2>
+        <div class="library-entry" style="background-color: var(--color-primary); padding: 2rem;">
+          <div class="library-entry-label" style="color: var(--color-primary-text); border-color: rgba(255,255,255,0.3);">stat-bar (dark)</div>
+          <!--
+            Authored structure: same as default.
+            Add "dark" as a block variation.
+            Use on sections with a dark/primary-colour background.
+          -->
+          <div class="stat-bar dark" data-block-name="stat-bar">
+            <div>
+              <div>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23ffffff'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23003366' font-family='Arial'%3E%E2%8F%B1%3C/text%3E%3C/svg%3E"
+                    alt=""
+                    width="48"
+                    height="48"
+                  />
+                </picture>
+              </div>
+              <div><p>4 hours less</p></div>
+              <div><p>"Off" time per day</p></div>
+            </div>
+            <div>
+              <div>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23ffffff'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-size='24' fill='%23003366' font-family='Arial'%3E%E2%98%91%3C/text%3E%3C/svg%3E"
+                    alt=""
+                    width="48"
+                    height="48"
+                  />
+                </picture>
+              </div>
+              <div><p>74%</p></div>
+              <div><p>Of patients achieved greater "On" time</p></div>
+            </div>
+            <div>
+              <div></div>
+              <div><p>16+ hours</p></div>
+              <div><p>Of continuous drug delivery daily</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             isi-bar — Default (sticky)
+             Sticky collapsible ISI bar fixed to the bottom of the viewport.
+             Required on every patient-facing page for regulatory compliance.
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">isi-bar — Default (sticky)</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">isi-bar</div>
+          <!--
+            Authored structure:
+              Row 1 = Summary text (required) — one-line ISI summary always visible in the collapsed bar.
+              Row 2 = Fragment path (optional) — path to the ISI fragment; defaults to /fragments/isi if omitted.
+
+            The block renders a fixed <aside> at the bottom of the viewport.
+            Collapsed state: shows the summary line + "See More" toggle button.
+            Expanded state: reveals scrollable full ISI text loaded from the fragment.
+            sessionStorage key "isi-expanded" persists the user's open/closed preference.
+          -->
+          <div class="isi-bar" data-block-name="isi-bar">
+            <!-- Row 1: Summary text (required) -->
+            <div>
+              <div>
+                <p>DUOPA has important safety information. <a href="/prescribing-information">See full Prescribing Information</a>.</p>
+              </div>
+            </div>
+            <!-- Row 2: Fragment path (optional) — omit to use default /fragments/isi -->
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             isi-bar (inline) — Inline Variant
+             Non-sticky version. Renders the ISI content inline at the block's
+             position in the page flow. Use on pages that already have a global
+             sticky ISI bar (e.g. sub-pages within a layout that includes the
+             sticky bar globally).
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">isi-bar (inline) — Inline Variant</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">isi-bar (inline)</div>
+          <!--
+            Authored structure: identical to default.
+            Add "inline" as a block variation (second word in the block name cell).
+            Use when a fixed-position ISI bar would double-stack with the site-wide sticky bar.
+          -->
+          <div class="isi-bar inline" data-block-name="isi-bar">
+            <!-- Row 1: Summary text (required) -->
+            <div>
+              <div>
+                <p>Important Safety Information: Please read the full Prescribing Information before use.</p>
+              </div>
+            </div>
+            <!-- Row 2: Fragment path (optional) — specify only when using a non-standard ISI fragment -->
+            <div>
+              <div>
+                <p>/fragments/isi</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             promo-banner — Default
+             Full-width promotional CTA banner on a light-subtle background.
+             One row: cell 1 = heading (required), cell 2 = body + CTA links (optional).
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">promo-banner — Default</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">promo-banner</div>
+          <!--
+            Authored structure:
+              One row only.
+              Cell 1 = Heading (required) — <h2> or <h3> element.
+              Cell 2 = Body (optional)    — paragraph text and/or one or two CTA links.
+                                            Links are decorated as .button by the global
+                                            decorateButtons pass; no manual class needed.
+            Note: if two CTA links are authored they render inline (flex row) on
+            tablet and wider viewports, and stack on mobile.
+          -->
+          <div class="promo-banner" data-block-name="promo-banner">
+            <div>
+              <div>
+                <h2>Need help managing your DUOPA therapy?</h2>
+              </div>
+              <div>
+                <p>Our dedicated support team is here to answer your questions and guide you through every step of treatment.</p>
+                <p><a href="/support">Get Support</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             promo-banner — Default (two CTAs)
+             Same default variant but with two CTA links. Both buttons render
+             inline on tablet and wider; they stack vertically on mobile.
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">promo-banner — Default (two CTAs)</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">promo-banner</div>
+          <div class="promo-banner" data-block-name="promo-banner">
+            <div>
+              <div>
+                <h2>Start your journey with DUOPA</h2>
+              </div>
+              <div>
+                <p>Speak to your neurologist or download the patient guide to learn more about continuous intestinal gel delivery.</p>
+                <p><a href="/patient-guide">Download the Guide</a></p>
+                <p><a href="/find-a-doctor">Find a Doctor</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             promo-banner (dark) — Dark Variant
+             Brand primary colour background (--color-primary, navy) with
+             white text and outlined white CTA buttons.
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">promo-banner (dark) — Dark Variant</h2>
+        <div class="library-entry" style="background-color: var(--color-primary); padding: 2rem;">
+          <div class="library-entry-label" style="color: var(--color-primary-text); border-color: rgba(255,255,255,0.3);">promo-banner (dark)</div>
+          <!--
+            Authored structure: identical to default.
+            Add "dark" as a block variation (second word in the block name cell).
+            Background: --color-primary (navy). Text: --color-primary-text (white).
+            CTA buttons render as outlined white (transparent bg, white border).
+          -->
+          <div class="promo-banner dark" data-block-name="promo-banner">
+            <div>
+              <div>
+                <h2>Talk to your healthcare provider</h2>
+              </div>
+              <div>
+                <p>Discuss whether DUOPA is right for you. Our clinical team can help you evaluate all your options.</p>
+                <p><a href="/hcp">Find a Specialist</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             promo-banner (accent) — Accent Variant
+             Brand accent colour background (--color-accent, orange) defined in
+             overrides.css. Text uses --color-accent-text. High-emphasis CTAs.
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">promo-banner (accent) — Accent Variant</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">promo-banner (accent)</div>
+          <!--
+            Authored structure: identical to default.
+            Add "accent" as a block variation (second word in the block name cell).
+            Background: --color-accent (brand orange). Text: --color-accent-text.
+            Use for high-emphasis support program CTAs (e.g. Patient Assistance Program).
+          -->
+          <div class="promo-banner accent" data-block-name="promo-banner">
+            <div>
+              <div>
+                <h2>Abbott Patient Assistance Program</h2>
+              </div>
+              <div>
+                <p>Eligible patients may receive DUOPA at no cost. See if you qualify today.</p>
+                <p><a href="/assistance">Check Eligibility</a></p>
+                <p><a href="/enroll">Enroll Now</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             split-section — Default (image left, text right)
+             Single row: Cell 1 = media (<picture>); Cell 2 = body content.
+             Default 50/50 column split at 760 px+; stacks image-above-text on mobile.
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">split-section — Default</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">split-section</div>
+          <!--
+            Authored structure:
+              One row only.
+              Cell 1 = Media (required) — <picture> element; full-column image.
+              Cell 2 = Body (required)  — optional eyebrow <p> BEFORE the heading,
+                        heading (h2 or h3), body paragraphs, optional CTA link.
+
+            Default layout: image left, text right at 760 px+.
+            Stacks to image-above-text on mobile.
+          -->
+          <div class="split-section" data-block-name="split-section">
+            <div>
+              <div>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23003366'/%3E%3Ctext x='400' y='310' text-anchor='middle' font-size='40' fill='%23ffffff' font-family='Arial'%3EProduct Image%3C/text%3E%3C/svg%3E"
+                    alt="DUOPA pump device shown in clinical setting"
+                    width="800"
+                    height="600"
+                  />
+                </picture>
+              </div>
+              <div>
+                <p>Clinical Context</p>
+                <h2>Continuous Delivery for Advanced Parkinson's</h2>
+                <p>DUOPA delivers carbidopa and levodopa directly into the small intestine, reducing motor fluctuations and providing up to 16 hours of continuous drug delivery daily.</p>
+                <p><a href="#learn-more">Learn More About DUOPA</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             split-section (reverse) — Reverse Variant
+             Same authored structure as Default. CSS flex-direction: row-reverse
+             swaps columns visually; DOM source order is UNCHANGED (image first).
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">split-section (reverse) — Reverse Variant</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">split-section (reverse)</div>
+          <!--
+            Authored structure: identical to Default.
+            Add "reverse" as a block variation (second word in the block name cell:
+            "Split Section (reverse)"). The image appears on the right at 760 px+
+            via CSS flex-direction: row-reverse. DOM source order is unchanged —
+            media cell always comes first for accessibility.
+          -->
+          <div class="split-section reverse" data-block-name="split-section">
+            <div>
+              <div>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23e8651a'/%3E%3Ctext x='400' y='310' text-anchor='middle' font-size='40' fill='%23ffffff' font-family='Arial'%3EPatient Photo%3C/text%3E%3C/svg%3E"
+                    alt="Patient using the DUOPA system at home with a caregiver nearby"
+                    width="800"
+                    height="600"
+                  />
+                </picture>
+              </div>
+              <div>
+                <p>Patient Benefits</p>
+                <h2>More "On" Time. Less Disruption.</h2>
+                <p>In clinical studies, 74% of patients achieved greater "On" time compared to oral levodopa therapy, enabling more daily activity without troublesome dyskinesia.</p>
+                <p><a href="#patient-stories">Read Patient Stories</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             split-section (wide-media) — Wide Media Variant
+             60 % image / 40 % text column split at 992 px+. Image on left.
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">split-section (wide-media) — Wide Media Variant</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">split-section (wide-media)</div>
+          <!--
+            Authored structure: identical to Default.
+            Add "wide-media" as a block variation (second word in the block name
+            cell: "Split Section (wide-media)").
+            At 992 px+ the media column expands to 60% width and the body shrinks
+            to 40%. The CTA is optional — omit the <p><a> row when no link is needed.
+          -->
+          <div class="split-section wide-media" data-block-name="split-section">
+            <div>
+              <div>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'%3E%3Crect width='1200' height='800' fill='%23002244'/%3E%3Ctext x='600' y='410' text-anchor='middle' font-size='48' fill='%23ffffff' font-family='Arial'%3EWide Media Image%3C/text%3E%3C/svg%3E"
+                    alt="Close-up of the DUOPA enteral tube showing the connection point"
+                    width="1200"
+                    height="800"
+                  />
+                </picture>
+              </div>
+              <div>
+                <p>How It Works</p>
+                <h3>Direct Intestinal Infusion</h3>
+                <p>A portable pump delivers a gel suspension of carbidopa/levodopa continuously through a tube placed directly into the small intestine via a PEG-J procedure.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             split-section (wide-media reverse) — Wide Media Reverse Variant
+             60 % image / 40 % text. Image on right (CSS reversal; DOM unchanged).
+             ════════════════════════════════════════════════════════════════ -->
+        <h2 class="lib-section">split-section (wide-media reverse) — Wide Media Reverse Variant</h2>
+        <div class="library-entry">
+          <div class="library-entry-label">split-section (wide-media reverse)</div>
+          <!--
+            Authored structure: identical to Default.
+            Combine "wide-media" and "reverse" variations: in the CMS block name
+            cell use "Split Section (wide-media reverse)". Both modifier classes
+            are applied: .wide-media for the 60/40 split and .reverse for the
+            CSS column flip. DOM source order is unchanged (media cell first).
+          -->
+          <div class="split-section wide-media reverse" data-block-name="split-section">
+            <div>
+              <div>
+                <picture>
+                  <img
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'%3E%3Crect width='1200' height='800' fill='%23001122'/%3E%3Ctext x='600' y='410' text-anchor='middle' font-size='48' fill='%23ffffff' font-family='Arial'%3EReverse Wide Media%3C/text%3E%3C/svg%3E"
+                    alt="Healthcare provider explaining the DUOPA treatment plan to a patient"
+                    width="1200"
+                    height="800"
+                  />
+                </picture>
+              </div>
+              <div>
+                <p>For Healthcare Providers</p>
+                <h3>Candidate Identification</h3>
+                <p>Consider DUOPA for patients with advanced Parkinson's disease who have motor fluctuations that are not adequately controlled on oral levodopa therapy.</p>
+                <p><a href="#hcp-resources">HCP Resources</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </main>
   </body>

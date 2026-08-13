@@ -1,28 +1,49 @@
 /**
  * Promo Pair block.
  *
- * Renders a two-column promotional card pair. Each authored row becomes one
- * promo card containing an image, heading, description, and optional CTA link.
+ * Renders two side-by-side promotional tiles, each with a cover image, a
+ * heading, body copy, and a CTA button. Used to highlight a pair of related
+ * destinations (e.g. two product categories) on a light-grey section band.
  *
  * Content model (see block.md):
- *   Each row — two cells: image `<picture>` (optional) | body (heading, description, CTA link)
+ *   Each row — two cells: image picture | body (heading, description, CTA link)
  */
 
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import { MARKUP, CARD_MARKUP } from './markup.js';
+import { MARKUP, TILE_MARKUP } from './markup.js';
 
 /**
- * Builds the HTML string for a single promo card from its authored row.
+ * Builds the HTML string for a single promo tile from its authored row.
  *
  * @param {Element} row The authored row element
- * @returns {string} Interpolated CARD_MARKUP HTML string
+ * @returns {string} Interpolated TILE_MARKUP HTML string, or empty string when
+ *   the row has no body cell
  */
-function buildCardHtml(row) {
+function buildTileHtml(row) {
   const [imageCell, bodyCell] = row.children;
 
-  // Image — lazy loaded (below the fold).
-  // Data URI placeholder images are passed through as-is; createOptimizedPicture
-  // cannot produce valid srcset URLs from a data URI (no server path).
+  // Body cell is required
+  if (!bodyCell) return '';
+
+  // Heading: first heading element in the body cell
+  const headingEl = bodyCell.querySelector('h1,h2,h3,h4,h5,h6');
+  const headingHtml = headingEl ? headingEl.outerHTML : '';
+
+  // CTA: first link in the body cell
+  const linkEl = bodyCell.querySelector('a');
+  const ctaHtml = linkEl
+    ? `<a class="promo-pair-cta" href="${linkEl.href || '#'}">${linkEl.textContent.trim()}</a>`
+    : '';
+
+  // Description: first paragraph that is not the CTA
+  const descEl = [...bodyCell.querySelectorAll('p')].find(
+    (p) => !p.querySelector('a') && p.textContent.trim(),
+  );
+  const description = descEl ? descEl.textContent.trim() : '';
+
+  // Image: optimized picture or raw HTML from the image cell.
+  // Data URI placeholders are passed through as-is; createOptimizedPicture
+  // cannot build valid srcset URLs from a data URI (no server path).
   let imageHtml = '';
   if (imageCell) {
     const img = imageCell.querySelector('picture > img');
@@ -30,39 +51,19 @@ function buildCardHtml(row) {
       const isDataUri = img.src.startsWith('data:');
       const pictureEl = isDataUri
         ? imageCell.querySelector('picture')
-        : createOptimizedPicture(img.src, img.alt ?? '', false, [
-          { media: '(width >= 760px)', width: '600' },
-          { width: '400' },
-        ]);
-      if (pictureEl) imageHtml = `<div class="promo-pair-image">${pictureEl.outerHTML}</div>`;
+        : createOptimizedPicture(img.src, img.alt ?? '', false, [{ width: '676' }]);
+      if (pictureEl) {
+        imageHtml = `<div class="promo-pair-image">${pictureEl.outerHTML}</div>`;
+      }
+    } else if (imageCell.innerHTML.trim()) {
+      imageHtml = `<div class="promo-pair-image">${imageCell.innerHTML}</div>`;
     }
   }
 
-  if (!bodyCell) {
-    return CARD_MARKUP
-      .replace('{image}', imageHtml)
-      .replace('{heading}', '')
-      .replace('{description}', '')
-      .replace('{cta}', '');
-  }
-
-  const headingEl = bodyCell.querySelector('h1,h2,h3,h4,h5,h6');
-  const headingHtml = headingEl ? headingEl.outerHTML : '';
-
-  const descEl = bodyCell.querySelector('p:not(:has(a))') ?? bodyCell.querySelector('p');
-  const descHtml = descEl ? `<p class="promo-pair-desc">${descEl.innerHTML}</p>` : '';
-
-  const linkEl = bodyCell.querySelector('a');
-  // Use promo-pair-cta class without .button so the global button decorator
-  // does not override the Abbott link-style CTA treatment.
-  const ctaHtml = linkEl
-    ? `<a class="promo-pair-cta" href="${linkEl.href}">${linkEl.textContent.trim()}</a>`
-    : '';
-
-  return CARD_MARKUP
+  return TILE_MARKUP
     .replace('{image}', imageHtml)
     .replace('{heading}', headingHtml)
-    .replace('{description}', descHtml)
+    .replace('{description}', description)
     .replace('{cta}', ctaHtml);
 }
 
@@ -75,7 +76,7 @@ export default function decorate(block) {
   const rows = [...block.children];
   if (!rows.length) return;
 
-  const cardsHtml = rows.map(buildCardHtml).join('');
+  const tilesHtml = rows.map(buildTileHtml).join('');
 
-  block.innerHTML = MARKUP.replace('{cards}', cardsHtml);
+  block.innerHTML = MARKUP.replace('{tiles}', tilesHtml);
 }

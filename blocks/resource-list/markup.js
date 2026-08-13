@@ -1,29 +1,29 @@
 /**
  * HTML templates for the resource-list block.
  *
- * MARKUP      — root list container
- * ITEM_MARKUP — individual resource list item (card variant)
+ * MARKUP      — root grid container
+ * CARD_MARKUP — individual resource/article card
  *
- * Abbott pattern: full-bleed thumbnail image on top, card body below with
- * title, description, and a "Learn More" underlined CTA link.
+ * Abbott "Latest News" pattern: white card with a thumbnail image on top, a
+ * linked navy heading, an italic muted category label, and a short summary.
  */
 
 export const MARKUP = /* html */`
-<ul class="resource-list-items">
-  {items}
+<ul class="resource-list-grid">
+  {cards}
 </ul>
 `;
 
-export const ITEM_MARKUP = /* html */`
+export const CARD_MARKUP = /* html */`
 <li class="resource-list-item">
-  {thumbnail}
-  <div class="resource-list-body">
-    {eyebrow}
-    {title}
-    {description}
-    {date}
-    {cta}
-  </div>
+  <article class="resource-list-card">
+    {image}
+    <div class="resource-list-body">
+      <h3 class="resource-list-title"><a href="{href}">{titleText}</a></h3>
+      {category}
+      <p class="resource-list-summary">{summary}</p>
+    </div>
+  </article>
 </li>
 `;
 
